@@ -1,0 +1,85 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Benton_Sans-Bold.otf",
+      "sha1": "4862bd0ab8af6026e7baf8c047c1e514d4d698bc"
+    },
+    {
+      "path": "src/assets/fonts/Benton_Sans-Medium.otf",
+      "sha1": "436ad99d9ce89ecdf993738e325cf1fcb55608c9"
+    },
+    {
+      "path": "src/assets/fonts/Benton_Sans-Regular.otf",
+      "sha1": "f358bfd48c2ffefc5e8fec3caebd4db809a7eb7b"
+    },
+    {
+      "path": "src/assets/icons/arrow.png",
+      "sha1": "8a0887b4587c2bb1a254dba899d369bedab4a927"
+    },
+    {
+      "path": "src/assets/icons/cart.png",
+      "sha1": "508e8e1a003f7544c47de9ac0ab7fff80841a710"
+    },
+    {
+      "path": "src/assets/icons/food_icon.png",
+      "sha1": "129b1638e530d9c1ad95b61e19aceac4c71a8297"
+    },
+    {
+      "path": "src/assets/icons/gym_icon.png",
+      "sha1": "580cfc592751b3a2459b1302692af412ac1b4437"
+    },
+    {
+      "path": "src/assets/icons/history.png",
+      "sha1": "82351bf45edcc4b91f6d26baed9a3d03dab2d034"
+    },
+    {
+      "path": "src/assets/icons/home.png",
+      "sha1": "8a67db975a5fbfcd57a9c9e076eb30cdec913fec"
+    },
+    {
+      "path": "src/assets/icons/kids_icon.png",
+      "sha1": "54057aa4eade1256709f89f0121a045b6f8019ef"
+    },
+    {
+      "path": "src/assets/icons/profile.png",
+      "sha1": "2abd73e58d4ac9b4652b99579d888af96d5b40e4"
+    },
+    {
+      "path": "src/assets/icons/running_icon.png",
+      "sha1": "fa483a7e342a47f5a91fba347d0512ad03978af9"
+    },
+    {
+      "path": "src/assets/images/buildingbg.png",
+      "sha1": "5aef173809a754a5ddb565accd99264b033f1df6"
+    },
+    {
+      "path": "src/assets/images/creche_slider.jpg",
+      "sha1": "235ebdb1f05cfa051e92c020b50b12f8e20b868e"
+    },
+    {
+      "path": "src/assets/images/gym_slider.jpg",
+      "sha1": "29ef3b9bf53d1d7d20db2a0d614829f1ff7b8eaf"
+    },
+    {
+      "path": "src/assets/images/resturant2_slider.jpg",
+      "sha1": "7a5b5bd524bdb4aa47d2c64496b57f5528ccfc52"
+    },
+    {
+      "path": "src/assets/images/resturant_slider.jpg",
+      "sha1": "01df67dc64ab0ac378803540d15b7ad2a71d34ce"
+    },
+    {
+      "path": "src/assets/images/shield.png",
+      "sha1": "6b0399043fdcee0f5b5c259e771a783c043bfe99"
+    },
+    {
+      "path": "src/assets/images/towers.png",
+      "sha1": "37fb27e4e3aac64b90fb20a8c16f4ef603f234e3"
+    },
+    {
+      "path": "src/assets/images/welcomebg.jpg",
+      "sha1": "5888467a136da0c100206939180ebe0cab5968a2"
+    }
+  ]
+}
