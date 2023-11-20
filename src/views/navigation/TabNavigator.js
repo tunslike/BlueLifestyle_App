@@ -64,7 +64,7 @@ const TabNavigator = () => {
                     <TabIcon 
                         focused={focused} 
                         icon={icons.cart}
-                        title="Cart"    
+                        title="Order"    
                     />
                 }}
                 />

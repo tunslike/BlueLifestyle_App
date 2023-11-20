@@ -10,8 +10,16 @@ import MenuItem from "./MenuItem";
 import AddQuantityItem from "./AddQuantityItem";
 import Button from "./Button";
 import HeaderBarBlank from "./HeaderBarBlank";
+import OrderItem from "./OrderItem";
+import ToggleButton from "./ToggleButton";
+import CrecheCard from "./CrecheCard";
+import CrecheInput from "./CrecheInput";
 
 export {
+    CrecheInput,
+    ToggleButton,
+    CrecheCard,
+    OrderItem,
     HeaderBarBlank,
     Button,
     AddQuantityItem,

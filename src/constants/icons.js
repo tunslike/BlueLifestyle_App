@@ -3,7 +3,7 @@ const cart = require("../assets/icons/cart.png")
 const history = require("../assets/icons/history.png")
 const profile = require("../assets/icons/profile.png")
 const arrow = require("../assets/icons/arrow.png")
-const kid = require("../assets/icons/kids_icon.png")
+const kids = require("../assets/icons/kids_icon.png")
 const gym = require("../assets/icons/running_icon.png")
 const food = require("../assets/icons/food_icon.png")
 const user = require("../assets/icons/user_icon.png")
@@ -32,8 +32,26 @@ const additem = require("../assets/icons/additem.png")
 const basket = require("../assets/icons/basket.png")
 const cash = require("../assets/icons/cash.png")
 const removeItem = require("../assets/icons/minus.png")
+const delivery = require("../assets/icons/delivery.png")
+const eatIn = require("../assets/icons/eat-In.png")
+const takeout = require("../assets/icons/takeout.png")
+const creche_quardian = require("../assets/icons/guardian.png")
+const hotline = require("../assets/icons/hotline.png")
+const phone_fill = require("../assets/icons/phone_fill.png")
+const child = require("../assets/icons/child.png")
+const emergencyPhone = require("../assets/icons/emergency_phone.png")
+const calendar = require("../assets/icons/calendar.png")
 
 export default {
+    calendar,
+    emergencyPhone,
+    child,
+    phone_fill,
+    creche_quardian,
+    hotline,
+    takeout,
+    eatIn,
+    delivery,
     removeItem,
     cash,
     basket,
@@ -59,7 +77,7 @@ export default {
     history,
     profile,
     arrow,
-    kid,
+    kids,
     gym,
     food,
     user,

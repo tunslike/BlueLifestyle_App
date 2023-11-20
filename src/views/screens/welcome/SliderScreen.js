@@ -31,7 +31,7 @@ const slides = [
   {
       id: '2',
       image: require("../../../assets/images/creche_slider.jpg"),
-      icon: icons.kid,
+      icon: icons.kids,
       title: 'Kids Creche',
       description: 'Book your kids creche session with ease and convenience'
   },

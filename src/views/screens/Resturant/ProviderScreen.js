@@ -91,27 +91,27 @@ const ProviderScreen = ({navigation}) => {
                     />
 
                     <MenuItem 
-                    onPress={() => navigation.navigate('OrderMenuItem')}
-                    name="Asian Beef Noodles"
-                    details="Special mix of vegatables & dryfish cooked with indoomie"
-                    price="4,000.00"
-                    image={images.indoomie_pic}
+                      onPress={() => navigation.navigate('OrderMenuItem')}
+                      name="Asian Beef Noodles"
+                      details="Special mix of vegatables & dryfish cooked with indoomie"
+                      price="4,000.00"
+                      image={images.indoomie_pic}
                     />
 
                     <MenuItem 
-                    onPress={() => navigation.navigate('OrderMenuItem')}
-                    name="Rice, Moi-moi and Beef"
-                    details="Rice, moi-moi and stew and cooked beef plus one bottle"
-                    price="3,000.00"
-                    image={images.moimoi_rice}
+                      onPress={() => navigation.navigate('OrderMenuItem')}
+                      name="Rice, Moi-moi and Beef"
+                      details="Rice, moi-moi and stew and cooked beef plus one bottle"
+                      price="3,000.00"
+                      image={images.moimoi_rice}
                     />
 
                     <MenuItem 
-                    onPress={() => navigation.navigate('OrderMenuItem')}
-                    name="Amala Swallo Complete"
-                    details="two wraps of amala, efo-riro and goat meats plus one drink"
-                    price="3,500.00"
-                    image={images.amala}
+                      onPress={() => navigation.navigate('OrderMenuItem')}
+                      name="Amala Swallo Complete"
+                      details="two wraps of amala, efo-riro and goat meats plus one drink"
+                      price="3,500.00"
+                      image={images.amala}
                     />
 
                 </ScrollView>

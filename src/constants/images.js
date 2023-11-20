@@ -14,8 +14,10 @@ const indoomie_pic = require("../assets/images/noodles.jpg")
 const native_rice = require("../assets/images/nativerice.jpg")
 const amala = require("../assets/images/amala.jpeg")
 const moimoi_rice = require("../assets/images/moimoi_rice.jpeg")
+const kidsCreche = require("../assets/images/kidsCreche.jpg")
 
 export default {
+    kidsCreche,
     amala,
     moimoi_rice,
     indoomie_pic,

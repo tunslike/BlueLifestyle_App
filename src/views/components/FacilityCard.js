@@ -12,7 +12,7 @@ import { COLORS, icons } from '../../constants';
 
 const { width, height } = Dimensions.get("window");
 
-const FacilityCard = ({image, title, onPress}) => {
+const FacilityCard = ({image, title, onPress, capacity, openingTime}) => {
   return (
     <View style={styles.cardBody}>
     <TouchableOpacity
@@ -30,15 +30,15 @@ const FacilityCard = ({image, title, onPress}) => {
                         height:15, marginRight:10, width: 15, tintColor: COLORS.darkGray, resizeMode: 'contain'
                     }}
                 />
-                <Text style={styles.subTitle}>Opens: 10:00am</Text>
+                <Text style={styles.subTitle}>{openingTime}</Text>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
-            <Image source={icons.key} 
+            <Image source={icons.people} 
                 style={{
                     height:15, marginRight:10, width: 15, tintColor: COLORS.darkGray, resizeMode: 'contain'
                 }}
                 />
-                <Text style={styles.subTitle}>Slot Available: 87</Text>
+                <Text style={styles.subTitle}>{capacity} Slots</Text>
             </View> 
             </View>
             <Image 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
     cardBody: {
      flex: 1,
-     marginVertical: 10,
+     marginVertical: 12,
      marginHorizontal:20,
     },
     cardTitle: {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius:10,
         borderBottomRightRadius: 10,
         borderWidth: 1,
-        borderColor: COLORS.ArrowGray,
+        borderColor: '#ededed',
         borderStyle: 'solid',
         flexDirection: 'row',
         justifyContent: 'flex-start',

@@ -54,15 +54,22 @@ const DashboardScreen = ({navigation}) => {
                 <FacilityCard 
                   image={images.dash_rest_img}
                   title="Restuarant"
+                  capacity="90"
+                  openingTime="8.00am"
                   onPress={() => navigation.navigate('Restaurant')}
                 />
                 <FacilityCard 
                   image={images.creche_dash_img}
-                  title="Creche"          
+                  title="Creche"
+                  capacity="45"
+                  openingTime="6.00am" 
+                  onPress={() => navigation.navigate('Creche')}         
                 />
                 <FacilityCard 
                     image={images.gym_dash_img}
-                    title="Gym"          
+                    title="Gym" 
+                    capacity="30"
+                    openingTime="7.00am"         
               />
             </ScrollView>
           </View>
