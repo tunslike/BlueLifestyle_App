@@ -10,9 +10,9 @@ import {
 
 import { COLORS } from '../../constants';
 
-const CrecheInput = ({button, onPress, icon, value, onChange, placeholder,maxlength}) => {
+const CrecheInput = ({button, onFocus, onPress, icon, value, onChange, placeholder,maxlength, multiline}) => {
   return (
-    <View style={styles.container}>
+    <View style={multiline ? styles.container_multiline : styles.container}>
             {button == true && 
                 <TouchableOpacity
                     onPress={onPress}
@@ -22,7 +22,8 @@ const CrecheInput = ({button, onPress, icon, value, onChange, placeholder,maxlen
                         height:20, 
                         width: 20, 
                         resizeMode: 'cover', 
-                        tintColor:COLORS.StandardardBankBlue}}  />
+                        tintColor:COLORS.StandardardBankBlue
+                    }}/>
                 </TouchableOpacity>
             }
 
@@ -32,14 +33,16 @@ const CrecheInput = ({button, onPress, icon, value, onChange, placeholder,maxlen
                         height:20, 
                         width: 20, 
                         resizeMode: 'cover', 
-                        tintColor:COLORS.StandardardBankBlue}}  />
+                        tintColor:COLORS.StandardardBankBlue,
+                        marginTop:(multiline) ? 10 : null
+                    }}  />
     
             }
 
             <TextInput
                 value={value}
-                onChange={onChange}
-                style={styles.inputStyle}
+                onChangeText={onChange}
+                style={multiline ? styles.multilineText : styles.inputStyle}
                 placeholder={placeholder}
                 placeholderTextColor={COLORS.darkGray}
                 keyboardType="default"
@@ -48,6 +51,8 @@ const CrecheInput = ({button, onPress, icon, value, onChange, placeholder,maxlen
                 blurOnSubmit={false}
                 returnKeyType='next'
                 maxLength={maxlength}
+                multiline={multiline ? true : false}
+                onFocus={onFocus}
             />
     </View>
   )
@@ -56,10 +61,20 @@ const CrecheInput = ({button, onPress, icon, value, onChange, placeholder,maxlen
 export default CrecheInput
 
 const styles = StyleSheet.create({
+    multilineText: {
+        minHeight: 130,
+        fontFamily: "Benton Sans",
+        fontWeight:'600',
+        fontSize:14,
+        color: COLORS.darkblue,
+        marginLeft:15,
+        flex: 1,
+        textAlignVertical: 'top'
+    },
     inputStyle: {
         fontFamily: "Benton Sans",
         fontWeight:'600',
-        fontSize:15,
+        fontSize:14,
         color: COLORS.darkblue,
         marginLeft:15,
         flex: 1
@@ -68,6 +83,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        borderBottomWidth: 1,
+        marginHorizontal:5,
+        borderBottomColor: COLORS.textGrey,
+        paddingBottom: 3,
+        marginTop:5
+    },
+    container_multiline : {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         borderBottomWidth: 1,
         marginHorizontal:5,
         borderBottomColor: COLORS.textGrey,

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import { 
         StyleSheet, 
         Text, 
@@ -7,22 +7,90 @@ import {
         TouchableOpacity,
         Dimensions,
         Image,
-        ScrollView
+        ScrollView,
+        StatusBar,
+        FlatList,
+        Alert
  } from 'react-native';
-
+ import axios from 'axios';
  import { SafeAreaProvider } from 'react-native-safe-area-context';
- import { COLORS, icons, images } from '../../../constants';
+ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+ import { useSelector } from 'react-redux';
+ import { COLORS, icons, images, dummyData, utilities, APIBaseUrl, ApIHeaderOptions } from '../../../constants';
  import { HeaderBarBlank, 
           ProviderFeature, 
           MenuItemHeader,
-          MenuItem 
+          MenuItem,
+          NewLoader,
+          AddToCartButton 
         } from '../../components';
 
  const { width, height } = Dimensions.get("window");
 
 
 // INIT APP
-const ProviderScreen = ({navigation}) => {
+const ProviderScreen = ({route, navigation}) => {
+
+  const {providerID} = route.params
+
+  const cartOrders = useSelector((state) => state.order.cart.length)
+
+  const [loader, setLoader] = useState(false)
+  const [menuItem, setMenuItem] = useState('');
+
+
+  // FUNCTION TO LOAD RESTURANT MENUS
+  const FetchRestaurantMenus = () => {
+
+    console.log('*****************//////////////////*****************')
+    console.log('Fetching Resturant Data')
+    console.log('*****************//////////////////*****************')
+
+     //show loader
+     setLoader(true);
+
+     const data = {
+      "providerId":providerID
+     }
+
+     axios.post(APIBaseUrl.developmentUrl + 'services/Service/FetchRestaurantMenu', data, ApIHeaderOptions.headers)
+     .then(response => {
+ 
+      setLoader(false)
+ 
+         if(response.data.errorCode == '000') {
+ 
+              //set data
+              setMenuItem(response.data.restaurantServiceData)
+ 
+         }else {
+ 
+             console.log(response.data.statusMessage)
+             //show error message
+             setErrorMessage(response.data.statusMessage);
+ 
+             //set loading off
+             setLoader(false)
+ 
+             return;
+         }
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   
+  }
+  // END OF FUNCTION
+
+//USE EFFECT
+useEffect(() => {
+
+  //fetch providers
+  //FetchProviders();
+
+  FetchRestaurantMenus();
+
+}, []);
 
   // FUNCTION TO RENDER HEADER
     function renderHeaderContent() {
@@ -78,10 +146,28 @@ const ProviderScreen = ({navigation}) => {
 
                 <View style={styles.menuListView}>
 
-                <ScrollView>
-
                     <MenuItemHeader title="Main Meal" />
 
+                    <FlatList 
+                    data={menuItem}
+                    keyboardDismissMode="on-drag"
+                    keyExtractor={item => `${item.menuID}`} 
+                    showsVerticalScrollIndicator={false}
+                    renderItem={
+                        ({ item }) => {
+                            return (
+                              <MenuItem 
+                              onPress={() => navigation.navigate('OrderMenuItem', { menuID: item.menuID, menuItem:item.food_Name, description: item.food_Description, amount: item.food_Price, image: images.indoomie_pic})}
+                              name={item.food_Name}
+                              details={item.food_Description}
+                              price={utilities.formatToCurency(Number(item.food_Price))}
+                              image={images.indoomie_pic}
+                            />
+                            )
+                        }
+                    }
+                />   
+                {/*
                     <MenuItem 
                       onPress={() => navigation.navigate('OrderMenuItem')}
                       name="Spicy Native Sauce"
@@ -112,10 +198,9 @@ const ProviderScreen = ({navigation}) => {
                       details="two wraps of amala, efo-riro and goat meats plus one drink"
                       price="3,500.00"
                       image={images.amala}
-                    />
+                  /> */}
 
-                </ScrollView>
-                    
+                  
                 </View>
 
                 {/* End of Load body for menu items */}
@@ -124,7 +209,15 @@ const ProviderScreen = ({navigation}) => {
     }
   return (
     <SafeAreaProvider style={styles.container}>
+    <StatusBar barStyle="light-content" />
+    {loader && 
+      <NewLoader title="Processing your request, please wait..." />
+    }
 
+    {cartOrders > 0 &&
+       <AddToCartButton onPress={() => navigation.navigate("RestaurantOrder")} title="Complete your order" icon={icons.basket} />
+    }
+  
          {/* Render Header */}
          {renderHeaderContent()}
 
@@ -137,6 +230,7 @@ const ProviderScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+ 
   menuListView: {
     borderTopColor: COLORS.lineDividerGray,
     borderTopWidth: 1,
@@ -162,7 +256,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginVertical:15
+    marginVertical:10
   },
   vendorDesc: {
     fontSize:14,

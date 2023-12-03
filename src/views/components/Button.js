@@ -23,7 +23,7 @@ const Button = ({title, icon, onPress}) => {
 
 const styles = StyleSheet.create({
     loginText: {
-        fontSize: 16,
+        fontSize: 15,
         fontFamily: "Benton Sans",
         color: COLORS.white,
         fontWeight: 'bold',
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         paddingHorizontal: 20,
         paddingVertical: 18,
-        marginTop:40,
+        marginTop:30,
     }
 })
 

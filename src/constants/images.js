@@ -1,4 +1,5 @@
 const welcomebg = require("../assets/images/welcomebg.jpg")
+const towersBuilding = require("../assets/images/welcomebg2.png")
 const shield = require("../assets/images/shield.png")
 const towers = require("../assets/images/towers.png")
 const buildingbg = require("../assets/images/buildingbg.png")
@@ -15,8 +16,18 @@ const native_rice = require("../assets/images/nativerice.jpg")
 const amala = require("../assets/images/amala.jpeg")
 const moimoi_rice = require("../assets/images/moimoi_rice.jpeg")
 const kidsCreche = require("../assets/images/kidsCreche.jpg")
+const gym1 = require("../assets/images/gym1.jpeg")
+const gym2 = require("../assets/images/gym2.jpeg")
+const gym3 = require("../assets/images/gym3.jpeg")
+const gym4 = require("../assets/images/gym4.jpeg")
+const profileUpdate = require("../assets/images/profileUpdate.jpg")
+const blank_food = require("../assets/images/blank_food.png")
 
 export default {
+    towersBuilding,
+    blank_food,
+    profileUpdate,
+    gym1, gym2, gym3, gym4,
     kidsCreche,
     amala,
     moimoi_rice,

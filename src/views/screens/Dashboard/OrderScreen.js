@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {  StyleSheet, 
   Text, 
   View,
@@ -8,14 +8,19 @@ import {  StyleSheet,
   StatusBar,
   Image, 
   TouchableOpacity} from 'react-native';
-  import { COLORS, icons, images } from '../../../constants';
-  import { HeaderBar, OrderItem, ToggleButton } from '../../components';
+  import { COLORS, icons, images, verticalScale, horizontalScale, moderateScale } from '../../../constants';
+  import { HeaderBar, OrderFacilityItem } from '../../components';
+  import { useSelector } from 'react-redux';
 
   const { width, height } = Dimensions.get("window");
 
 
   // init app screen
 const OrderScreen = ({navigation}) => {
+
+  const cartOrders = useSelector((state) => state.order.cart.length)
+
+  const [orderAvailabe, setOrderAvailable] = useState(true);
 
   // function to render header
   function renderHeaderContent() {
@@ -60,81 +65,49 @@ const OrderScreen = ({navigation}) => {
       {/* START OF ORDERS */}
 
       <View style={styles.vendorTitle}>
-          <Text style={styles.mainTitle}>Your Order</Text>
+          <Text style={styles.mainTitle}>Your Orders</Text>
           <Image source={icons.cart} 
             style={{
               height: 20, width: 20, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
             }}
           />
       </View>
-
-      <View style={styles.cartBox}>
-        <OrderItem 
-            name="Rice, Moi-moi and Beef"
-            details="Rice, moi-moi and stew and cooked beef plus one bottle"
-            price="5,500.00"
-            image={images.moimoi_rice}
-        />
-
-        <OrderItem 
-        name="Amala and Efo Riro"
-        details="Rice, moi-moi and stew and cooked beef plus one bottle"
-        price="2,050.00"
-        image={images.amala}
-    />
-
-    <OrderItem 
-    name="Bonlogesse Sphagetti"
-    details="Rice, moi-moi and stew and cooked beef plus one bottle"
-    price="3,000.00"
-    image={images.indoomie_pic}
-/>
+      <View style={styles.subTitleBox}>
+            <Text style={styles.subTitle}>Select the facility category below to view and complete your order</Text>
       </View>
+
+      {orderAvailabe == false &&
+        
+        <View style={styles.orderStatusDiv}>
+           <Image 
+            source={icons.info}
+            style={{
+              height:32, width: 32, tintColor: COLORS.gradientMiddle,
+              resizeMode: 'contain'
+            }}
+           />
+           <Text style={styles.infoText}>Sorry, you do not have any pending order for any facility</Text>
+        </View>
+        
+      }
+
+      <OrderFacilityItem 
+          onPress={() => navigation.navigate('RestaurantOrder')}
+          type="food"
+          icon={icons.food} 
+          title={cartOrders + " Orders Pending"} />
+
+          <OrderFacilityItem 
+          type="creche"
+          icon={icons.kids} 
+          title="3 Orders Pending" />
+
+          <OrderFacilityItem 
+          type="gym"
+          icon={icons.gym} 
+          title="3 Orders Pending" />
+      
    
-
-      <View style={styles.paymentTitle}>
-          <Text style={styles.mainTitle}>Delivery Method</Text>
-          <Image source={icons.delivery} 
-            style={{
-              height: 25, width: 25, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
-            }}
-          />
-      </View>
-      
-      <ToggleButton />
-
-      
-      <View style={styles.summaryTitle}>
-          <Text style={styles.mainTitle}>Summary</Text>
-          <Image source={icons.cash} 
-            style={{
-              height: 25, width: 25, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
-            }}
-          />
-      </View>  
-    
-
-{/* SUMMARY FIELD */}
-<View style={styles.summaryWindow}>
-    <View style={styles.summaryTextDiv}>
-        <Text style={styles.summaryText}>Total Order</Text>
-        <Text style={styles.summaryText}>₦ 9,040.00</Text>
-    </View>
-    
-
-
-    <TouchableOpacity 
-      style={styles.placeOrderbtn}>
-          <Text style={styles.loginText}>Complete your Order</Text>
-          <Image source={icons.check_yes}
-            style={{height:24, width: 24    ,
-            tintColor: COLORS.white, resizeMode: 'contain'}}
-          />
-    </TouchableOpacity>
-</View>
-{/* END OF SUMMARY FIELD
- */}
-
         {/* END OF ORDERS */}
 
 
@@ -162,56 +135,30 @@ const OrderScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-  summaryText: {
-    fontSize: 16,
+  infoText: {
+    fontSize: 14,
     fontFamily: "Benton Sans",
-    color: COLORS.StandardardBankBlue,
-    fontWeight: 'bold',
+    color: COLORS.StatureBlue,
+    fontWeight: 'normal', 
+    lineHeight: 20,
+    width: horizontalScale(250)
   },
-  loginText: {
-    fontSize: 17,
-    fontFamily: "Benton Sans",
-    color: COLORS.white,
-    fontWeight: 'bold',
-    marginRight:10
-  },
-  placeOrderbtn: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLORS.SecondaryGreen ,
-    borderRadius:10,
-    paddingHorizontal: 20,
-    paddingVertical: 18,
-    marginTop:40,
-  },
-  summaryTextDiv: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  summaryWindow: {
-    backgroundColor: '#ededed',
-    padding:25,
-    marginBottom: 50,
-  },
-  orderBox: {
+  orderStatusDiv: {
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: COLORS.InfoAlertBorder,
+    backgroundColor: COLORS.InfoAlertbg,
+    marginHorizontal: horizontalScale(20),
+    marginTop: verticalScale(25),
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: moderateScale(15),
+    borderRadius: moderateScale(15),
+    columnGap: 15
   },
-  orderText: {
-    color: COLORS.darkGray,
-    fontSize: 13,
-    fontFamily: "Benton Sans",
-    fontWeight: 'normal', 
-  },
-  orderHistory: {
-    marginTop: 5,
-    marginHorizontal:25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+  subTitleBox: {
+    marginHorizontal: horizontalScale(25),
   },
   vendorTitle : {
       flexDirection: 'row',
@@ -246,6 +193,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   }, 
+  subTitle: {
+    fontSize: 14,
+    fontFamily: "Benton Sans",
+    color: COLORS.StatureBlue,
+    fontWeight: 'normal', 
+    lineHeight: 20
+  },
   mainTitle: {
     fontSize: 21,
     fontFamily: "Benton Sans",

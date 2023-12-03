@@ -5,6 +5,7 @@ import {
     TouchableOpacity, 
     View } from 'react-native';
 import { icons, COLORS } from '../../constants';
+import { verticalScale, horizontalScale, moderateScale } from '../../constants';
 
 
 const HeaderBar = ({onPress, icon, iconStyle, notificationStyle}) => {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: verticalScale(30),
         marginHorizontal:15
       },
 })

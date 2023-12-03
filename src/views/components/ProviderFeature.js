@@ -17,6 +17,13 @@ const ProviderFeature = ({icon, title}) => {
 }
 
 const styles = StyleSheet.create({
+    featureText: {
+
+            fontSize: 13,
+            fontFamily: "Benton Sans",
+            color: COLORS.darkGray,
+            fontWeight: 'normal',
+    },
     featureBox: {
         flexDirection: 'row',
         justifyContent: 'flex-start',

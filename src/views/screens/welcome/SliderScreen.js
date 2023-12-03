@@ -11,11 +11,12 @@ import {
   TouchableOpacity, 
   View } from 'react-native'
   import LinearGradient from 'react-native-linear-gradient';
-
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { 
   COLORS, 
   images, 
-  icons, 
+  icons,
+  verticalScale, 
 } from '../../../constants';
 
 const { width, height } = Dimensions.get("window");
@@ -23,7 +24,7 @@ const { width, height } = Dimensions.get("window");
 const slides = [
   {
       id: '1',
-      image: require("../../../assets/images/resturant2_slider.jpg"),
+      image: require("../../../assets/images/resturant_slider.jpg"),
       icon: icons.food,
       title: 'Restaurant',
       description: 'Experience the ease and comfort of making your food orders'
@@ -74,8 +75,28 @@ const Slide = ({item}) => {
         <ImageBackground
         resizeMode="cover"
           source={item.image}
-          style={styles.imagebg}>
+          style={[styles.imagebg]}>
 
+          <View
+            style={{
+             paddingHorizontal: wp(3), position: 'absolute', top:wp(15),
+             width
+            }}
+          >
+
+          <View style={{flexDirection:'row', alignItems: 'center', 
+          justifyContent: 'space-between', marginHorizontal:7}}>
+                  <View style={styles.shieldDiv}>
+                        <Image style={styles.img} source={images.shield} />
+                  </View>
+                      <TouchableOpacity
+                        style={styles.skipBtn}
+                      >
+                        <Text style={styles.skipText}>Skip</Text>
+                      </TouchableOpacity>
+                </View>
+          </View>
+        
           <LinearGradient
             start={{x: 0, y: 0}}
             end={{ x: 0, y: 1}}
@@ -95,8 +116,8 @@ const Slide = ({item}) => {
                   source={item.icon}
                   resizeMode="contain"
                   style={{
-                    height: 43,
-                    width: 43,
+                    height: hp(4.5),
+                    width: hp(4.5),
                     tintColor: COLORS.white,
                     marginRight: 10
                   }}
@@ -141,7 +162,7 @@ const Slide = ({item}) => {
                           source={icons.arrow} 
                           resizeMode='contain'
                           style={{
-                            height: 23, width: 23, resizeMode: 'contain',
+                            height: wp(4), width: wp(4), resizeMode: 'contain',
                             tintColor: COLORS.darkblue, marginLeft: 10,
                           }}
                           />
@@ -172,6 +193,20 @@ const Slide = ({item}) => {
 }
 
 const styles = StyleSheet.create({
+  skipBtn: {
+      borderRadius: wp(5),
+      borderColor: COLORS.white,
+      borderStyle: 'solid',
+      borderWidth: 1,
+      paddingHorizontal: wp(5.3),
+      paddingVertical: wp(1.3)
+  },
+  skipText: {
+    fontFamily: "Benton Sans",
+    fontWeight:'normal',
+    fontSize:wp(3.5),
+    color: COLORS.white
+  },
   indicatorDiv: {
     flexDirection: 'row',
     justifyContent: 'center'
@@ -186,21 +221,21 @@ const styles = StyleSheet.create({
   btnTextNext: {
     fontFamily: "Benton Sans",
     fontWeight:'600',
-    fontSize:16,
+    fontSize:wp(4),
     color: COLORS.darkblue
   },
   btnNext : {
-    borderRadius: 8,
+    borderRadius: wp(2.5),
     backgroundColor: COLORS.white,
-    paddingHorizontal:23,
-    paddingVertical: 8,
+    paddingHorizontal: wp(3),
+    paddingVertical: wp(1.5),
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center'
 
   },
   btnDiv : {
-      marginTop:110,
+      marginTop:hp(15),
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center'
@@ -208,30 +243,36 @@ const styles = StyleSheet.create({
   titlebox: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center'   
+    alignItems: 'center',   
   },
   textDescription : {
-    marginTop:10,
+    marginTop:hp(1),
     fontFamily: "Benton Sans",
     color: COLORS.white,
-    fontSize:17,
-    fontWeight: '300'
+    fontSize:wp(4),
+    fontWeight: '300',
+    lineHeight: hp(3)
   },
   textTitle: {
-    width:350,
-    fontSize: 33,
+    fontSize: wp(7),
     fontFamily: "Benton Sans",
     color: COLORS.white,
     fontWeight: '900',
-    lineHeight:40
+    lineHeight:hp(7)
+  },
+  img: {
+    height:wp('14%'),
+    width:wp('14%')
   },
   imagebg: {
     flex: 1,
     width,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    resizeMode:'cover'
+    
   },
   sliderContainer: {
-    alignItems:'center'
+    alignItems:'center',
   }
 })
 

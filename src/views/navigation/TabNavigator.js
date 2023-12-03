@@ -39,7 +39,7 @@ const TabNavigator = () => {
                     height:60,
                     borderRadius: 50,
                     marginBottom:10,
-                    marginHorizontal:5,
+                    marginHorizontal:10,
                     borderTopColor: 'transparent'
                 }
             }}

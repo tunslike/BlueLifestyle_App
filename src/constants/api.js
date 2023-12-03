@@ -1,6 +1,10 @@
-const APIBaseUrl = {
-    developmentUrl: "https://webdev.stanbicibtcpension.com:7443/",
-    productionUrl: "",
-}
+import axios from "axios";
+import APIBaseUrl from "./config";
 
-export default APIBaseUrl;
+const ApiManager = axios.create({
+    baseURL: APIBaseUrl.developmentUrl,
+    responseType: 'json',
+    withCredentials: true,
+});
+
+export default ApiManager;

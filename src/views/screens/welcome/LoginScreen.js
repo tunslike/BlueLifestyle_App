@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState, useEffect, useMemo} from 'react';
 import { 
   SafeAreaView,
   StyleSheet, 
@@ -9,42 +9,81 @@ import {
   StatusBar,
   TouchableOpacity,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TextInput,
+  Alert
 } from 'react-native'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { COLORS, images, icons} from '../../../constants';
-import { LoginInput } from '../../components';
+import { LoginInput, MessageBox, NewLoader, CustomBottomSheet } from '../../components';
+import { AuthContext } from '../../../context/AuthContext';
 const { width, height } = Dimensions.get("window");
+
 
 const LoginScreen = ({navigation}) => {
 
-  // SET STATES
-  const [isVisible, setIsVisible] = React.useState(false);
+  // CALL AUTH CONTEXT
+  const {ValidateUserLogin, 
+         isLoading, 
+         errorMessage,
+         company,
+         department
+        } = useContext(AuthContext)
 
+  // SET STATES
+  //const [companyName, setCompanyName] = useState(company);
+  //const [departmentName, setDepartmentName] = useState(department);
+
+  const [isVisible, setIsVisible] = React.useState(true);
 
   // SET USER INPUT STATES
-  const [sapid, setSAPID] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState('');
+  const [username, setUsername] = useState('A171207');
+  const [pwd, setPwd] = useState('Pension@Dmin123$');
+  
+
+  //Function to login
+  const AuthenticateUser = async () => {
+    
+    ValidateUserLogin(username, pwd);
+
+  }
+  // end of function
+
+  //USE EFFECT
+  useEffect(() => {
+
+    
+
+}, []);
 
   return (
     <KeyboardAwareScrollView 
-     enableOnAndroid={true}
-     keyboardShouldPersistTaps={"handled"}
-     extraScrollHeight={-300}
-     contentContainerStyle={{
-      flexGrow: 1,
-      justifyContent: 'center'
-     }}>
+        enableOnAndroid={true}
+        keyboardShouldPersistTaps={"handled"}
+        extraScrollHeight={-300}
+        contentContainerStyle={{
+          flexGrow: 1,
+          backgroundColor: COLORS.white
+        }}
+     >
     <StatusBar barStyle="dark-content"  />
-    <SafeAreaView>
+  
+    {errorMessage &&
+      <MessageBox status="error" message={errorMessage} />
+    }
+    
+    {isLoading && 
+      <NewLoader title="Authenticating user, please wait..." />
+    }
+    
+    <SafeAreaView>    
       <View style={styles.subContainer}>
           <Image style={styles.img} source={images.shield} />
       </View>
       <View style={styles.imgContainer}>
         <Image source={images.resturant_image} style={{
-          height: 200, width, resizeMode: 'contain'
+          height: wp(50), width, resizeMode: 'contain'
         }} />
         <Text style={styles.loginTitle}>
         Let's Get You Started
@@ -53,17 +92,18 @@ const LoginScreen = ({navigation}) => {
       </View>
 
       <View>
+
           <LoginInput 
-            value={sapid}
-            onChange={(text) => setSAPID(text)}
+            value={username}
+            onChange={(text) => setUsername(text)}
             pwd={false}
             placeholder="Enter your SAP ID"
             icon={icons.user}
             maxlength={7}
           />
           <LoginInput 
-            value={password}
-            onChange={(text) => setPassword(text)}
+            value={pwd}
+            onChange={(text) => setPwd(text)}
             pwd={true}
             setSecureText={isVisible}
             placeholder="Enter your password"
@@ -75,7 +115,7 @@ const LoginScreen = ({navigation}) => {
 
       <View>
           <TouchableOpacity 
-            onPress={() => navigation.replace('Tab')}
+            onPress={() => AuthenticateUser()}
             style={styles.loginBtn}>
                 <Text style={styles.loginText}>Sign In</Text>
                 <Image source={icons.arrow} 
@@ -105,33 +145,33 @@ const styles = StyleSheet.create({
       borderRadius:10,
       paddingHorizontal: 20,
       paddingVertical: 18,
-      marginHorizontal:25,
-      marginTop:40
+      marginHorizontal:wp(8),
+      marginTop:(height > 600) ? hp(7) : hp(4)
   },
   loginDesc :{
-    fontSize: 14,
+    fontSize: wp(3.4),
     fontFamily: "Benton Sans",
     color: COLORS.darkGray,
     fontWeight: 'normal',
-    marginHorizontal: 25,
-    marginVertical:5,
+    marginHorizontal: wp(7),
+    marginVertical:hp(0.7),
   },
   loginTitle : {
-    width:350,
-    fontSize: 25,
+    fontSize: wp(6),
     fontFamily: "Benton Sans",
     color: COLORS.StandardardBankBlue,
     fontWeight: 'bold',
-    marginHorizontal:25,
-    marginTop:40,
+    marginHorizontal:wp(7),
+    marginTop:hp(3),
   },
   imgContainer : {
-    marginVertical:20
+    marginVertical:hp(1),
+    marginTop: wp(10),
+    marginBottom: wp(7)
   },
   subContainer: {
-    marginHorizontal: 25,
-    marginBottom:10,
-    marginTop:20
+    marginHorizontal: hp(2),
+    marginTop:hp('7%')
   },
   container : {
     flex: 1,

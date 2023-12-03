@@ -2,6 +2,18 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/animation/LoaderNew.json",
+      "sha1": "7f8c7a1c7e9f9082b6df52b72fc0b088217beb2d"
+    },
+    {
+      "path": "src/assets/animation/loaderFast.json",
+      "sha1": "7f8c7a1c7e9f9082b6df52b72fc0b088217beb2d"
+    },
+    {
+      "path": "src/assets/animation/success_lottie.json",
+      "sha1": "d5f04e5e7fa78d266dea487f2cb57d2e7f9e5c85"
+    },
+    {
       "path": "src/assets/fonts/Benton_Sans-Bold.otf",
       "sha1": "4862bd0ab8af6026e7baf8c047c1e514d4d698bc"
     },
@@ -14,16 +26,96 @@
       "sha1": "f358bfd48c2ffefc5e8fec3caebd4db809a7eb7b"
     },
     {
+      "path": "src/assets/icons/access.png",
+      "sha1": "2206a40edab3b244e77a42560d7ab9ad77ddcc68"
+    },
+    {
+      "path": "src/assets/icons/additem.png",
+      "sha1": "71f9b581ea85bbc5799f3989277abd7338351fe1"
+    },
+    {
       "path": "src/assets/icons/arrow.png",
       "sha1": "8a0887b4587c2bb1a254dba899d369bedab4a927"
+    },
+    {
+      "path": "src/assets/icons/back_arrow.png",
+      "sha1": "4b519a2f27519fcc9186510a9dafd4ef3eb64596"
+    },
+    {
+      "path": "src/assets/icons/basket.png",
+      "sha1": "f9c9b977363aa943e6bd65ceda8eafd450833270"
+    },
+    {
+      "path": "src/assets/icons/calendar.png",
+      "sha1": "60075d7e4a8b795638bc189c690c86f7dbaef2e5"
+    },
+    {
+      "path": "src/assets/icons/cancel.png",
+      "sha1": "4a774b88cb1f5164d9688222d8f01f7388ef8129"
     },
     {
       "path": "src/assets/icons/cart.png",
       "sha1": "508e8e1a003f7544c47de9ac0ab7fff80841a710"
     },
     {
+      "path": "src/assets/icons/cash.png",
+      "sha1": "66dad365507f740b66e2c4b261c8e133e481dd98"
+    },
+    {
+      "path": "src/assets/icons/check_no.png",
+      "sha1": "28f8c978d4a80cd4adfeba1f4b293e08b779a00d"
+    },
+    {
+      "path": "src/assets/icons/check_yes.png",
+      "sha1": "f9221db81552005c5e9cbf5b68852081758199bd"
+    },
+    {
+      "path": "src/assets/icons/child.png",
+      "sha1": "0a16dc68bc53c693432e94775bc3e2241ee97771"
+    },
+    {
+      "path": "src/assets/icons/close.png",
+      "sha1": "0b5eb1bbfdafbf199dcd15a1c444d7c5e85fa3bd"
+    },
+    {
+      "path": "src/assets/icons/company.png",
+      "sha1": "5c9b36ccaac49fcdf5b33fcea0b02f8934212789"
+    },
+    {
+      "path": "src/assets/icons/delivery.png",
+      "sha1": "8c049d90b790e64a3aa8cb2fb7d936cb80c1b477"
+    },
+    {
+      "path": "src/assets/icons/eat-In.png",
+      "sha1": "bb75fbd1af1cadb84a5fd1a02dd9175dbbffbd2d"
+    },
+    {
+      "path": "src/assets/icons/emergency_phone.png",
+      "sha1": "34b6149912a4c1cf2502605486529cff015ce7cb"
+    },
+    {
+      "path": "src/assets/icons/eye_off.png",
+      "sha1": "e104308111c2257be3b54408e87dc9fa37db5559"
+    },
+    {
+      "path": "src/assets/icons/eye_on.png",
+      "sha1": "60b6ea65bdcb2054c2d08c4f7c88b9f427609997"
+    },
+    {
+      "path": "src/assets/icons/feedback.png",
+      "sha1": "1a86df98670bcb96baa5d215551def1acbe1288b"
+    },
+    {
       "path": "src/assets/icons/food_icon.png",
       "sha1": "129b1638e530d9c1ad95b61e19aceac4c71a8297"
+    },
+    {
+      "path": "src/assets/icons/guardian.png",
+      "sha1": "e063102945944d80df7f3d873bb2cb751df0b925"
+    },
+    {
+      "path": "src/assets/icons/gym_details.png",
+      "sha1": "64a513c65fbc10b348ef14be6d998c8e24ee9f2c"
     },
     {
       "path": "src/assets/icons/gym_icon.png",
@@ -38,48 +130,192 @@
       "sha1": "8a67db975a5fbfcd57a9c9e076eb30cdec913fec"
     },
     {
+      "path": "src/assets/icons/hotline.png",
+      "sha1": "fa007e0fc894597cfdedc43f66dc5ba8b4b071a4"
+    },
+    {
+      "path": "src/assets/icons/info.png",
+      "sha1": "92cac795f25ec1590c934d032adaca67cccbd3bd"
+    },
+    {
       "path": "src/assets/icons/kids_icon.png",
       "sha1": "54057aa4eade1256709f89f0121a045b6f8019ef"
+    },
+    {
+      "path": "src/assets/icons/like.png",
+      "sha1": "d9cb6bccfb3306f19ff8158501d1c604f3807b35"
+    },
+    {
+      "path": "src/assets/icons/logout.png",
+      "sha1": "5a1c06191f3d741792efefbcd5226c956043539e"
+    },
+    {
+      "path": "src/assets/icons/minus.png",
+      "sha1": "531e0a9ddfe20388bc5ba2c84bc919165935a68d"
+    },
+    {
+      "path": "src/assets/icons/nav_arrow.png",
+      "sha1": "2c5da9eb39d88fed02b14c8ce50f1b0b1130fb97"
+    },
+    {
+      "path": "src/assets/icons/notification.png",
+      "sha1": "f9067a6880400aeb1cb12cefa364db5aadffcf21"
+    },
+    {
+      "path": "src/assets/icons/office.png",
+      "sha1": "6045d94ac5f613c068859cd9acafdd77549fe262"
+    },
+    {
+      "path": "src/assets/icons/order_again.png",
+      "sha1": "fab7191e28f50bc18243e0a109729fbb740438b5"
+    },
+    {
+      "path": "src/assets/icons/package.png",
+      "sha1": "fee6c4f40680d13513da2a15a6f2342c85d75faa"
+    },
+    {
+      "path": "src/assets/icons/people.png",
+      "sha1": "7acd0e587f652311d2deed455e361a8083b95101"
+    },
+    {
+      "path": "src/assets/icons/phone_fill.png",
+      "sha1": "560473da2cbbd2b7a6322384247733581427a5ec"
     },
     {
       "path": "src/assets/icons/profile.png",
       "sha1": "2abd73e58d4ac9b4652b99579d888af96d5b40e4"
     },
     {
+      "path": "src/assets/icons/pwd_icon.png",
+      "sha1": "3aa3940f5fd6cb47088ac33947670092ee677cdf"
+    },
+    {
+      "path": "src/assets/icons/rating.png",
+      "sha1": "031efc0d9c8669a5a7e332e5a91b0486b6785e94"
+    },
+    {
       "path": "src/assets/icons/running_icon.png",
       "sha1": "fa483a7e342a47f5a91fba347d0512ad03978af9"
     },
     {
-      "path": "src/assets/images/buildingbg.png",
-      "sha1": "5aef173809a754a5ddb565accd99264b033f1df6"
+      "path": "src/assets/icons/takeout.png",
+      "sha1": "cee35993f7e56a57768aeca916847401caec8386"
+    },
+    {
+      "path": "src/assets/icons/thumbs_up.png",
+      "sha1": "4c9295b1b9770ad90e07a252081e31385a9c323f"
+    },
+    {
+      "path": "src/assets/icons/time.png",
+      "sha1": "7c85bcc2a57515e7533c8a212da436cd611777f3"
+    },
+    {
+      "path": "src/assets/icons/time2.png",
+      "sha1": "79af4a5f3266e9fa62c1c3c33f0208f133c9588a"
+    },
+    {
+      "path": "src/assets/icons/time3.png",
+      "sha1": "5dd57432dc9520981f7d8dbdcdb1212d1cf60e7a"
+    },
+    {
+      "path": "src/assets/icons/trainer.png",
+      "sha1": "2b49fefecc6fdd3b7698fd2d45526e70300cda49"
+    },
+    {
+      "path": "src/assets/icons/user_icon.png",
+      "sha1": "95484af8e2e04eb13245e31e16cf6d852a27f0e1"
+    },
+    {
+      "path": "src/assets/icons/vendor.png",
+      "sha1": "b11b9629b6686f24a53aee2cde7c2396b1ef3456"
+    },
+    {
+      "path": "src/assets/icons/watch.png",
+      "sha1": "b6b6ee949d35d6d0e89a82544dadc4c056c6b3b0"
+    },
+    {
+      "path": "src/assets/images/amala.jpeg",
+      "sha1": "c53ea990606fd18ad1a4e4eda1de57e454a21f79"
+    },
+    {
+      "path": "src/assets/images/blank_food.png",
+      "sha1": "e46c53dfdae38c6f51e439af3047c58f2cda17ea"
     },
     {
       "path": "src/assets/images/creche_slider.jpg",
-      "sha1": "235ebdb1f05cfa051e92c020b50b12f8e20b868e"
+      "sha1": "82bb9d472d8bc0916e524a10f27f49365fd0cd25"
+    },
+    {
+      "path": "src/assets/images/gym1.jpeg",
+      "sha1": "8408f335e3e7ec92ee7ef79ae35e2dd075029ae2"
+    },
+    {
+      "path": "src/assets/images/gym2.jpeg",
+      "sha1": "100086347834692c064d30b39412f95c4b103144"
+    },
+    {
+      "path": "src/assets/images/gym3.jpeg",
+      "sha1": "9f9d7faeb29b814d3c8fab8bf3f8c8fb6161ac43"
+    },
+    {
+      "path": "src/assets/images/gym4.jpeg",
+      "sha1": "d711fe1a19e39f015956c05716608e2d23d70f84"
+    },
+    {
+      "path": "src/assets/images/gym_image.jpg",
+      "sha1": "94f6d4aa038f182a05ac3c47d178bc3d7ac49760"
     },
     {
       "path": "src/assets/images/gym_slider.jpg",
-      "sha1": "29ef3b9bf53d1d7d20db2a0d614829f1ff7b8eaf"
+      "sha1": "d00b474558a0eadc15817915b66c805af76412a2"
     },
     {
-      "path": "src/assets/images/resturant2_slider.jpg",
-      "sha1": "7a5b5bd524bdb4aa47d2c64496b57f5528ccfc52"
+      "path": "src/assets/images/kidsCreche.jpg",
+      "sha1": "936eccf4dc4716f81861d7a25486acc92ee2484f"
+    },
+    {
+      "path": "src/assets/images/kitchen_bg.jpg",
+      "sha1": "980bc17fe739cab05ff3f4f879b270353a886adb"
+    },
+    {
+      "path": "src/assets/images/kitchen_bg2.jpg",
+      "sha1": "aad9272524e7171f67880e4f339143a393608b15"
+    },
+    {
+      "path": "src/assets/images/moimoi_rice.jpeg",
+      "sha1": "252fc7fd94a70cc16b74888f2684686eee969c0b"
+    },
+    {
+      "path": "src/assets/images/nativerice.jpg",
+      "sha1": "953af1affaf8866d2cbf70cc5629c8c36ee96f45"
+    },
+    {
+      "path": "src/assets/images/noodles.jpg",
+      "sha1": "306ae0215596f01037fcc8ec0689088fae41eff0"
+    },
+    {
+      "path": "src/assets/images/order_food.jpg",
+      "sha1": "6adda684a8fb360dd2f57b9ce00951e273687bf7"
+    },
+    {
+      "path": "src/assets/images/profileUpdate.jpg",
+      "sha1": "3ea92a238ca6bc03184d951756f0badb7fd53b1a"
+    },
+    {
+      "path": "src/assets/images/resturant_img_dash.jpg",
+      "sha1": "72542e5a69833b7045bbb64b418b7ece489ef1cb"
     },
     {
       "path": "src/assets/images/resturant_slider.jpg",
-      "sha1": "01df67dc64ab0ac378803540d15b7ad2a71d34ce"
+      "sha1": "336c8bbfb77ac4127e64732f8e3053234c9e9468"
     },
     {
       "path": "src/assets/images/shield.png",
       "sha1": "6b0399043fdcee0f5b5c259e771a783c043bfe99"
     },
     {
-      "path": "src/assets/images/towers.png",
-      "sha1": "37fb27e4e3aac64b90fb20a8c16f4ef603f234e3"
-    },
-    {
-      "path": "src/assets/images/welcomebg.jpg",
-      "sha1": "5888467a136da0c100206939180ebe0cab5968a2"
+      "path": "src/assets/images/welcomebg.png",
+      "sha1": "2521ffc843a6d95b3e1e947b9679447dbe2253c5"
     }
   ]
 }

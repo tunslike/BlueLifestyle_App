@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import { 
         StyleSheet, 
         Text, 
@@ -7,26 +7,77 @@ import {
         TouchableOpacity,
         Dimensions,
         Image,
-        ScrollView
+        ScrollView,
+        Alert
  } from 'react-native';
 
  import { SafeAreaProvider } from 'react-native-safe-area-context';
- import { COLORS, icons, images } from '../../../constants';
+ import { COLORS, icons, images, utilities, verticalScale } from '../../../constants';
  import { HeaderBarBlank, 
           AddQuantityItem,
-          Button
+          Button, MessageBox
         } from '../../components';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addToCart, removeFromCart } from '../../../store/OrderSlice';
 
  const { width, height } = Dimensions.get("window");
 
 // INIT APP
-const OrderMenuItem = ({navigation}) => {
+const OrderMenuItem = ({route, navigation}) => {
+
+const {menuID, menuItem, description, amount, image } = route.params
+
+const orderCart = useSelector((state) => state.order.cart);
+const dispatch = useDispatch();
+
+const [showMessage, setShowMessage] = useState(0);
+const [itemCount, setItemCount] = useState(0);
+
+const getItemCount = (data) => {
+    if(!data) {
+        setItemCount(Number(data))
+    }
+}
+
+// function to load product details
+const AddProductToCart = (product_id) => {
+
+    // create cart object
+    const cart = {
+        menuID : product_id,
+        quantity: itemCount,
+        amount: amount
+    }
+    
+    // push cart to store
+    dispatch(addToCart(cart))
+
+    //show notification
+    setShowMessage(1);
+
+    setTimeout(hideNotificationMessage, 3000);
+}
+// end of function
+
+//functiont to turn of message
+const hideNotificationMessage = () => {
+    setShowMessage(0);
+}
+
+//USE EFFECT
+useEffect(() => {
+
+    //fetch providers
+    console.log("Number of items in cart: " + orderCart.length)
+  
+  }, []);
 
     // FUNCTION TO RENDER HEADER FUNCTION
     function renderHeaderContent() {
         return (
             <ImageBackground
-            source={images.kitchen_bg2}
+            source={image}
             style={styles.headerBg}
           >
               <HeaderBarBlank 
@@ -50,11 +101,11 @@ const OrderMenuItem = ({navigation}) => {
                             marginRight: 15
                         }}
                     />
-                    <Text style={styles.productHeader}>Rice, Moi-moi and Beef</Text>
+                    <Text style={styles.productHeader}>{menuItem}</Text>
                 </View>
 
                 <View style={styles.productDesc}>
-                    <Text style={styles.descText}>Indomie noodles cooked in Spicy sauddce with Ofada</Text>
+                    <Text style={styles.descText}>{description}</Text>
                 </View>
 
                 <View style={styles.priceBox}>
@@ -65,12 +116,13 @@ const OrderMenuItem = ({navigation}) => {
                         marginRight: 15
                     }}
                 />
-                        <Text style={styles.textPrice}>₦ 4,500.00</Text>
+                        <Text style={styles.textPrice}>₦ {utilities.formatToCurency(Number(amount))}</Text>
+                    
                 </View>
 
-                <AddQuantityItem />
+                <AddQuantityItem getItemCount={getItemCount} amount={amount} />
 
-                <Button title="Add to order" icon={icons.basket} />
+                <Button onPress={() => AddProductToCart(menuID)} title="Add to Order" icon={icons.basket} />
                 
             </View>
         )
@@ -80,6 +132,10 @@ const OrderMenuItem = ({navigation}) => {
   return (
 
     <SafeAreaProvider style={styles.container}>
+
+    {showMessage == 1 &&
+        <MessageBox message="Item has been added to your order successfully!" status="success" />
+    }
 
          {/* Render Header */}
          {renderHeaderContent()}

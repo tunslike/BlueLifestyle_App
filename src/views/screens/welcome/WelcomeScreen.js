@@ -1,9 +1,23 @@
 import React, { useRef } from 'react';
-import { Animated, Image, ImageBackground, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
-import { COLORS, images, icons, SIZES, FONTS } from '../../../constants';
+import { Animated, 
+         Image, 
+         ImageBackground, 
+         StatusBar,
+         StyleSheet, 
+         Text, 
+         TouchableOpacity, 
+         View } from 'react-native';
+import { 
+         COLORS, 
+         images, 
+         icons, 
+         verticalScale,
+         horizontalScale,
+         moderateScale} from '../../../constants';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const WelcomeScreen = ({navigation}) => {
+
 
   const fadeanim = useRef(new Animated.Value(0)).current;
 
@@ -13,7 +27,7 @@ const WelcomeScreen = ({navigation}) => {
       <ImageBackground
         resizeMode="cover"
         style={styles.welcomebg}
-        source={images.buildingbg}>
+        source={images.towersBuilding}>
           <View style={styles.shieldDiv}>
                 <Image style={styles.img} source={images.shield} />
           </View>
@@ -22,18 +36,19 @@ const WelcomeScreen = ({navigation}) => {
                   STANBIC TOWERS FACILITY MANAGEMENT
               </Text>
               <Text style={styles.mainDesc}>
-               Accessing facilities with better experience
+               Access facility with better booking experience
               </Text>
           </View>
           <View>
               <TouchableOpacity 
-              onPress={() => navigation.navigate('Slider')}
+             onPress={() => navigation.navigate('Slider')}
+
               style={styles.actionBtn}>
                 <Text style={styles.actionTxt}>Get Started here</Text>
                 <Image source={icons.arrow} 
                  style={{
-                  height:28, 
-                  width:28, 
+                  height:hp(5), 
+                  width:wp(7), 
                   resizeMode: 'contain', 
                   tintColor: COLORS.white,
                   marginLeft: 30,
@@ -48,50 +63,50 @@ const WelcomeScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   actionTxt: {
-    fontSize: 17,
+    fontSize: wp(4),
     fontFamily: "Benton Sans",
     color: COLORS.white,
-    fontWeight: '600',
+    fontWeight: '900',
   },
   actionBtn: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-     width: '90%',
-     marginHorizontal:20,
-     padding:20,
-     borderRadius:14,
+     marginHorizontal:wp(7),
+     padding:wp(2.5),
+     borderRadius:wp(3),
      alignItems: 'center',
-     marginTop: 90,
+     marginTop: hp(18),
      borderColor: COLORS.textGrey,
      borderWidth:1,
+     backgroundColor:'rgba(0, 51, 161, 0.6)',
   },
   mainDesc : {
-    marginTop:20,
+    marginTop:wp(3),
     fontFamily: "Benton Sans",
-    color: COLORS.lightBlue,
-    fontSize:17,
+    color: COLORS.lineDividerGray,
+    fontSize:wp(3.7),
     fontWeight: 'normal'
   },
   fontdiv: {
-    paddingHorizontal:20,
-    marginTop:50,
+    paddingHorizontal:wp(5),
+    marginTop:hp(4),
   },
   mainTitle: {
-    width:350,
-    fontSize: 28,
+    fontSize: wp(6),
     fontFamily: "Benton Sans",
     color: COLORS.white,
     fontWeight: 'bold',
-    lineHeight:40
+    lineHeight:hp(4.7),
+    width: wp(80)
   },
   shieldDiv:{
-    paddingVertical: 80,
-    paddingHorizontal: 20
+    paddingVertical: wp(20),
+    paddingHorizontal: hp('3%')
   },
   img: {
-    height:80,
-    width:80
+    height:60,
+    width:60
   },
   welcomebg : {
     flex: 1,

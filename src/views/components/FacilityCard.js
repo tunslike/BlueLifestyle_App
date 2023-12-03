@@ -22,7 +22,7 @@ const FacilityCard = ({image, title, onPress, capacity, openingTime}) => {
         <Image source={image} style={styles.cardImage} />
 
         <View style={styles.cardDetails}> 
-            <View>
+            <View style={{flex:1}}>
             <Text style={styles.cardTitle}>{title}</Text>
             <View style={{flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center'}}>
                 <Image source={icons.time} 
@@ -44,7 +44,7 @@ const FacilityCard = ({image, title, onPress, capacity, openingTime}) => {
             <Image 
                 source={icons.nav_arrow}
                 style={{
-                   marginLeft:50,  height: 25, width: 25, tintColor: COLORS.ArrowGray, resizeMode: 'contain'
+                   marginLeft:-30, height: 25, width: 25, tintColor: COLORS.ArrowGray, resizeMode: 'contain'
                 }}
             />
         </View>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
-        paddingHorizontal: 20,
+        paddingHorizontal: 33,
         paddingVertical:10,
         width,
         borderTopRightRadius:10,
@@ -87,12 +87,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+        marginLeft:-10,
     },
     cardImage: {
         height: 100,
         width: 120,
         resizeMode: 'contain',
         borderRadius: 10,
+        zIndex:10
     },
     cardContainer: {
         flexDirection: 'row',

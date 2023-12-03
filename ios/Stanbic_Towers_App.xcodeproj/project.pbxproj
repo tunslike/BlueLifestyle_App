@@ -19,14 +19,7 @@
 		740162E48BC5412F9F5D71B4 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C65898BDB3C4D3090A113F1 /* home.png */; };
 		2487E290FAD244FDA7E96E65 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 116E65A615E840F58DA5B7D2 /* profile.png */; };
 		4A932BAFC62D428F9C593A93 /* shield.png in Resources */ = {isa = PBXBuildFile; fileRef = 735DA88F1DAC46A1AD1B2D0F /* shield.png */; };
-		AF981CA01A884334B3CB2A21 /* welcomebg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A37FEAD58B054A6588FE7008 /* welcomebg.jpg */; };
 		FA274BDAFAAF41E7AB1A2950 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 878853485F9D44E9B6809729 /* arrow.png */; };
-		917ABE5E4F57465E95DD369A /* buildingbg.png in Resources */ = {isa = PBXBuildFile; fileRef = CCD7ABD01295429B933EA328 /* buildingbg.png */; };
-		B80514E3DF3E4B5B8F677B5E /* towers.png in Resources */ = {isa = PBXBuildFile; fileRef = E3EE8013DF1A48FD8DD29F01 /* towers.png */; };
-		D84A86AC955C4DD2ACFF62F8 /* creche_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 60561D6EB472497EA883097D /* creche_slider.jpg */; };
-		B36BB470FF564F3C8DA7B105 /* gym_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBF328D1661743F7BEE8B1ED /* gym_slider.jpg */; };
-		D8C32E3B41A94E0B96EBE1A3 /* resturant2_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EB8D9A91F1B4F168C46E6A1 /* resturant2_slider.jpg */; };
-		367D5A7D990E46859C223AB3 /* resturant_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 883E17F8EFCC4CFDA17DE82F /* resturant_slider.jpg */; };
 		A6F0F27AA44449FB8EB87B8A /* Benton_Sans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C06075B0E5E548498B71FEC6 /* Benton_Sans-Bold.otf */; };
 		3D1509127FE34A5DA9A18120 /* Benton_Sans-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E065FE08395645C89AB92055 /* Benton_Sans-Medium.otf */; };
 		23B45D7473B44321A6A97E4F /* Benton_Sans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1E84DB5AD254A81BA823094 /* Benton_Sans-Regular.otf */; };
@@ -34,6 +27,72 @@
 		B8C8E952C74743CFB1AE1E48 /* gym_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F239598BCF64FD8B51BF538 /* gym_icon.png */; };
 		6D9781621FD34573B9C22387 /* kids_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2BD7D813CC49F4B492E767 /* kids_icon.png */; };
 		D6C98FA8284F438FA9198B64 /* running_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 506844E5FB394AF99FC05D0D /* running_icon.png */; };
+		A576D109AE174B5C9281B92A /* LoaderNew.json in Resources */ = {isa = PBXBuildFile; fileRef = BD82F98D74BF4D3DB2B488BA /* LoaderNew.json */; };
+		5806F1AA1E1B409BB36F1C80 /* loaderFast.json in Resources */ = {isa = PBXBuildFile; fileRef = 683B7BDFEB0F4576BF3D4366 /* loaderFast.json */; };
+		ABAD4B2BBDBE436CAED93E40 /* success_lottie.json in Resources */ = {isa = PBXBuildFile; fileRef = F2910A9AFACC4D5698E2621E /* success_lottie.json */; };
+		E828D79672324ADD86CDDB78 /* access.png in Resources */ = {isa = PBXBuildFile; fileRef = 4062C72E8AE9445B968BFDC1 /* access.png */; };
+		E0F7FC9EE8D44481A47D9D69 /* additem.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C18337359467F9BEA5A52 /* additem.png */; };
+		C3F1BE1D9C3B4325B838FD83 /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BB451FF2E23846C0A2626C63 /* back_arrow.png */; };
+		89D799A39E014C468D039C40 /* basket.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D71C991F6924B78AED613CA /* basket.png */; };
+		4F6D8B9377694B668A309135 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = C64A49C7A3494443B8CB82C1 /* calendar.png */; };
+		887274998A0B4E0ABE3C37FB /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 22788BE284504EF193AD32D9 /* cancel.png */; };
+		73937B0538074C2EB30E8ADC /* cash.png in Resources */ = {isa = PBXBuildFile; fileRef = 60ECA6183EEB436BB17CCF72 /* cash.png */; };
+		6E6F12BA16B94BA093F11062 /* check_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE4C6F831184096AFED8D27 /* check_no.png */; };
+		020D796BF9304397ABC649E8 /* check_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C1D5B39847540E09DD9904F /* check_yes.png */; };
+		5D0FFC08CFF844BCA3F87412 /* child.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B30F43FDB44AED911C8B68 /* child.png */; };
+		60FCA2FB53D04A53B61B0DC9 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 4AD624DEDED24D09A9FC033A /* close.png */; };
+		D2EE9075233648E788382BDE /* company.png in Resources */ = {isa = PBXBuildFile; fileRef = F9CB758C4ADC4DE6A4F2A3A0 /* company.png */; };
+		5E379E8261A144A38DB3DD50 /* delivery.png in Resources */ = {isa = PBXBuildFile; fileRef = AC0164ABC9CD489FB9AFACAC /* delivery.png */; };
+		C4CA997C446F4275AA088B5F /* eat-In.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6681AE8E74A3DA217339D /* eat-In.png */; };
+		2B12F2385739491595138160 /* emergency_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B359A4186384CED848C07C0 /* emergency_phone.png */; };
+		33BF9B5FDA624881BA4F589D /* eye_off.png in Resources */ = {isa = PBXBuildFile; fileRef = D790E3882964489D9EBC7FD7 /* eye_off.png */; };
+		9FD7AE7CD64A4AC79DB9CA0E /* eye_on.png in Resources */ = {isa = PBXBuildFile; fileRef = A35AF52E7CB8418ABDE93CC4 /* eye_on.png */; };
+		569D89ED8CFA41F0A979AF63 /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 9851F536BAC84BF88040BA8C /* feedback.png */; };
+		A949565E360F462986E68E76 /* guardian.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9A4760E7A54B22A78C9E55 /* guardian.png */; };
+		69961DFA8A364BC2B8A57405 /* gym_details.png in Resources */ = {isa = PBXBuildFile; fileRef = A0C34E4EDE4C42C88EA37B4D /* gym_details.png */; };
+		B53719127A174B5B8F621572 /* hotline.png in Resources */ = {isa = PBXBuildFile; fileRef = 76621C1409824F1DB7143E41 /* hotline.png */; };
+		65E1854E94AF4AC1AB573F19 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A14E06D6F4841D2A943453B /* info.png */; };
+		AADCE8094534448EA64087CE /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED421153604427A69B3A87 /* like.png */; };
+		900553CBEF9E41FF99F04EB6 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = EA9CC935A08244759AEF746D /* logout.png */; };
+		B062375BB79148BA9FE75E6A /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = DD2F4D9BD1AA4E3FAB462514 /* minus.png */; };
+		096ADB81EC014BCE812249A6 /* nav_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 09B2FAB427CC4988B5F9E00C /* nav_arrow.png */; };
+		C5345A9B3BAB4E099C73356E /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D84236D322F4C34BA3CE767 /* notification.png */; };
+		16AB22966EBC4548A7EB9F30 /* office.png in Resources */ = {isa = PBXBuildFile; fileRef = 066BF04271084D63AC77D7EB /* office.png */; };
+		9AE21F3E785C4C249C4673B0 /* order_again.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D45F6A7498F466AA55AB682 /* order_again.png */; };
+		F9E28471289C433E85591348 /* package.png in Resources */ = {isa = PBXBuildFile; fileRef = 7919200678A549E78A8E6B47 /* package.png */; };
+		18EF42191129404AADD98F68 /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = 19DAFF94CE574D6AB67FAC83 /* people.png */; };
+		772C20A798A64CFB86AB334C /* phone_fill.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ADD47EA12B2412A86BF4532 /* phone_fill.png */; };
+		15E2A8D609464FBE9E1AC40F /* pwd_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FB9DBDA52F454C90B491764F /* pwd_icon.png */; };
+		8433203EACC646148C16A116 /* rating.png in Resources */ = {isa = PBXBuildFile; fileRef = 05955CBE16174A4081E6A072 /* rating.png */; };
+		AF89C22EC6E7488B8D27C732 /* takeout.png in Resources */ = {isa = PBXBuildFile; fileRef = 62093475E27A44A78C4F0396 /* takeout.png */; };
+		82B29C1B4C8F4FFD9765DBEF /* thumbs_up.png in Resources */ = {isa = PBXBuildFile; fileRef = ECD7B5AABF824E329D930E01 /* thumbs_up.png */; };
+		DB43EBB00C364B97BFA74197 /* time.png in Resources */ = {isa = PBXBuildFile; fileRef = 33D23C193B1749288AE706FF /* time.png */; };
+		089FE026C7B343EEACDB06A6 /* time2.png in Resources */ = {isa = PBXBuildFile; fileRef = C104B024D2FF4B0384CD62EA /* time2.png */; };
+		AC41C4ED8CBD4155B4A42815 /* time3.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F6397116815407BA40B1C85 /* time3.png */; };
+		9998B47BCC79440899DF0F57 /* trainer.png in Resources */ = {isa = PBXBuildFile; fileRef = 55421E98D42844B28535B8FC /* trainer.png */; };
+		5E006B00C2964861B4CF855A /* user_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E5390B292E8144D9A3FAEF80 /* user_icon.png */; };
+		FD1CE0F7ABAD401CA9710092 /* vendor.png in Resources */ = {isa = PBXBuildFile; fileRef = 71CB8DBD88AE43A69A7FCA1B /* vendor.png */; };
+		081F485CA0844423A5E87B61 /* watch.png in Resources */ = {isa = PBXBuildFile; fileRef = 02CA6309958D473EB57204C3 /* watch.png */; };
+		87EFBFAD34164B5EB0D636B2 /* amala.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4A673E072E2F455594C28D74 /* amala.jpeg */; };
+		4D53A8D51C7241058549BBC9 /* blank_food.png in Resources */ = {isa = PBXBuildFile; fileRef = F9E5387C518C4F7799877F17 /* blank_food.png */; };
+		8796346113B54FD888D5C624 /* creche_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9EB84AAF125490BB86DC94D /* creche_slider.jpg */; };
+		983506C83E324A8AA5F7BC5F /* gym1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6C2A8FB12D7A4D17A80FC40A /* gym1.jpeg */; };
+		4C1B976AC8974CA9A06CFDCE /* gym2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 533D66666BFC42E886435561 /* gym2.jpeg */; };
+		C678AD11B6B04E2CB0373975 /* gym3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DA915FADA4374F0D90307137 /* gym3.jpeg */; };
+		4E84D83ED6E04F8C99549C45 /* gym4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F5C0654FF01A4F6FBAF8CDE9 /* gym4.jpeg */; };
+		D4686F9E7A674A50BFE59EC6 /* gym_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 26E5E981446540CB8535270B /* gym_image.jpg */; };
+		6E62F30D7D1B484BBD2810FC /* gym_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49E7011E3281401C9A18F7CA /* gym_slider.jpg */; };
+		86161D17428F4F4BA3E33BD6 /* kidsCreche.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 41826AD1C9DF4CC9803297B5 /* kidsCreche.jpg */; };
+		6731B4F5C6B942B0B024E724 /* kitchen_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 75C4F66E91314A21B9BE3E7A /* kitchen_bg.jpg */; };
+		4A714B8D0A934F19993F8443 /* kitchen_bg2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A3038BEA8BB4A61925E2C88 /* kitchen_bg2.jpg */; };
+		57763A47D8A64C9086BCC87E /* moimoi_rice.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = ADCFBFFEA8654AA9A6E43F8F /* moimoi_rice.jpeg */; };
+		C8491FB8C147485C8A2D53B3 /* nativerice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2B7DD0BA35A4A798A978353 /* nativerice.jpg */; };
+		B8D5E9A720ED4C239AEEF94E /* noodles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 425E2F539A424418A9687DC5 /* noodles.jpg */; };
+		9AA70C27E15F426EAD0DAA26 /* order_food.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F14753615C3547758E376503 /* order_food.jpg */; };
+		7E2ABAFB81B64488A8D280C0 /* profileUpdate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 80353AE5C67B4C049F8B951B /* profileUpdate.jpg */; };
+		71FD798A16DA41D8BE672C4F /* resturant_img_dash.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2D21CD5EBB9143E089514773 /* resturant_img_dash.jpg */; };
+		7FB23F2915F742D9AE29A825 /* resturant_slider.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F6FB37F385E4BFEAA07CD88 /* resturant_slider.jpg */; };
+		1A6D141329B64740A71A342A /* welcomebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 13BEB8FDB4CF4265B4D8C012 /* welcomebg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,14 +128,7 @@
 		8C65898BDB3C4D3090A113F1 /* home.png */ = {isa = PBXFileReference; name = "home.png"; path = "../src/assets/icons/home.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		116E65A615E840F58DA5B7D2 /* profile.png */ = {isa = PBXFileReference; name = "profile.png"; path = "../src/assets/icons/profile.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		735DA88F1DAC46A1AD1B2D0F /* shield.png */ = {isa = PBXFileReference; name = "shield.png"; path = "../src/assets/images/shield.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A37FEAD58B054A6588FE7008 /* welcomebg.jpg */ = {isa = PBXFileReference; name = "welcomebg.jpg"; path = "../src/assets/images/welcomebg.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		878853485F9D44E9B6809729 /* arrow.png */ = {isa = PBXFileReference; name = "arrow.png"; path = "../src/assets/icons/arrow.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		CCD7ABD01295429B933EA328 /* buildingbg.png */ = {isa = PBXFileReference; name = "buildingbg.png"; path = "../src/assets/images/buildingbg.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E3EE8013DF1A48FD8DD29F01 /* towers.png */ = {isa = PBXFileReference; name = "towers.png"; path = "../src/assets/images/towers.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		60561D6EB472497EA883097D /* creche_slider.jpg */ = {isa = PBXFileReference; name = "creche_slider.jpg"; path = "../src/assets/images/creche_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BBF328D1661743F7BEE8B1ED /* gym_slider.jpg */ = {isa = PBXFileReference; name = "gym_slider.jpg"; path = "../src/assets/images/gym_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4EB8D9A91F1B4F168C46E6A1 /* resturant2_slider.jpg */ = {isa = PBXFileReference; name = "resturant2_slider.jpg"; path = "../src/assets/images/resturant2_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		883E17F8EFCC4CFDA17DE82F /* resturant_slider.jpg */ = {isa = PBXFileReference; name = "resturant_slider.jpg"; path = "../src/assets/images/resturant_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C06075B0E5E548498B71FEC6 /* Benton_Sans-Bold.otf */ = {isa = PBXFileReference; name = "Benton_Sans-Bold.otf"; path = "../src/assets/fonts/Benton_Sans-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E065FE08395645C89AB92055 /* Benton_Sans-Medium.otf */ = {isa = PBXFileReference; name = "Benton_Sans-Medium.otf"; path = "../src/assets/fonts/Benton_Sans-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F1E84DB5AD254A81BA823094 /* Benton_Sans-Regular.otf */ = {isa = PBXFileReference; name = "Benton_Sans-Regular.otf"; path = "../src/assets/fonts/Benton_Sans-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -84,6 +136,72 @@
 		7F239598BCF64FD8B51BF538 /* gym_icon.png */ = {isa = PBXFileReference; name = "gym_icon.png"; path = "../src/assets/icons/gym_icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FE2BD7D813CC49F4B492E767 /* kids_icon.png */ = {isa = PBXFileReference; name = "kids_icon.png"; path = "../src/assets/icons/kids_icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		506844E5FB394AF99FC05D0D /* running_icon.png */ = {isa = PBXFileReference; name = "running_icon.png"; path = "../src/assets/icons/running_icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BD82F98D74BF4D3DB2B488BA /* LoaderNew.json */ = {isa = PBXFileReference; name = "LoaderNew.json"; path = "../src/assets/animation/LoaderNew.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		683B7BDFEB0F4576BF3D4366 /* loaderFast.json */ = {isa = PBXFileReference; name = "loaderFast.json"; path = "../src/assets/animation/loaderFast.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F2910A9AFACC4D5698E2621E /* success_lottie.json */ = {isa = PBXFileReference; name = "success_lottie.json"; path = "../src/assets/animation/success_lottie.json"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4062C72E8AE9445B968BFDC1 /* access.png */ = {isa = PBXFileReference; name = "access.png"; path = "../src/assets/icons/access.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8E7C18337359467F9BEA5A52 /* additem.png */ = {isa = PBXFileReference; name = "additem.png"; path = "../src/assets/icons/additem.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BB451FF2E23846C0A2626C63 /* back_arrow.png */ = {isa = PBXFileReference; name = "back_arrow.png"; path = "../src/assets/icons/back_arrow.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4D71C991F6924B78AED613CA /* basket.png */ = {isa = PBXFileReference; name = "basket.png"; path = "../src/assets/icons/basket.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C64A49C7A3494443B8CB82C1 /* calendar.png */ = {isa = PBXFileReference; name = "calendar.png"; path = "../src/assets/icons/calendar.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		22788BE284504EF193AD32D9 /* cancel.png */ = {isa = PBXFileReference; name = "cancel.png"; path = "../src/assets/icons/cancel.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		60ECA6183EEB436BB17CCF72 /* cash.png */ = {isa = PBXFileReference; name = "cash.png"; path = "../src/assets/icons/cash.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3CE4C6F831184096AFED8D27 /* check_no.png */ = {isa = PBXFileReference; name = "check_no.png"; path = "../src/assets/icons/check_no.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5C1D5B39847540E09DD9904F /* check_yes.png */ = {isa = PBXFileReference; name = "check_yes.png"; path = "../src/assets/icons/check_yes.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		24B30F43FDB44AED911C8B68 /* child.png */ = {isa = PBXFileReference; name = "child.png"; path = "../src/assets/icons/child.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4AD624DEDED24D09A9FC033A /* close.png */ = {isa = PBXFileReference; name = "close.png"; path = "../src/assets/icons/close.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F9CB758C4ADC4DE6A4F2A3A0 /* company.png */ = {isa = PBXFileReference; name = "company.png"; path = "../src/assets/icons/company.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AC0164ABC9CD489FB9AFACAC /* delivery.png */ = {isa = PBXFileReference; name = "delivery.png"; path = "../src/assets/icons/delivery.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		95C6681AE8E74A3DA217339D /* eat-In.png */ = {isa = PBXFileReference; name = "eat-In.png"; path = "../src/assets/icons/eat-In.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3B359A4186384CED848C07C0 /* emergency_phone.png */ = {isa = PBXFileReference; name = "emergency_phone.png"; path = "../src/assets/icons/emergency_phone.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D790E3882964489D9EBC7FD7 /* eye_off.png */ = {isa = PBXFileReference; name = "eye_off.png"; path = "../src/assets/icons/eye_off.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A35AF52E7CB8418ABDE93CC4 /* eye_on.png */ = {isa = PBXFileReference; name = "eye_on.png"; path = "../src/assets/icons/eye_on.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9851F536BAC84BF88040BA8C /* feedback.png */ = {isa = PBXFileReference; name = "feedback.png"; path = "../src/assets/icons/feedback.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6C9A4760E7A54B22A78C9E55 /* guardian.png */ = {isa = PBXFileReference; name = "guardian.png"; path = "../src/assets/icons/guardian.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A0C34E4EDE4C42C88EA37B4D /* gym_details.png */ = {isa = PBXFileReference; name = "gym_details.png"; path = "../src/assets/icons/gym_details.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76621C1409824F1DB7143E41 /* hotline.png */ = {isa = PBXFileReference; name = "hotline.png"; path = "../src/assets/icons/hotline.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8A14E06D6F4841D2A943453B /* info.png */ = {isa = PBXFileReference; name = "info.png"; path = "../src/assets/icons/info.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6DED421153604427A69B3A87 /* like.png */ = {isa = PBXFileReference; name = "like.png"; path = "../src/assets/icons/like.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		EA9CC935A08244759AEF746D /* logout.png */ = {isa = PBXFileReference; name = "logout.png"; path = "../src/assets/icons/logout.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DD2F4D9BD1AA4E3FAB462514 /* minus.png */ = {isa = PBXFileReference; name = "minus.png"; path = "../src/assets/icons/minus.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09B2FAB427CC4988B5F9E00C /* nav_arrow.png */ = {isa = PBXFileReference; name = "nav_arrow.png"; path = "../src/assets/icons/nav_arrow.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9D84236D322F4C34BA3CE767 /* notification.png */ = {isa = PBXFileReference; name = "notification.png"; path = "../src/assets/icons/notification.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		066BF04271084D63AC77D7EB /* office.png */ = {isa = PBXFileReference; name = "office.png"; path = "../src/assets/icons/office.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6D45F6A7498F466AA55AB682 /* order_again.png */ = {isa = PBXFileReference; name = "order_again.png"; path = "../src/assets/icons/order_again.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7919200678A549E78A8E6B47 /* package.png */ = {isa = PBXFileReference; name = "package.png"; path = "../src/assets/icons/package.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		19DAFF94CE574D6AB67FAC83 /* people.png */ = {isa = PBXFileReference; name = "people.png"; path = "../src/assets/icons/people.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0ADD47EA12B2412A86BF4532 /* phone_fill.png */ = {isa = PBXFileReference; name = "phone_fill.png"; path = "../src/assets/icons/phone_fill.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FB9DBDA52F454C90B491764F /* pwd_icon.png */ = {isa = PBXFileReference; name = "pwd_icon.png"; path = "../src/assets/icons/pwd_icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		05955CBE16174A4081E6A072 /* rating.png */ = {isa = PBXFileReference; name = "rating.png"; path = "../src/assets/icons/rating.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		62093475E27A44A78C4F0396 /* takeout.png */ = {isa = PBXFileReference; name = "takeout.png"; path = "../src/assets/icons/takeout.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ECD7B5AABF824E329D930E01 /* thumbs_up.png */ = {isa = PBXFileReference; name = "thumbs_up.png"; path = "../src/assets/icons/thumbs_up.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		33D23C193B1749288AE706FF /* time.png */ = {isa = PBXFileReference; name = "time.png"; path = "../src/assets/icons/time.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C104B024D2FF4B0384CD62EA /* time2.png */ = {isa = PBXFileReference; name = "time2.png"; path = "../src/assets/icons/time2.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8F6397116815407BA40B1C85 /* time3.png */ = {isa = PBXFileReference; name = "time3.png"; path = "../src/assets/icons/time3.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		55421E98D42844B28535B8FC /* trainer.png */ = {isa = PBXFileReference; name = "trainer.png"; path = "../src/assets/icons/trainer.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E5390B292E8144D9A3FAEF80 /* user_icon.png */ = {isa = PBXFileReference; name = "user_icon.png"; path = "../src/assets/icons/user_icon.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		71CB8DBD88AE43A69A7FCA1B /* vendor.png */ = {isa = PBXFileReference; name = "vendor.png"; path = "../src/assets/icons/vendor.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		02CA6309958D473EB57204C3 /* watch.png */ = {isa = PBXFileReference; name = "watch.png"; path = "../src/assets/icons/watch.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4A673E072E2F455594C28D74 /* amala.jpeg */ = {isa = PBXFileReference; name = "amala.jpeg"; path = "../src/assets/images/amala.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F9E5387C518C4F7799877F17 /* blank_food.png */ = {isa = PBXFileReference; name = "blank_food.png"; path = "../src/assets/images/blank_food.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F9EB84AAF125490BB86DC94D /* creche_slider.jpg */ = {isa = PBXFileReference; name = "creche_slider.jpg"; path = "../src/assets/images/creche_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6C2A8FB12D7A4D17A80FC40A /* gym1.jpeg */ = {isa = PBXFileReference; name = "gym1.jpeg"; path = "../src/assets/images/gym1.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		533D66666BFC42E886435561 /* gym2.jpeg */ = {isa = PBXFileReference; name = "gym2.jpeg"; path = "../src/assets/images/gym2.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DA915FADA4374F0D90307137 /* gym3.jpeg */ = {isa = PBXFileReference; name = "gym3.jpeg"; path = "../src/assets/images/gym3.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F5C0654FF01A4F6FBAF8CDE9 /* gym4.jpeg */ = {isa = PBXFileReference; name = "gym4.jpeg"; path = "../src/assets/images/gym4.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		26E5E981446540CB8535270B /* gym_image.jpg */ = {isa = PBXFileReference; name = "gym_image.jpg"; path = "../src/assets/images/gym_image.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		49E7011E3281401C9A18F7CA /* gym_slider.jpg */ = {isa = PBXFileReference; name = "gym_slider.jpg"; path = "../src/assets/images/gym_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		41826AD1C9DF4CC9803297B5 /* kidsCreche.jpg */ = {isa = PBXFileReference; name = "kidsCreche.jpg"; path = "../src/assets/images/kidsCreche.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		75C4F66E91314A21B9BE3E7A /* kitchen_bg.jpg */ = {isa = PBXFileReference; name = "kitchen_bg.jpg"; path = "../src/assets/images/kitchen_bg.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0A3038BEA8BB4A61925E2C88 /* kitchen_bg2.jpg */ = {isa = PBXFileReference; name = "kitchen_bg2.jpg"; path = "../src/assets/images/kitchen_bg2.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ADCFBFFEA8654AA9A6E43F8F /* moimoi_rice.jpeg */ = {isa = PBXFileReference; name = "moimoi_rice.jpeg"; path = "../src/assets/images/moimoi_rice.jpeg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C2B7DD0BA35A4A798A978353 /* nativerice.jpg */ = {isa = PBXFileReference; name = "nativerice.jpg"; path = "../src/assets/images/nativerice.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		425E2F539A424418A9687DC5 /* noodles.jpg */ = {isa = PBXFileReference; name = "noodles.jpg"; path = "../src/assets/images/noodles.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F14753615C3547758E376503 /* order_food.jpg */ = {isa = PBXFileReference; name = "order_food.jpg"; path = "../src/assets/images/order_food.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		80353AE5C67B4C049F8B951B /* profileUpdate.jpg */ = {isa = PBXFileReference; name = "profileUpdate.jpg"; path = "../src/assets/images/profileUpdate.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		2D21CD5EBB9143E089514773 /* resturant_img_dash.jpg */ = {isa = PBXFileReference; name = "resturant_img_dash.jpg"; path = "../src/assets/images/resturant_img_dash.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3F6FB37F385E4BFEAA07CD88 /* resturant_slider.jpg */ = {isa = PBXFileReference; name = "resturant_slider.jpg"; path = "../src/assets/images/resturant_slider.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		13BEB8FDB4CF4265B4D8C012 /* welcomebg.png */ = {isa = PBXFileReference; name = "welcomebg.png"; path = "../src/assets/images/welcomebg.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,14 +315,7 @@
 				8C65898BDB3C4D3090A113F1 /* home.png */,
 				116E65A615E840F58DA5B7D2 /* profile.png */,
 				735DA88F1DAC46A1AD1B2D0F /* shield.png */,
-				A37FEAD58B054A6588FE7008 /* welcomebg.jpg */,
 				878853485F9D44E9B6809729 /* arrow.png */,
-				CCD7ABD01295429B933EA328 /* buildingbg.png */,
-				E3EE8013DF1A48FD8DD29F01 /* towers.png */,
-				60561D6EB472497EA883097D /* creche_slider.jpg */,
-				BBF328D1661743F7BEE8B1ED /* gym_slider.jpg */,
-				4EB8D9A91F1B4F168C46E6A1 /* resturant2_slider.jpg */,
-				883E17F8EFCC4CFDA17DE82F /* resturant_slider.jpg */,
 				C06075B0E5E548498B71FEC6 /* Benton_Sans-Bold.otf */,
 				E065FE08395645C89AB92055 /* Benton_Sans-Medium.otf */,
 				F1E84DB5AD254A81BA823094 /* Benton_Sans-Regular.otf */,
@@ -212,6 +323,72 @@
 				7F239598BCF64FD8B51BF538 /* gym_icon.png */,
 				FE2BD7D813CC49F4B492E767 /* kids_icon.png */,
 				506844E5FB394AF99FC05D0D /* running_icon.png */,
+				BD82F98D74BF4D3DB2B488BA /* LoaderNew.json */,
+				683B7BDFEB0F4576BF3D4366 /* loaderFast.json */,
+				F2910A9AFACC4D5698E2621E /* success_lottie.json */,
+				4062C72E8AE9445B968BFDC1 /* access.png */,
+				8E7C18337359467F9BEA5A52 /* additem.png */,
+				BB451FF2E23846C0A2626C63 /* back_arrow.png */,
+				4D71C991F6924B78AED613CA /* basket.png */,
+				C64A49C7A3494443B8CB82C1 /* calendar.png */,
+				22788BE284504EF193AD32D9 /* cancel.png */,
+				60ECA6183EEB436BB17CCF72 /* cash.png */,
+				3CE4C6F831184096AFED8D27 /* check_no.png */,
+				5C1D5B39847540E09DD9904F /* check_yes.png */,
+				24B30F43FDB44AED911C8B68 /* child.png */,
+				4AD624DEDED24D09A9FC033A /* close.png */,
+				F9CB758C4ADC4DE6A4F2A3A0 /* company.png */,
+				AC0164ABC9CD489FB9AFACAC /* delivery.png */,
+				95C6681AE8E74A3DA217339D /* eat-In.png */,
+				3B359A4186384CED848C07C0 /* emergency_phone.png */,
+				D790E3882964489D9EBC7FD7 /* eye_off.png */,
+				A35AF52E7CB8418ABDE93CC4 /* eye_on.png */,
+				9851F536BAC84BF88040BA8C /* feedback.png */,
+				6C9A4760E7A54B22A78C9E55 /* guardian.png */,
+				A0C34E4EDE4C42C88EA37B4D /* gym_details.png */,
+				76621C1409824F1DB7143E41 /* hotline.png */,
+				8A14E06D6F4841D2A943453B /* info.png */,
+				6DED421153604427A69B3A87 /* like.png */,
+				EA9CC935A08244759AEF746D /* logout.png */,
+				DD2F4D9BD1AA4E3FAB462514 /* minus.png */,
+				09B2FAB427CC4988B5F9E00C /* nav_arrow.png */,
+				9D84236D322F4C34BA3CE767 /* notification.png */,
+				066BF04271084D63AC77D7EB /* office.png */,
+				6D45F6A7498F466AA55AB682 /* order_again.png */,
+				7919200678A549E78A8E6B47 /* package.png */,
+				19DAFF94CE574D6AB67FAC83 /* people.png */,
+				0ADD47EA12B2412A86BF4532 /* phone_fill.png */,
+				FB9DBDA52F454C90B491764F /* pwd_icon.png */,
+				05955CBE16174A4081E6A072 /* rating.png */,
+				62093475E27A44A78C4F0396 /* takeout.png */,
+				ECD7B5AABF824E329D930E01 /* thumbs_up.png */,
+				33D23C193B1749288AE706FF /* time.png */,
+				C104B024D2FF4B0384CD62EA /* time2.png */,
+				8F6397116815407BA40B1C85 /* time3.png */,
+				55421E98D42844B28535B8FC /* trainer.png */,
+				E5390B292E8144D9A3FAEF80 /* user_icon.png */,
+				71CB8DBD88AE43A69A7FCA1B /* vendor.png */,
+				02CA6309958D473EB57204C3 /* watch.png */,
+				4A673E072E2F455594C28D74 /* amala.jpeg */,
+				F9E5387C518C4F7799877F17 /* blank_food.png */,
+				F9EB84AAF125490BB86DC94D /* creche_slider.jpg */,
+				6C2A8FB12D7A4D17A80FC40A /* gym1.jpeg */,
+				533D66666BFC42E886435561 /* gym2.jpeg */,
+				DA915FADA4374F0D90307137 /* gym3.jpeg */,
+				F5C0654FF01A4F6FBAF8CDE9 /* gym4.jpeg */,
+				26E5E981446540CB8535270B /* gym_image.jpg */,
+				49E7011E3281401C9A18F7CA /* gym_slider.jpg */,
+				41826AD1C9DF4CC9803297B5 /* kidsCreche.jpg */,
+				75C4F66E91314A21B9BE3E7A /* kitchen_bg.jpg */,
+				0A3038BEA8BB4A61925E2C88 /* kitchen_bg2.jpg */,
+				ADCFBFFEA8654AA9A6E43F8F /* moimoi_rice.jpeg */,
+				C2B7DD0BA35A4A798A978353 /* nativerice.jpg */,
+				425E2F539A424418A9687DC5 /* noodles.jpg */,
+				F14753615C3547758E376503 /* order_food.jpg */,
+				80353AE5C67B4C049F8B951B /* profileUpdate.jpg */,
+				2D21CD5EBB9143E089514773 /* resturant_img_dash.jpg */,
+				3F6FB37F385E4BFEAA07CD88 /* resturant_slider.jpg */,
+				13BEB8FDB4CF4265B4D8C012 /* welcomebg.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -318,14 +495,7 @@
 				740162E48BC5412F9F5D71B4 /* home.png in Resources */,
 				2487E290FAD244FDA7E96E65 /* profile.png in Resources */,
 				4A932BAFC62D428F9C593A93 /* shield.png in Resources */,
-				AF981CA01A884334B3CB2A21 /* welcomebg.jpg in Resources */,
 				FA274BDAFAAF41E7AB1A2950 /* arrow.png in Resources */,
-				917ABE5E4F57465E95DD369A /* buildingbg.png in Resources */,
-				B80514E3DF3E4B5B8F677B5E /* towers.png in Resources */,
-				D84A86AC955C4DD2ACFF62F8 /* creche_slider.jpg in Resources */,
-				B36BB470FF564F3C8DA7B105 /* gym_slider.jpg in Resources */,
-				D8C32E3B41A94E0B96EBE1A3 /* resturant2_slider.jpg in Resources */,
-				367D5A7D990E46859C223AB3 /* resturant_slider.jpg in Resources */,
 				A6F0F27AA44449FB8EB87B8A /* Benton_Sans-Bold.otf in Resources */,
 				3D1509127FE34A5DA9A18120 /* Benton_Sans-Medium.otf in Resources */,
 				23B45D7473B44321A6A97E4F /* Benton_Sans-Regular.otf in Resources */,
@@ -333,6 +503,72 @@
 				B8C8E952C74743CFB1AE1E48 /* gym_icon.png in Resources */,
 				6D9781621FD34573B9C22387 /* kids_icon.png in Resources */,
 				D6C98FA8284F438FA9198B64 /* running_icon.png in Resources */,
+				A576D109AE174B5C9281B92A /* LoaderNew.json in Resources */,
+				5806F1AA1E1B409BB36F1C80 /* loaderFast.json in Resources */,
+				ABAD4B2BBDBE436CAED93E40 /* success_lottie.json in Resources */,
+				E828D79672324ADD86CDDB78 /* access.png in Resources */,
+				E0F7FC9EE8D44481A47D9D69 /* additem.png in Resources */,
+				C3F1BE1D9C3B4325B838FD83 /* back_arrow.png in Resources */,
+				89D799A39E014C468D039C40 /* basket.png in Resources */,
+				4F6D8B9377694B668A309135 /* calendar.png in Resources */,
+				887274998A0B4E0ABE3C37FB /* cancel.png in Resources */,
+				73937B0538074C2EB30E8ADC /* cash.png in Resources */,
+				6E6F12BA16B94BA093F11062 /* check_no.png in Resources */,
+				020D796BF9304397ABC649E8 /* check_yes.png in Resources */,
+				5D0FFC08CFF844BCA3F87412 /* child.png in Resources */,
+				60FCA2FB53D04A53B61B0DC9 /* close.png in Resources */,
+				D2EE9075233648E788382BDE /* company.png in Resources */,
+				5E379E8261A144A38DB3DD50 /* delivery.png in Resources */,
+				C4CA997C446F4275AA088B5F /* eat-In.png in Resources */,
+				2B12F2385739491595138160 /* emergency_phone.png in Resources */,
+				33BF9B5FDA624881BA4F589D /* eye_off.png in Resources */,
+				9FD7AE7CD64A4AC79DB9CA0E /* eye_on.png in Resources */,
+				569D89ED8CFA41F0A979AF63 /* feedback.png in Resources */,
+				A949565E360F462986E68E76 /* guardian.png in Resources */,
+				69961DFA8A364BC2B8A57405 /* gym_details.png in Resources */,
+				B53719127A174B5B8F621572 /* hotline.png in Resources */,
+				65E1854E94AF4AC1AB573F19 /* info.png in Resources */,
+				AADCE8094534448EA64087CE /* like.png in Resources */,
+				900553CBEF9E41FF99F04EB6 /* logout.png in Resources */,
+				B062375BB79148BA9FE75E6A /* minus.png in Resources */,
+				096ADB81EC014BCE812249A6 /* nav_arrow.png in Resources */,
+				C5345A9B3BAB4E099C73356E /* notification.png in Resources */,
+				16AB22966EBC4548A7EB9F30 /* office.png in Resources */,
+				9AE21F3E785C4C249C4673B0 /* order_again.png in Resources */,
+				F9E28471289C433E85591348 /* package.png in Resources */,
+				18EF42191129404AADD98F68 /* people.png in Resources */,
+				772C20A798A64CFB86AB334C /* phone_fill.png in Resources */,
+				15E2A8D609464FBE9E1AC40F /* pwd_icon.png in Resources */,
+				8433203EACC646148C16A116 /* rating.png in Resources */,
+				AF89C22EC6E7488B8D27C732 /* takeout.png in Resources */,
+				82B29C1B4C8F4FFD9765DBEF /* thumbs_up.png in Resources */,
+				DB43EBB00C364B97BFA74197 /* time.png in Resources */,
+				089FE026C7B343EEACDB06A6 /* time2.png in Resources */,
+				AC41C4ED8CBD4155B4A42815 /* time3.png in Resources */,
+				9998B47BCC79440899DF0F57 /* trainer.png in Resources */,
+				5E006B00C2964861B4CF855A /* user_icon.png in Resources */,
+				FD1CE0F7ABAD401CA9710092 /* vendor.png in Resources */,
+				081F485CA0844423A5E87B61 /* watch.png in Resources */,
+				87EFBFAD34164B5EB0D636B2 /* amala.jpeg in Resources */,
+				4D53A8D51C7241058549BBC9 /* blank_food.png in Resources */,
+				8796346113B54FD888D5C624 /* creche_slider.jpg in Resources */,
+				983506C83E324A8AA5F7BC5F /* gym1.jpeg in Resources */,
+				4C1B976AC8974CA9A06CFDCE /* gym2.jpeg in Resources */,
+				C678AD11B6B04E2CB0373975 /* gym3.jpeg in Resources */,
+				4E84D83ED6E04F8C99549C45 /* gym4.jpeg in Resources */,
+				D4686F9E7A674A50BFE59EC6 /* gym_image.jpg in Resources */,
+				6E62F30D7D1B484BBD2810FC /* gym_slider.jpg in Resources */,
+				86161D17428F4F4BA3E33BD6 /* kidsCreche.jpg in Resources */,
+				6731B4F5C6B942B0B024E724 /* kitchen_bg.jpg in Resources */,
+				4A714B8D0A934F19993F8443 /* kitchen_bg2.jpg in Resources */,
+				57763A47D8A64C9086BCC87E /* moimoi_rice.jpeg in Resources */,
+				C8491FB8C147485C8A2D53B3 /* nativerice.jpg in Resources */,
+				B8D5E9A720ED4C239AEEF94E /* noodles.jpg in Resources */,
+				9AA70C27E15F426EAD0DAA26 /* order_food.jpg in Resources */,
+				7E2ABAFB81B64488A8D280C0 /* profileUpdate.jpg in Resources */,
+				71FD798A16DA41D8BE672C4F /* resturant_img_dash.jpg in Resources */,
+				7FB23F2915F742D9AE29A825 /* resturant_slider.jpg in Resources */,
+				1A6D141329B64740A71A342A /* welcomebg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,6 +5,7 @@ import {
     TouchableOpacity, 
     View } from 'react-native';
 import { icons, COLORS, images } from '../../constants';
+import { verticalScale, horizontalScale, moderateScale } from '../../constants';
 
 
 const HeaderBarBlank = ({onPress, icon, iconStyle, notificationStyle}) => {
@@ -48,16 +49,16 @@ const HeaderBarBlank = ({onPress, icon, iconStyle, notificationStyle}) => {
 const styles = StyleSheet.create({
     arrowBg: {
         backgroundColor: COLORS.darkGrayTransparent,
-        padding:5,
-        borderRadius: 50
+        padding:moderateScale(5),
+        borderRadius: moderateScale(50)
     },
     headerToolbar: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 30,
-        marginVertical:15,
-        marginHorizontal:15
+        marginTop: verticalScale(20),
+        marginVertical:verticalScale(15),
+        marginHorizontal:horizontalScale(15)
       },
 })
 

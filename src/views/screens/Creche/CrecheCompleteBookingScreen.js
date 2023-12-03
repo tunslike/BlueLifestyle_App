@@ -13,8 +13,14 @@ import {
  import LottieView from 'lottie-react-native';
  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
  import { SafeAreaProvider } from 'react-native-safe-area-context';
- import { COLORS, icons, images, animation } from '../../../constants';
- import { Button } from '../../components';
+ import { COLORS, 
+          icons, 
+          images, 
+          animation, 
+          verticalScale, 
+          horizontalScale, 
+          moderateScale } from '../../../constants';
+
  
 
  const { width, height } = Dimensions.get("window");
@@ -65,33 +71,33 @@ const CrecheCompleteBookingScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({ 
     loginText: {
-        fontSize: 16,
+        fontSize: moderateScale(16),
         fontFamily: "Benton Sans",
         color: COLORS.DeepBlue,
         fontWeight: 'bold',
-        marginRight:20
+        marginRight:moderateScale(20)
       },
     loginBtn: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLORS.white ,
-        borderRadius:10,
-        paddingHorizontal: 20,
-        paddingVertical: 18,
-        marginTop:90,
+        borderRadius:moderateScale(10),
+        paddingHorizontal: horizontalScale(20),
+        paddingVertical: verticalScale(18),
+        marginTop:verticalScale(90),
     },
     booking_details: {
-        width: 300,
-        height: 300,
+        width: horizontalScale(300),
+        height: verticalScale(300),
         backgroundColor: COLORS.white,
-        padding:30,
-        borderRadius: 30,
-        marginHorizontal:30
+        padding:moderateScale(30),
+        borderRadius: moderateScale(30),
+        marginHorizontal:moderateScale(30)
     },
     succes_header: {
-        marginHorizontal: 25,
-        marginTop: -70
+        marginHorizontal: horizontalScale(25),
+        marginTop: verticalScale(-70)
     },
     success_title: {
         marginBottom: 15,

@@ -7,22 +7,22 @@ import {
     Image,
     Keyboard,
     TouchableOpacity, } from 'react-native';
-
+    import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {COLORS, icons} from '../../constants'
 
-const LoginInput = ({pwd, value, setSecureText, visibleOnPress, onChange, placeholder, maxlength, icon, eye_type}) => {
+const LoginInput = ({pwd, value, onFocus, setSecureText, visibleOnPress, onChange, placeholder, maxlength, icon, eye_type}) => {
   return (
     <View style={styles.container}>
         <Image source={icon} 
         style={{
-            height:23, 
-            width: 23, 
+            height:wp(5), 
+            width: wp(5), 
             resizeMode: 'cover', 
             tintColor:COLORS.StandardardBankBlue}}  />
         <TextInput
             value={value}
-            onChange={onChange}
+            onChangeText={onChange}
             style={styles.inputStyle}
             placeholder={placeholder}
             placeholderTextColor={COLORS.darkGray}
@@ -33,6 +33,7 @@ const LoginInput = ({pwd, value, setSecureText, visibleOnPress, onChange, placeh
             secureTextEntry={setSecureText}
             returnKeyType='next'
             maxLength={maxlength}
+            onFocus={onFocus}
         />
 
         {pwd == true &&
@@ -42,7 +43,7 @@ const LoginInput = ({pwd, value, setSecureText, visibleOnPress, onChange, placeh
             <Image 
             source={eye_type}
             style={{
-                height:22, width:22, resizeMode: 'contain',
+                height:wp(5), width:wp(5), resizeMode: 'contain',
                 tintColor: COLORS.darkGray
             }}
             />
@@ -58,9 +59,9 @@ const styles = StyleSheet.create({
     inputStyle: {
         fontFamily: "Benton Sans",
         fontWeight:'600',
-        fontSize:15,
+        fontSize:wp(4),
         color: COLORS.darkblue,
-        marginLeft:15,
+        marginLeft:wp(3),
         flex: 1
     },
     container : {
@@ -70,8 +71,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 25,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.textGrey,
-        paddingBottom: 3,
-        marginTop:10
+        paddingBottom: wp(0.4),
+        marginTop:wp(2)
     }
 })
 

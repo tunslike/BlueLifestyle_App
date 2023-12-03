@@ -26,7 +26,7 @@ style={styles.container}>
                     height: 15, width: 15, resizeMode: 'contain', marginRight: 5
                 }}
             />
-            <Text style={styles.ratingText}>4.5 (10)</Text>
+            <Text style={styles.ratingText}>{rating} (10)</Text>
         </View>
         <View style={styles.business}>
             <Image source={icons.kids} 
@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     },
     cardBody: {
         backgroundColor: COLORS.darkGray,
-        width:373,
         padding:10,
         borderRadius:27,
         height: 160,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, 
     Text, 
     View,
@@ -6,31 +6,43 @@ import { StyleSheet,
     Dimensions,
     TouchableOpacity
 } from 'react-native'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { COLORS, icons } from '../../constants';
-
+import { TouchableHighlight } from '@gorhom/bottom-sheet';
 const { width, height } = Dimensions.get("window");
 
 // INIT APP
-const ToggleButton = () => {
+const ToggleButton = ({deliveryMethod}) => {
+
+ const [active, setActive] = useState(1);
+
+ deliveryMethod(active);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.togglebtnLeft}>
+      <TouchableOpacity 
+        onPress={() => setActive(1)}
+      style={[styles.togglebtnLeft, {backgroundColor: (active == 1) ? COLORS.SecondaryGreen : COLORS.lineDividerGray}]}>
             <Image source={icons.eatIn} 
             style={{
-                marginLeft:35,marginRight:5,height:15, width: 15, resizeMode: 'contain', tintColor: COLORS.white
+                marginLeft:35,marginRight:5,height:15, width: 15, 
+                resizeMode: 'contain', tintColor: (active == 1) ? COLORS.white : COLORS.StatureBlue
             }}
         />
-        <Text style={styles.toggleTextLeft}>Take Out</Text>
+        <Text style={[styles.toggleTextLeft, {color: (active == 1) ? COLORS.white : COLORS.StatureBlue}]}>Take Out</Text>
        
         
       </TouchableOpacity>
-      <TouchableOpacity style={styles.togglebtnRight}>
+      <TouchableOpacity 
+        onPress={() => setActive(2)}
+        style={[styles.togglebtnRight, {backgroundColor: (active == 2) ? COLORS.SecondaryGreen : COLORS.lineDividerGray}]}>
       <Image source={icons.takeout} 
       style={{
-       marginLeft:35, marginRight:5,height:20, width: 20, resizeMode: 'contain', tintColor: COLORS.StatureBlue
+       marginLeft:35, marginRight:5,height:20, width: 20, 
+       resizeMode: 'contain', tintColor: (active == 2) ? COLORS.white : COLORS.StatureBlue
       }}
   />
-         <Text style={styles.toggleTextRight}>Eat-In</Text>
+         <Text style={[styles.toggleTextRight, {color: (active == 2) ? COLORS.white : COLORS.StatureBlue}]}>Eat-In</Text>
       </TouchableOpacity>
     </View>
   )
@@ -42,7 +54,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal:20,
-        marginTop:25,
+        marginTop:10,
         marginBottom:19,
         
     },

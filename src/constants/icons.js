@@ -41,8 +41,24 @@ const phone_fill = require("../assets/icons/phone_fill.png")
 const child = require("../assets/icons/child.png")
 const emergencyPhone = require("../assets/icons/emergency_phone.png")
 const calendar = require("../assets/icons/calendar.png")
+const specials = require("../assets/icons/package.png")
+const trainer = require("../assets/icons/trainer.png")
+const time2 = require("../assets/icons/time2.png")
+const time3 = require("../assets/icons/time3.png")
+const info = require("../assets/icons/info.png")
+const logout = require("../assets/icons/logout.png")
+const company = require("../assets/icons/company.png")
+const gym_details = require("../assets/icons/gym_details.png")
 
 export default {
+    gym_details,
+    company,
+    logout,
+    info,
+    time2,
+    time3,
+    trainer,
+    specials,
     calendar,
     emergencyPhone,
     child,

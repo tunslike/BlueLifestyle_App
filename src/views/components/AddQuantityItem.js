@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { 
     StyleSheet, 
     Text, 
@@ -7,12 +7,34 @@ import {
     TouchableOpacity
  } from 'react-native'
 
- import { COLORS, icons } from '../../constants'
+ import { COLORS, icons, utilities, verticalScale } from '../../constants'
 
-const AddQuantityItem = () => {
+const AddQuantityItem = ({amount, getItemCount}) => {
+
+  const [subTotal, setSubTotal] = useState(amount);
+  const [itemCount, setItemCount] = useState(1);
+
+  getItemCount(itemCount);
+
+  // increase counter
+  const IncreaseItem = () => {
+            setItemCount(itemCount + 1)
+    }
+
+
+  // increase counter
+  const DecreaseItem = () => {
+        if(itemCount > 1) {
+            setItemCount(itemCount - 1);
+        }
+  }
+    
   return (
-    <View style={styles.orderQuantity}>
-        <TouchableOpacity style={styles.itemicon}>
+    <View>
+            <View style={styles.orderQuantity}>
+            <TouchableOpacity 
+            onPress={() => DecreaseItem()}
+        style={styles.itemicon}>
             <Image 
                 source={icons.removeItem}
                 style={{
@@ -20,8 +42,10 @@ const AddQuantityItem = () => {
                 }}
             />
         </TouchableOpacity>
-        <Text style={styles.QtyText}>1</Text>
-        <TouchableOpacity style={styles.itemicon}>
+        <Text style={styles.QtyText}>{itemCount}</Text>
+        <TouchableOpacity 
+            onPress={() => IncreaseItem()}
+        style={styles.itemicon}>
                 <Image 
                 source={icons.additem}
                 style={{
@@ -29,11 +53,27 @@ const AddQuantityItem = () => {
                 }}
             />
         </TouchableOpacity>
+            </View>
+            <View style={styles.subTotalBox}>
+                <Text style={styles.subTotalText}>
+                Sub-total Per Item: ₦ {utilities.formatToCurency(subTotal * itemCount)}
+                </Text>
+            </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+    subTotalBox: {
+        alignItems: 'center',
+        marginTop: verticalScale(10)
+    },
+    subTotalText: {
+        fontSize: 13,
+        fontFamily: "Benton Sans",
+        color: COLORS.SecondaryPlum,
+        fontWeight: 'normal',
+    },
     itemicon: {
         backgroundColor: COLORS.addItem,
         padding:7,

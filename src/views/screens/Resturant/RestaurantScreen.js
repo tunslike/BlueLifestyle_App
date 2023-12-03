@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {  StyleSheet, 
   Text, 
   View,
@@ -6,16 +6,64 @@ import {  StyleSheet,
   ScrollView,
   Dimensions,
   StatusBar,
-  Image, 
-  TouchableOpacity} from 'react-native';
-  import { COLORS, icons, images } from '../../../constants';
-  import { HeaderBar, ProviderCard } from '../../components';
-
+  Image, Alert,
+  FlatList} from 'react-native';
+  import axios from 'axios';
+  import { COLORS, icons, images, APIBaseUrl, ApIHeaderOptions } from '../../../constants';
+  import { HeaderBar, ProviderCard, NewLoader } from '../../components';
   const { width, height } = Dimensions.get("window");
 
 
   // init app screen
 const RestaurantScreen = ({navigation}) => {
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [providers, setProviders] = useState('');
+
+// function to load providers
+  const FetchProviders = () => {
+
+    //show loader
+    setIsLoading(true);
+
+    axios.post(APIBaseUrl.developmentUrl + 'services/Providers/FetchRestaurantProviders', ApIHeaderOptions.headers)
+    .then(response => {
+
+      setIsLoading(false)
+
+        if(response.data.errorCode == '000') {
+
+             //set data
+             setProviders(response.data.restaurantProviderData)
+             console.log(providers)
+
+        }else {
+
+            console.log(response.data.statusMessage)
+            //show error message
+            setErrorMessage(response.data.statusMessage);
+
+            //set loading off
+            setIsLoading(false)
+
+            return;
+        }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  }
+// end of function
+
+
+//USE EFFECT
+      useEffect(() => {
+
+        //fetch providers
+        FetchProviders();
+
+    }, []);
 
   // function to render header
   function renderHeaderContent() {
@@ -60,9 +108,7 @@ const RestaurantScreen = ({navigation}) => {
   function renderBodyContent() {
     return (
       <View style={styles.bodyContainer}>
-      <ScrollView style={{flex: 1}}>
-
-
+    
       {/* START OF RENDER PROVIDERS */}
 
       <View style={styles.vendorTitle}>
@@ -73,17 +119,26 @@ const RestaurantScreen = ({navigation}) => {
             }}
           />
       </View>
-      
+
         <View style={styles.providerList}>
-            <ProviderCard
-              image={images.kitchen_bg2}
-              name="Travis Caterering Services"
-              onPress={() => navigation.navigate('Provider')}
-            />   
-            <ProviderCard
-              image={images.kitchen_bg}
-              name="The Place Kitchen"
-            />          
+
+        <FlatList 
+        data={providers}
+        keyboardDismissMode="on-drag"
+        keyExtractor={item => `${item.provider_id}`} 
+        showsVerticalScrollIndicator={false}
+        renderItem={
+            ({ item }) => {
+                return (
+                  <ProviderCard
+                  image={images.kitchen_bg2}
+                  name={item.provider_name}
+                  onPress={() => navigation.navigate('Provider', {providerID: item.provider_id})}
+                />   
+                )
+            }
+        }
+    />   
         </View>
 
         {/* END OF RENDER PROVIDERS */}
@@ -101,9 +156,6 @@ const RestaurantScreen = ({navigation}) => {
                 <Text style={styles.orderText}>Your Order History</Text>
             </View>
         {/* END OF RENDER ORDER HISTORY */}
-
-      </ScrollView>
-      
       </View>
     )
   }
@@ -111,6 +163,9 @@ const RestaurantScreen = ({navigation}) => {
   // return function
   return (
     <SafeAreaView style={styles.container}>
+        {isLoading && 
+          <NewLoader title="Processing your request, please wait..." />
+        }
     <StatusBar barStyle="light-content" />
 
      {/* Render Header */}

@@ -13,7 +13,7 @@ const MenuItemHeader = ({title}) => {
 
 const styles = StyleSheet.create({
     headerText: {
-        fontSize: 20,
+        fontSize: 17,
         fontFamily: "Benton Sans",
         color: COLORS.StatureBlue,
         fontWeight: 'bold',

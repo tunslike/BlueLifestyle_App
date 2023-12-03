@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import { 
         StyleSheet, 
         Text, 
@@ -9,25 +9,42 @@ import {
         Image,
         ScrollView,
         StatusBar,
-        KeyboardAvoidingView
+        Keyboard,
+        Alert
  } from 'react-native';
+ import axios from 'axios';
+ import { useSelector } from 'react-redux';
  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
  import { SafeAreaProvider } from 'react-native-safe-area-context';
  import DateTimePickerModal from "react-native-modal-datetime-picker";
- import { COLORS, icons, images } from '../../../constants';
+ import { COLORS, icons, images, APIBaseUrl, ApIHeaderOptions } from '../../../constants';
  import { HeaderBarBlank, 
           ProviderFeature, 
           MenuItemHeader,
           CrecheInput,
-          Button
+          Button, MessageBox, NewLoader,
         } from '../../components';
 
  const { width, height } = Dimensions.get("window");
 
 
-// INIT APP
-const CrecheProviderScreen = ({navigation}) => {
+// INIT APP COMPONENT
+const CrecheProviderScreen = ({route, navigation}) => {
 
+  const userData = useSelector((state) => state.user.userData)
+
+  // GET ROUTE PARAMS
+  const { 
+          providerId, 
+          startTime, 
+          capacity, 
+          teacher, 
+          contactPhone, 
+          rating, 
+          sessionName} = route.params
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   // SET USER INPUT STATES
   const [childName, setChildName] = useState('');
@@ -35,18 +52,25 @@ const CrecheProviderScreen = ({navigation}) => {
   const [emergencyNo, setEmergencyNo] = useState('');
   const [pickUpTime, setPickUpTime] = useState('');
   const [dropOffDate, setDropOffDate] = useState('');
+
+  const [showMessage, setShowMessage] = useState(0);
+
+  //component states
   const [calendarMode, setCalendarMode] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+  //show date picker
   const showDatePicker = (mode) => {
     setDatePickerVisibility(true);
     setCalendarMode(mode)
   };
 
+  //hide date pickers
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
 
+  // handle confirm 
   const handleConfirm = (date) => {
     if(calendarMode == "date") {
       setDropOffDate(FormatDate(date))
@@ -67,6 +91,7 @@ const CrecheProviderScreen = ({navigation}) => {
     return dateTimeString; // It will look something like this 3-5-2021 16:23
   };
 
+  // function to format to date
   const FormatDate = (data) => {
     let dateTimeString =
       data.getDate() +
@@ -78,6 +103,104 @@ const CrecheProviderScreen = ({navigation}) => {
     return dateTimeString; // It will look something like this 3-5-2021 16:23
   };
 
+
+  //FUNCTION TO SUBMIT GYM SESSION REQUEST
+  const BookCrecheSession = () => {
+    
+    setErrorMessage(null)
+    Keyboard.dismiss();
+
+    Alert.alert('Creche Facility - Stanbic Towers', 'Do you want to book now?', [
+      {
+        text: 'No',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Ok', onPress: () => RequestCrecheSession()},
+    ]);
+
+  }//END OF FUNCTION
+
+  //function to book creche session
+  const RequestCrecheSession = () => {
+
+    setErrorMessage(null)
+    Keyboard.dismiss();
+
+    //validate input
+    if(!childName || !parentPhone || !emergencyNo || !dropOffDate || !pickUpTime) {
+        setErrorMessage('Please complete all fields!')
+        //setTimeout(hideErrorMessage, 3000);
+        return;
+    }
+
+    const data = {
+      "userID": "A171207",
+      "entity": 1,
+      "contactNumber": "09053100574",
+      "emergencyNumber": "09088792992",
+      "orderDetails": [
+        {
+          "providerID": "KJKJDJKDJDJDJKD",
+          "childFirstName": "Kehinde",
+          "childLastName": "Adams",
+          "dateFrom": "2023-12-02T23:20:07.871Z",
+          "dateTo": "2023-12-02T23:20:07.871Z"
+        }
+      ]
+    };
+
+    setIsLoading(true)
+
+    try {
+
+        console.log('********************* Booking Creche Session ***********************')
+    
+        axios.post(APIBaseUrl.developmentUrl + 'Order/CreateCreche', data, ApIHeaderOptions.headers)
+        .then(response => {
+    
+          setIsLoading(false)
+    
+            if(response.data.errorCode == '000') {
+    
+                //set data
+                console.log(response.data)
+                navigation.navigate('CrecheComplete', {message:response.data.statusMessage})
+    
+            }else {
+    
+                console.log(response.data.statusMessage)
+                //show error message
+                setErrorMessage(response.data.statusMessage);
+    
+                //set loading off
+                setIsLoading(false)
+    
+                return;
+            }
+        })
+        .catch(error => {
+          setIsLoading(false)
+          console.log(error);
+        });
+      
+    } catch (error) {
+      setIsLoading(false)
+      console.log(error)
+    }
+
+  }
+  //end of booking function
+
+//functiont to turn of message
+const hideNotificationMessage = () => {
+  setShowMessage(0);
+}
+
+//functiont to turn of message
+const hideErrorMessage = () => {
+  setErrorMessage(null);
+}
 
   // FUNCTION TO RENDER HEADER
     function renderHeaderContent() {
@@ -115,11 +238,11 @@ const CrecheProviderScreen = ({navigation}) => {
                 
                 <View style={styles.vendorFeatures}>
                     <ProviderFeature
-                      title="Opens: 8am"
+                      title={`Opens: ${startTime}`}
                       icon={icons.time}
                     />
                     <ProviderFeature
-                      title="Slots: 45"
+                      title={`Slots: ${capacity}`}
                       icon={icons.people}
                     />
                     <ProviderFeature
@@ -127,11 +250,11 @@ const CrecheProviderScreen = ({navigation}) => {
                       icon={icons.feedback}
                     />
                     <ProviderFeature
-                    title="Mrs. Tobi Egunjobi"
+                    title={teacher}
                     icon={icons.creche_quardian}
                   />
                   <ProviderFeature
-                  title="090 578 0393"
+                  title={contactPhone}
                   icon={icons.phone_fill}
                     />
     
@@ -153,6 +276,7 @@ const CrecheProviderScreen = ({navigation}) => {
                       placeholder="Enter Child Full Name"
                       onChange={(text) => setChildName(text)}
                       value={childName}
+                      onFocus={() => setErrorMessage(null)}
                     />
                     <CrecheInput 
                     button={false}
@@ -160,6 +284,8 @@ const CrecheProviderScreen = ({navigation}) => {
                     placeholder="Enter Parent Number"
                     onChange={(text) => setParentPhone(text)}
                     value={parentPhone}
+                    onFocus={() => setErrorMessage(null)}
+                    maxlength={11}
                   />
 
                   <CrecheInput 
@@ -168,22 +294,25 @@ const CrecheProviderScreen = ({navigation}) => {
                     placeholder="Enter Emergency Number"
                     onChange={(text) => setEmergencyNo(text)}
                     value={emergencyNo}
+                    onFocus={() => setErrorMessage(null)}
+                    maxlength={11}
                   />
 
                   <CrecheInput 
                     button={true}
                     onPress={() => showDatePicker("date")}
                     icon={icons.calendar}
-                    placeholder="Select Drop-off Date"
+                    placeholder="Tap left icon to select Date"
                     onChange={(text) => setDropOffDate(text)}
                     value={dropOffDate}
+                    onFocus={() => setErrorMessage(null)}
                   />
 
                   <CrecheInput 
                     button={true}
                     onPress={() => showDatePicker("time")}
                     icon={icons.time}
-                    placeholder="Select Drop-off Time"
+                    placeholder="Tap left icon to select time"
                     onChange={(text) => setPickUpTime(text)}
                     value={pickUpTime}
                   />
@@ -192,7 +321,7 @@ const CrecheProviderScreen = ({navigation}) => {
                       <Button 
                           title="Book Now" 
                           icon={icons.check_yes} 
-                          onPress={() => navigation.navigate('CrecheComplete')}
+                          onPress={() => BookCrecheSession()}
                           />
                   </View>
 
@@ -229,6 +358,14 @@ const CrecheProviderScreen = ({navigation}) => {
           <SafeAreaProvider style={styles.container}>
           <StatusBar style="auto" />
 
+          {errorMessage &&
+            <MessageBox status="error" message={errorMessage} />
+          }
+
+          {isLoading && 
+            <NewLoader title="Processing your request, please wait..." />
+          }
+
               {/* Render Header */}
               {renderHeaderContent()}
 
@@ -246,7 +383,7 @@ const CrecheProviderScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   descText: {
-    fontSize:14,
+    fontSize:13,
         fontFamily: "Benton Sans",
         color: COLORS.darkGray,
         marginTop:5,
@@ -289,7 +426,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical:15,
     flexWrap:'wrap',
-    rowGap: 15
+    rowGap: 10
   },
   vendorDesc: {
     fontSize:14,

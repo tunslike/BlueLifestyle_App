@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {  StyleSheet, 
   Text, 
   View,
@@ -7,15 +7,71 @@ import {  StyleSheet,
   Dimensions,
   StatusBar,
   Image, 
-  TouchableOpacity} from 'react-native';
+  FlatList
+  } from 'react-native';
+  import axios from 'axios';
   import { COLORS, icons, images } from '../../../constants';
-  import { HeaderBar, CrecheCard } from '../../components';
+  import { HeaderBar, CrecheCard, NewLoader } from '../../components';
+  import { APIBaseUrl, ApIHeaderOptions } from '../../../constants';
 
   const { width, height } = Dimensions.get("window");
 
 
   // init app screen
 const CrecheScreen = ({navigation}) => {
+
+  const [loader, setLoader] = useState(false)
+  const [crecheData, setCrecheData] = useState('');
+
+
+  // FUNCTION TO LOAD RESTURANT MENUS
+  const FetchCrecheProviders = () => {
+
+    console.log('*****************//////////////////*****************')
+    console.log('Fetching Creche Providers')
+    console.log('*****************//////////////////*****************')
+
+     //show loader
+     setLoader(true);
+
+     axios.post(APIBaseUrl.developmentUrl + 'services/service/FetchCrecheDetails', ApIHeaderOptions.headers)
+     .then(response => {
+ 
+      setLoader(false)
+ 
+         if(response.data.errorCode == '000') {
+ 
+              //set data
+              setCrecheData(response.data.crecheServiceData)
+ 
+         }else {
+ 
+             console.log(response.data.statusMessage)
+             //show error message
+             setErrorMessage(response.data.statusMessage);
+ 
+             //set loading off
+             setLoader(false)
+ 
+             return;
+         }
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   
+  }
+  // END OF FUNCTION
+
+  //USE EFFECT
+useEffect(() => {
+
+  //fetch providers
+  //FetchProviders();
+
+  FetchCrecheProviders();
+
+}, []);
 
   // function to render header
   function renderHeaderContent() {
@@ -63,13 +119,11 @@ const CrecheScreen = ({navigation}) => {
   function renderBodyContent() {
     return (
       <View style={styles.bodyContainer}>
-      <ScrollView style={{flex: 1}}>
-
-
+      
       {/* START OF RENDER PROVIDERS */}
 
       <View style={styles.vendorTitle}>
-          <Text style={styles.mainTitle}>Available Creche Sessions</Text>
+          <Text style={styles.mainTitle}>Available Sessions</Text>
           <Image source={icons.kids} 
             style={{
               height: 20, width: 20, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
@@ -77,7 +131,33 @@ const CrecheScreen = ({navigation}) => {
           />
       </View>
       
-        <View style={styles.providerList}>
+        <View style={{marginHorizontal:8}}>
+
+        <FlatList 
+        data={crecheData}
+        keyboardDismissMode="on-drag"
+        keyExtractor={item => `${item.crecheServiceId}`} 
+        showsVerticalScrollIndicator={false}
+        renderItem={
+            ({ item }) => {
+                return (
+                  <CrecheCard
+                  rating={item.provider_performance_ratings} 
+                  onPress={() => navigation.navigate('CrecheProvider', { providerId: item.crecheServiceId, startTime: item.crecheSessionName,
+                                                    capacity: item.crecheSessionCapacity, teacher: item.crecheTeacherName,
+                                                    contactPhone: item.crecheTeacherContact, rating: item.provider_performance_ratings,
+                                                  sessionName: item.provider_name})}
+                  name={item.provider_name}
+                  image={images.creche_dash_img}
+                  time={item.crecheSessionStartTime}
+                  slot={item.crecheSessionCapacity}
+              />
+                )
+            }
+        }
+    /> 
+
+        {/**
                 <CrecheCard 
                     onPress={() => navigation.navigate('CrecheProvider')}
                     name="Kids Morning Session"
@@ -91,6 +171,7 @@ const CrecheScreen = ({navigation}) => {
                     time="4pm"
                     slot="20"
                 />
+          */}
         </View>
 
         {/* END OF RENDER PROVIDERS */}
@@ -108,9 +189,7 @@ const CrecheScreen = ({navigation}) => {
                 <Text style={styles.orderText}>Your Order History</Text>
             </View>
         {/* END OF RENDER ORDER HISTORY */}
-
-      </ScrollView>
-      
+  
       </View>
     )
   }
@@ -119,6 +198,10 @@ const CrecheScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
     <StatusBar barStyle="light-content" />
+
+    {loader && 
+      <NewLoader title="Processing your request, please wait..." />
+    }
 
      {/* Render Header */}
      {renderHeaderContent()}

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { 
   StyleSheet, 
   Text, 
@@ -7,18 +7,77 @@ import {
   ScrollView,
   Dimensions,
   StatusBar,
-  Image 
+  Image,
+  Alert 
 } from 'react-native';
-import { Shadow } from 'react-native-shadow-2';
-import { COLORS,images, icons } from '../../../constants' 
-import { FacilityCard } from '../../components';
-
+import { useSelector } from 'react-redux';
+import { COLORS,images, icons, ApplicationName } from '../../../constants' 
+import { FacilityCard, LogoutButton } from '../../components';
+import { AuthContext } from '../../../context/AuthContext';
+import { horizontalScale, verticalScale, moderateScale } from '../../../constants';
 const { width, height } = Dimensions.get("window");
 
 const DashboardScreen = ({navigation}) => {
 
+  //get state
+  const userUD = useSelector((state) => state.user.userID);
+  const fName = useSelector((state) => state.user.firstName)
+
+  const {firstName, 
+          ExitAuthenticatedUser, 
+          company, department
+        } = useContext(AuthContext);
+
+  // SET STATES
+  const [greetings, setGreetings] = useState('');
+  
+
+  // function to load facilities
+  const LogoutAuthenticatedUser = () => {
+    Alert.alert(ApplicationName.AppName, 'Do you want to logout?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Yes', onPress: () => {
+        console.log('Logged out');
+        ExitAuthenticatedUser();
+      }},
+    ]);
+  }
+// end of function
+
+    //USE EFFECT
+    useEffect(() => {
+
+      //fetch facilities
+      //this.FetchFacilities();
+    
+      //check greetings
+      this.checkTimeGreetings();
+
+  }, []);
+
+     //check time
+     checkTimeGreetings = () => {
+
+      var today = new Date()
+      var curHr = today.getHours()
+
+      if (curHr < 12) {
+        setGreetings('Good Morning')
+      } else if (curHr < 18) {
+        setGreetings('Good Afternoon')
+      } else {
+        setGreetings('Good Evening')
+      }
+  }
+
+
   // Render Header Function
   function renderHeaderContent() {
+    
     return (
       <View style={styles.headerbg}>
 
@@ -29,15 +88,15 @@ const DashboardScreen = ({navigation}) => {
             }} />
         </View>
         <View style={styles.profileDisplay}>
-            <Text style={styles.greetings}>Good Morning</Text>
-            <Text style={styles.titleName}>Hi, Babatunde</Text>
+            <Text style={styles.greetings}>{greetings}</Text>
+            <Text style={styles.titleName}>Hi, {fName.trim()}</Text>
 
             <View style={styles.officeDetails}>
                 <Image source={icons.office} style={{
                   height: 15, width: 15, resizeMode: 'contain',
                   tintColor: COLORS.gentleBlue, marginRight: 5,
                 }} />
-                <Text style={styles.business}>Pensions | Information Technology</Text>
+                <Text style={styles.business}>{company} | {department}</Text>
             </View> 
         </View>
       </View>
@@ -70,6 +129,7 @@ const DashboardScreen = ({navigation}) => {
                     title="Gym" 
                     capacity="30"
                     openingTime="7.00am"         
+                    onPress={() => navigation.navigate('Gym')} 
               />
             </ScrollView>
           </View>
@@ -81,6 +141,9 @@ const DashboardScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      
+       <LogoutButton onPress={() => LogoutAuthenticatedUser()} />
+
         <StatusBar barStyle="light-content" />
 
          {/* Render Header */}
@@ -99,7 +162,7 @@ export default DashboardScreen;
 
 const styles = StyleSheet.create({
   mainTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: "Benton Sans",
     color: COLORS.StatureBlue,
     fontWeight: 'bold',
@@ -150,7 +213,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: verticalScale(30),
     marginHorizontal:20
   },
   headerbg: {
