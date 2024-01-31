@@ -3,14 +3,15 @@ import {
     StyleSheet, 
     Text, 
     View,
-    Image } from 'react-native'
-
+    Image, 
+    Platform} from 'react-native'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { COLORS, icons } from '../../constants'
 
-const TabIcon = ({focused, icon, title}) => {
+const TabIcon = ({focused, icon, title, addStyle}) => {
   if(focused) {
     return (
-        <View style={styles.isFocusedTab}>
+        <View style={[styles.isFocusedTab,{...addStyle}]}>
             <Image source={icon} 
                 style={{
                     height: 22,
@@ -51,18 +52,20 @@ const styles = StyleSheet.create({
     notFocusedTab: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 90,
-        width: 50
+        height: wp(10),
+        width: wp(15),
+        marginTop: Platform.OS === 'ios' ? wp(6.5) : null
     },
     isFocusedTab: {
         backgroundColor: COLORS.white,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingHorizontal: 10,
-        paddingVertical:5,
-        borderRadius:15,
-        marginLeft:20
+        paddingHorizontal: wp(3),
+        paddingVertical:wp(2),
+        borderRadius: wp(6),
+        marginLeft:wp(4),
+        marginTop: Platform.OS === 'ios' ? wp(6.5) : null
     }
 });
 

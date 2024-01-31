@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image,
+        Platform } from 'react-native';
 import { COLORS } from '../../constants';
 
 // INIT FUNCTION
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
     featureText: {
 
             fontSize: 13,
-            fontFamily: "Benton Sans",
+            fontFamily: "Roboto",
             color: COLORS.darkGray,
             fontWeight: 'normal',
     },
@@ -32,8 +33,8 @@ const styles = StyleSheet.create({
         borderColor: COLORS.ArrowGray,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderRadius: 10,
-        paddingVertical:2,
+        borderRadius: Platform.OS === 'ios' ? 14 : 10,
+        paddingVertical: Platform.OS === 'ios' ? 5.6 : 2,
         paddingHorizontal:8,
         marginRight: 12
     },

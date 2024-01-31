@@ -5,7 +5,7 @@ import { StyleSheet,
     Dimensions,
     View, 
     Image,
-    ImageBackground} from 'react-native';
+    ImageBackground, Platform} from 'react-native';
 
 import { COLORS, icons } from '../../constants';
 const { width, height } = Dimensions.get("window");
@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
         borderColor: COLORS.ArrowGray,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderRadius: 10,
-        paddingVertical:2,
+        borderRadius: Platform.OS === 'ios' ? 13 : 10,
+        paddingVertical: Platform.OS == 'ios' ? 6 : 2,
         paddingHorizontal:8
     },
     featureText: {
         fontSize: 12,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
         fontWeight: 'bold',
     },
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
     },
     businessName: {
         fontSize: 16,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'bold',
     },
     ratingText: {
         fontSize: 13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'normal',
     },

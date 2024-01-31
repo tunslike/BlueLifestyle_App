@@ -33,7 +33,7 @@ const basket = require("../assets/icons/basket.png")
 const cash = require("../assets/icons/cash.png")
 const removeItem = require("../assets/icons/minus.png")
 const delivery = require("../assets/icons/delivery.png")
-const eatIn = require("../assets/icons/eat-In.png")
+const eatIn = require("../assets/icons/eat_in.png")
 const takeout = require("../assets/icons/takeout.png")
 const creche_quardian = require("../assets/icons/guardian.png")
 const hotline = require("../assets/icons/hotline.png")
@@ -41,7 +41,7 @@ const phone_fill = require("../assets/icons/phone_fill.png")
 const child = require("../assets/icons/child.png")
 const emergencyPhone = require("../assets/icons/emergency_phone.png")
 const calendar = require("../assets/icons/calendar.png")
-const specials = require("../assets/icons/package.png")
+const specials = require("../assets/icons/specials.png")
 const trainer = require("../assets/icons/trainer.png")
 const time2 = require("../assets/icons/time2.png")
 const time3 = require("../assets/icons/time3.png")
@@ -49,8 +49,12 @@ const info = require("../assets/icons/info.png")
 const logout = require("../assets/icons/logout.png")
 const company = require("../assets/icons/company.png")
 const gym_details = require("../assets/icons/gym_details.png")
+const pending = require("../assets/icons/pending.png")
+const order_success = require("../assets/icons/order_success.png")
 
 export default {
+    order_success,
+    pending,
     gym_details,
     company,
     logout,

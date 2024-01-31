@@ -49,7 +49,7 @@ const ToggleButton = ({deliveryMethod}) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    toggleContainer: {
         width: '90%',
         flexDirection: 'row',
         justifyContent: 'space-between',

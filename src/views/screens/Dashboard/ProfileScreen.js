@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {  StyleSheet, 
   Text, 
   View,
@@ -6,11 +6,15 @@ import {  StyleSheet,
   ScrollView,
   Dimensions,
   StatusBar,
-  Image, 
+  Image, Alert, Keyboard,
   TouchableOpacity} from 'react-native';
   import { useSelector } from 'react-redux';
-  import { COLORS, icons, images, verticalScale, horizontalScale, moderateScale } from '../../../constants';
-  import { HeaderBar, CustomInput, Button } from '../../components';
+  import axios from 'axios';
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+  import { COLORS, icons, images, ApplicationName, APIBaseUrl, ApIHeaderOptions,
+    verticalScale, horizontalScale, moderateScale } from '../../../constants';
+  import { HeaderBar, CustomInput, Button, NewLoader, MessageBox } from '../../components';
+  import { AuthContext } from '../../../context/AuthContext';
 
   const { width, height } = Dimensions.get("window");
 
@@ -20,18 +24,127 @@ const ProfileScreen = ({navigation}) => {
   //GET FROM STORE
   const userData = useSelector((state) => state.user.userData)
 
+  const { ExitAuthenticatedUser } = useContext(AuthContext);
+
   const [errorMessage, setErrorMessage] = useState(null);
   const [company, setCompany] = useState('');
   const [department, setDepartment] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isFocus, setIsFocus] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [requestStatus, setRequestStatus] = useState(null);
+  const [showMessage, setShowMessage] = useState(0);
+  const [profile, setProfile] = useState(false);
 
+
+  const ValidateUpdateProfile = () => {
+
+    setErrorMessage(null)
+    Keyboard.dismiss();
+    
+    if(company.trim == '' || department == '' || phoneNumber == '') {
+      setErrorMessage('Please complete all fields!')
+      return;
+    } 
+
+    Alert.alert('Stanbic Towers Profile', 'Do you want to update your profile?', [
+      {
+        text: 'No',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'Yes', onPress: () => UpdateProfileData()},
+    ]);
+  }
+
+  //function to update profile
+  const UpdateProfileData = () => {
+
+    setErrorMessage(null)
+    Keyboard.dismiss();
+
+    const data = {
+      company: company,
+      username: userData.userID,
+      department: department,
+      phone: phoneNumber
+    };
+
+    try {
+
+      setIsLoading(true)
+
+      console.log('********************* Making API Request ***********************')
+
+      axios.post(APIBaseUrl.developmentUrl + 'accounts/staff/updateProfile', data, ApIHeaderOptions.headers)
+      .then(response => {
+  
+        setIsLoading(false)
+  
+          if(response.data.errorCode == '000') {
+  
+               //set data
+               console.log(response.data)
+               //show notification
+               setShowMessage(1);
+               setRequestStatus(true);
+               setProfile(true)
+  
+          }else {
+  
+              setRequestStatus(false);
+              console.log(response.data.statusMessage)
+              //show error message
+              setErrorMessage(response.data.statusMessage);
+  
+              //set loading off
+              setIsLoading(false)
+  
+              return;
+          }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+      
+    } catch (error) {
+      setErrorMessage(error)
+    }
+
+  }
+  //end of function
+
+    // function to load facilities
+const LogoutAuthenticatedUser = () => {
+      Alert.alert(ApplicationName.AppName, 'Do you want to logout?', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'Yes', onPress: () => {
+          console.log('Logged out');
+          ExitAuthenticatedUser();
+        }},
+      ]);
+    }
+  // end of function
+
+  // function to check profile
+const ValidateProfile = () => {
+  if(userData.company == '' || userData.phone == '' || userData.department == '') {
+   setProfile(false);
+  }else{
+   setProfile(true)
+  }
+}
+// end of function
 
 
   // RUN EFFECT HOOK
     useEffect(() => {
-  
+      ValidateProfile()
     
      }, []);
   // END OF EFFECT HOOK
@@ -78,13 +191,25 @@ const ProfileScreen = ({navigation}) => {
 
       {/* START OF ORDERS */}
 
-      <View style={styles.vendorTitle}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+      
+          <View style={styles.vendorTitle}>
           <Text style={styles.mainTitle}>Personal Details</Text>
           <Image source={icons.user} 
             style={{
               height: 15, width: 15, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
             }}
           />
+          </View>
+
+         {!profile &&
+          <View style={{flexDirection: 'row', marginTop:13, paddingRight: 10, justifyContent: 'flex-start', alignItems: 'center'}}>
+          <Text style={styles.updateError}>Update Required</Text>
+          <Image source={icons.info} style={{height: 15, marginLeft: 5, width: 15, resizeMode: 'contain', tintColor: COLORS.SecondaryPlum}} />
+         </View>
+        } 
+       
+
       </View>
       
         <View style={styles.divider}>
@@ -111,9 +236,13 @@ const ProfileScreen = ({navigation}) => {
         value={userData.email}
       />
       <CustomInput 
+        onChange={(text) => setPhoneNumber(text)}
         label="Phone:"
         icon={icons.user}
-        value={userData.phone}
+        value={(!userData.phone) ? phoneNumber : userData.phone}
+        errorStyle={(!userData.phone) ? {
+          color: COLORS.SecondaryPlum
+        } : null }
     />
     <View style={{height:20}}></View>
         </View>
@@ -128,29 +257,49 @@ const ProfileScreen = ({navigation}) => {
         </View>
 
         <View style={styles.divider}>
+
         <CustomInput 
+        onChange={(text) => setCompany(text)}
         label="Company:"
         icon={icons.user}
-        value={userData.company}
+        value={(!userData.company) ? company : userData.company}
+        errorStyle={(!userData.company) ? {
+          color: COLORS.SecondaryPlum
+        } : null }
         />
+
         <CustomInput 
+        onChange={(text) => setDepartment(text)}
         label="Department:"
         icon={icons.user}
-        value={userData.department}
+        value={(!userData.department) ? department : userData.department}
+        errorStyle={(!userData.department) ? {
+          color: COLORS.SecondaryPlum
+        } : null }
         />
 
         <View style={{height:20}}></View>
         </View>
 
         <View style={{ marginHorizontal:25}}>
-          <Button title="Update Profile"
-          icon={icons.check_yes} />
-
-          <TouchableOpacity style={styles.mainLogout}>
+        {/*
+          <Button
+            onPress={() => ValidateUpdateProfile()} 
+            title="Update Profile"
+            icon={icons.check_yes} 
+            addStyles={{
+              backgroundColor: COLORS.SecondaryGreen
+            }}
+            />
+          */}
+          <TouchableOpacity 
+          onPress={() => LogoutAuthenticatedUser()}
+          style={styles.mainLogout}>
               <Text style={styles.mainLogoutText}>Log Out</Text>
               <Image source={icons.logout} 
                 style={{
-                  height:20, width: 20, resizeMode: 'contain', tintColor: COLORS.white
+                  height:20, marginLeft:wp(1),
+                   width: 20, resizeMode: 'contain', tintColor: COLORS.white
                 }}
               />
           </TouchableOpacity>
@@ -170,6 +319,18 @@ const ProfileScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
     <StatusBar barStyle="light-content" />
 
+    {isLoading && 
+      <NewLoader title="Updating your profile, please wait..." />
+    }
+  
+    {errorMessage &&
+      <MessageBox status="error" message={errorMessage} />
+    }
+
+    {showMessage == 1 &&
+      <MessageBox message="Your profile update was successful!" status="success" />
+  }
+
      {/* Render Header */}
      {renderHeaderContent()}
 
@@ -182,9 +343,15 @@ const ProfileScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+  updateError: {
+    fontSize: 13,
+    fontFamily: "Roboto",
+    color: COLORS.SecondaryPlum,
+    fontWeight: 'normal', 
+  },
   mainLogoutText: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold', 
   },
@@ -210,7 +377,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'normal', 
     lineHeight: 20,
@@ -267,14 +434,14 @@ const styles = StyleSheet.create({
   }, 
   subTitle: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'normal', 
     lineHeight: 20
   },
   mainTitle: {
     fontSize: 17,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold', 
   },
@@ -288,7 +455,7 @@ const styles = StyleSheet.create({
   },
   business : {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.gentleBlue,
     fontWeight: 'normal',
     marginLeft:5
@@ -301,7 +468,7 @@ const styles = StyleSheet.create({
   },
   titleName: {
     fontSize: 25,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
   },
@@ -313,6 +480,8 @@ const styles = StyleSheet.create({
     width,
     height: 220,
     backgroundColor: COLORS.StandardardBankBlue,
+    marginTop: Platform.OS === 'ios' ? wp(-15) : null,
+    paddingTop: Platform.OS === 'ios' ? wp(4.5) : null
   },
   container: {
     flex: 1,

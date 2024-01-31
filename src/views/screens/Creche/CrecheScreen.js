@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {  StyleSheet, 
   Text, 
   View,
@@ -7,12 +7,16 @@ import {  StyleSheet,
   Dimensions,
   StatusBar,
   Image, 
-  FlatList
+  FlatList, Alert
   } from 'react-native';
   import axios from 'axios';
+  import { AuthContext } from '../../../context/AuthContext';
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+  import { useSelector } from 'react-redux';
   import { COLORS, icons, images } from '../../../constants';
   import { HeaderBar, CrecheCard, NewLoader } from '../../components';
-  import { APIBaseUrl, ApIHeaderOptions } from '../../../constants';
+  import { APIBaseUrl, ApplicationName, ApIHeaderOptions, verticalScale, horizontalScale, moderateScale } from '../../../constants';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
   const { width, height } = Dimensions.get("window");
 
@@ -20,9 +24,16 @@ import {  StyleSheet,
   // init app screen
 const CrecheScreen = ({navigation}) => {
 
+  const userData = useSelector((state) => state.user.userData)
+  const token = useSelector((state) => state.user.idtkn)
+
+  const { ExitAuthenticatedUser } = useContext(AuthContext);
+
   const [loader, setLoader] = useState(false)
   const [crecheData, setCrecheData] = useState('');
-
+  const [crecheDetails, setCrecheDetails] = useState('');
+  const [regData, setRegData] = useState('');
+  const [registrationStatus, setRegistrationStatus] = useState(0)
 
   // FUNCTION TO LOAD RESTURANT MENUS
   const FetchCrecheProviders = () => {
@@ -38,7 +49,7 @@ const CrecheScreen = ({navigation}) => {
      .then(response => {
  
       setLoader(false)
- 
+  
          if(response.data.errorCode == '000') {
  
               //set data
@@ -49,9 +60,75 @@ const CrecheScreen = ({navigation}) => {
              console.log(response.data.statusMessage)
              //show error message
              setErrorMessage(response.data.statusMessage);
+
+             if(response.data.statusMessage.includes("failed")) {
+
+              Alert.alert(ApplicationName.AppName, 'Session Expired! Please login again')
+              ExitAuthenticatedUser();
+           }
  
              //set loading off
              setLoader(false)
+ 
+             return;
+         }
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   
+  }
+  // END OF FUNCTION
+
+  // FUNCTION TO VALIDATE CRECHE REGISTRATION
+  const ValidateCrecheRegistration = () => {
+
+    console.log('*****************//////////////////*****************')
+    console.log('Validating Creche Registrations')
+    console.log('*****************//////////////////*****************')
+
+     //show loader
+     setLoader(true); 
+
+     const data = {
+      username : userData.userID
+     }
+
+     axios.post(APIBaseUrl.developmentUrl + 'accounts/Staff/ValidateCrecheUser', data, {
+      headers: {
+        'JWTToken': token
+      }
+    })
+     .then(response => {
+ 
+      setLoader(false)
+
+      console.log(response.data)
+ 
+         if(response.data.errorCode == '000' && response.data.crecheRegisterData != null) {
+          
+
+          if(response.data.crecheRegisterData) {
+            console.log('Registration is completed already')
+            setRegistrationStatus(2);
+            setRegData(response.data.crecheRegisterData)
+            setCrecheDetails(response.data.crecheServiceData)
+          }
+
+          return;
+             
+        }else if(response.data.errorCode == '002') {
+
+          setRegistrationStatus(1);
+
+            return
+      
+        }else {
+
+            if(response.data.crecheRegisterData == null) {
+              console.log('Registration is needed')
+              setRegistrationStatus(0);
+            }
  
              return;
          }
@@ -69,7 +146,11 @@ useEffect(() => {
   //fetch providers
   //FetchProviders();
 
-  FetchCrecheProviders();
+  //setRegistrationStatus(true)
+
+  ValidateCrecheRegistration();
+
+  //FetchCrecheProviders();
 
 }, []);
 
@@ -123,13 +204,99 @@ useEffect(() => {
       {/* START OF RENDER PROVIDERS */}
 
       <View style={styles.vendorTitle}>
-          <Text style={styles.mainTitle}>Available Sessions</Text>
+          <Text style={styles.mainTitle}>Reserve a slot for your kid today </Text>
           <Image source={icons.kids} 
             style={{
               height: 20, width: 20, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
             }}
           />
       </View>
+
+
+
+{/* REGISTRATION BUTTON STARTS HERE */}
+{(registrationStatus == 0) && 
+  <TouchableOpacity
+    onPress={() => navigation.navigate("CrecheRegistration")}
+  >
+  <View
+    style={{
+      marginHorizontal:20,
+    }}
+  >
+    <Text style={styles.regNotice}>Sorry! You do not have an active registration with the creche facility. Hurry now and register to reserve a slot</Text>
+  </View>
+<View style={styles.container_restuarant}>
+        <Image
+            source={icons.kids}
+            style={{
+                height: 30, width: 30, resizeMode: 'contain', tintColor: COLORS.AlertGreenbg
+            }}
+        />
+       <View style={styles.textArea}>
+            <Text style={styles.txtRegister}>New Registration</Text>
+    
+       </View>
+       <View style={styles.viewBtn}>
+            <Text style={styles.btnText}>Register Now</Text>
+       </View>
+        </View>
+</TouchableOpacity>
+}
+
+{(registrationStatus == 1) && 
+  <View style={styles.pendingReview}>
+  <Image source={icons.info} style={
+    {
+      height: 25, width: 25, marginRight: 15, resizeMode: 'contain', tintColor: COLORS.WarningTextColor
+    }
+  } />
+    <Text style={styles.pendingtxt}>Sorry, your registration is being reviewed. Kindly contact the facility manager for further instructions!</Text>
+  </View>
+} 
+
+{(registrationStatus == 2) && 
+
+  <View>
+  <View style={styles.isActiveStatus}>
+      <Image 
+        source={icons.check_yes}
+        style={{
+          height: 20, width: 20, marginRight:15, resizeMode: 'contain', tintColor: COLORS.AlertGreenbg
+        }}
+      />
+      <Text style={styles.activeTxt}>You have an active creche registration! Please tap below to book a slot</Text>
+  </View>
+
+  <View
+        style={{
+          marginTop: 30
+        }}
+  >
+  <CrecheCard
+  rating={crecheDetails.provider_performance_ratings} 
+  onPress={() => navigation.navigate('CrecheProvider', {facilityID: crecheDetails.facilityId, providerId: crecheDetails.providerId, 
+    crecheSessionID: crecheDetails.crecheServiceId, 
+crecheSessionName: crecheDetails.crecheSessionName, sessionStart: crecheDetails.crecheSessionStartTime,
+capacity: crecheDetails.crecheSessionCapacity, teacher: crecheDetails.crecheTeacherName,
+crecheSessionStartTime:crecheDetails.crecheSessionStartTime,
+contactPhone: crecheDetails.crecheTeacherContact, rating: crecheDetails.provider_performance_ratings,
+sessionName: crecheDetails.provider_name, childName: regData.dependentName1, 
+  parentPhone: regData.phone})}
+  name="Book a Slot Now"
+  image={images.creche_dash_img}
+  time={crecheDetails.crecheSessionStartTime}
+  slot={crecheDetails.crecheSessionCapacity}
+/>
+  
+</View>
+</View>
+
+}
+
+
+{/* REGISTRATION BUTTON STARTS HERE */}
+
       
         <View style={{marginHorizontal:8}}>
 
@@ -143,8 +310,11 @@ useEffect(() => {
                 return (
                   <CrecheCard
                   rating={item.provider_performance_ratings} 
-                  onPress={() => navigation.navigate('CrecheProvider', { providerId: item.crecheServiceId, startTime: item.crecheSessionName,
+                  onPress={() => navigation.navigate('CrecheProvider', {facilityID: item.facilityId, providerId: item.providerId, 
+                                                                          crecheSessionID: item.crecheServiceId, 
+                                                    crecheSessionName: item.crecheSessionName, sessionStart: item.crecheSessionStartTime,
                                                     capacity: item.crecheSessionCapacity, teacher: item.crecheTeacherName,
+                                                    crecheSessionStartTime:item.crecheSessionStartTime,
                                                     contactPhone: item.crecheTeacherContact, rating: item.provider_performance_ratings,
                                                   sessionName: item.provider_name})}
                   name={item.provider_name}
@@ -200,7 +370,7 @@ useEffect(() => {
     <StatusBar barStyle="light-content" />
 
     {loader && 
-      <NewLoader title="Processing your request, please wait..." />
+      <NewLoader title="Validating registration details, please wait..." />
     }
 
      {/* Render Header */}
@@ -216,10 +386,102 @@ useEffect(() => {
 }
 
 const styles = StyleSheet.create({
+
+  pendingtxt: {
+    color: COLORS.WarningTextColor,
+    fontFamily: "Roboto",
+    fontWeight: 'bold', 
+    lineHeight: 20,
+    fontSize:14,
+    width:'90%'
+  },
+
+  activeTxt: {
+    color: COLORS.AlertGreenbg,
+    fontFamily: "Roboto",
+    fontWeight: 'bold', 
+    lineHeight: 20,
+    fontSize:14,
+    width:'90%'
+  },
+  isActiveStatus: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#bfe5eb',
+    backgroundColor: '#d1ecf1',
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10
+  },
+  pendingReview: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: COLORS.WarningBorder,
+    backgroundColor: COLORS.Warningbg,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10
+  },
+  regNotice: {
+    fontSize: moderateScale(12.5),
+    fontFamily: "Roboto",
+    color: COLORS.SecondaryPlum,
+    fontWeight: 'normal', 
+    lineHeight: 18,
+  },
+  btnText: {
+    fontSize: moderateScale(12),
+    fontFamily: "Roboto",
+    color: COLORS.AlertGreenbg,
+    fontWeight: 'normal', 
+},
+viewBtn: {
+    borderRadius: 14,
+    paddingVertical: verticalScale(5),
+    paddingHorizontal: horizontalScale(12),
+    backgroundColor: COLORS.white,
+},
+subTitle: {
+    fontSize: moderateScale(12),
+    fontFamily: "Roboto",
+    color: COLORS.StatureBlue,
+    fontWeight: 'normal', 
+},
+txtRegister: {
+    fontSize: moderateScale(15.5),
+    fontFamily: "Roboto",
+    color: COLORS.AlertGreenbg,
+    fontWeight: 'bold', 
+},
+textArea: {
+ flex: 1,
+},
+container_restuarant: {
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: '#bfe5eb',
+  backgroundColor: '#d1ecf1',
+  marginHorizontal: horizontalScale(20),
+  marginTop: verticalScale(20),
+  flexDirection: 'row',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  padding: moderateScale(15),
+  borderRadius: moderateScale(15),
+  columnGap: 15
+  },
     titleDesc: {
         color: COLORS.white,
         fontSize: 13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         fontWeight: 'normal', 
     },
   orderBox: {
@@ -230,7 +492,7 @@ const styles = StyleSheet.create({
   orderText: {
     color: COLORS.darkGray,
     fontSize: 13,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight: 'normal', 
   },
   orderHistory: {
@@ -255,7 +517,7 @@ const styles = StyleSheet.create({
   }, 
   mainTitle: {
     fontSize: 17,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold', 
   },
@@ -270,7 +532,7 @@ const styles = StyleSheet.create({
   },
   business : {
     fontSize: 15,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.gentleBlue,
     fontWeight: 'normal',
     marginLeft:5
@@ -283,7 +545,7 @@ const styles = StyleSheet.create({
   },
   titleName: {
     fontSize: 25,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
   },
@@ -295,6 +557,8 @@ const styles = StyleSheet.create({
     width,
     height: 220,
     backgroundColor: COLORS.StandardardBankBlue,
+    marginTop: Platform.OS === 'ios' ? wp(-15) : null,
+    paddingTop: Platform.OS === 'ios' ? wp(4.5) : null
   },
   container: {
     flex: 1,

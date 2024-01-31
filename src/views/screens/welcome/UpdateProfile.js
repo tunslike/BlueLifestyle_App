@@ -169,6 +169,7 @@ const UpdateProfile = ({navigation}) => {
           />
 
       <View>
+      {/*
           <TouchableOpacity 
             onPress={() => UpdateProfileData()}
             style={styles.loginBtn}>
@@ -178,6 +179,7 @@ const UpdateProfile = ({navigation}) => {
                   tintColor: COLORS.white, resizeMode: 'contain'}}
                 />
           </TouchableOpacity>
+      */}
       </View>
       </SafeAreaView>
     </KeyboardAwareScrollView>

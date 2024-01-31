@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     },
     featureText: {
         fontSize: 12,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
         fontWeight: 'bold',
     },
@@ -102,13 +102,13 @@ const styles = StyleSheet.create({
     },
     businessName: {
         fontSize: 16,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'bold',
     },
     ratingText: {
         fontSize: 13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'normal',
     },

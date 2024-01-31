@@ -8,8 +8,9 @@ import {  StyleSheet,
   StatusBar,
   Image, 
   TouchableOpacity} from 'react-native';
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
   import { COLORS, icons, images, verticalScale, horizontalScale, moderateScale } from '../../../constants';
-  import { HeaderBar, OrderFacilityItem } from '../../components';
+  import { HeaderBar, HistoryFacilityItem } from '../../components';
 
   const { width, height } = Dimensions.get("window");
 
@@ -62,15 +63,15 @@ const HistoryScreen = ({navigation}) => {
       {/* START OF ORDERS */}
 
       <View style={styles.vendorTitle}>
-          <Text style={styles.mainTitle}>Your Orders</Text>
-          <Image source={icons.cart} 
+          <Text style={styles.mainTitle}>View Order History</Text>
+          <Image source={icons.history} 
             style={{
               height: 20, width: 20, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
             }}
           />
       </View>
       <View style={styles.subTitleBox}>
-            <Text style={styles.subTitle}>Select the facility category below to view and complete your order</Text>
+            <Text style={styles.subTitle}>Select the facility category below to view and complete your order history</Text>
       </View>
 
       {orderAvailabe == false &&
@@ -88,18 +89,20 @@ const HistoryScreen = ({navigation}) => {
         
       }
 
-      <OrderFacilityItem 
-          onPress={() => navigation.navigate('RestaurantOrder')}
+      <HistoryFacilityItem 
+          onPress={() => navigation.navigate("RestaurantHistory")}
           type="food"
           icon={icons.food} 
           title="3 Orders Pending" />
 
-          <OrderFacilityItem 
+          <HistoryFacilityItem 
+          onPress={() => navigation.navigate("CrecheHistory")}
           type="creche"
           icon={icons.kids} 
           title="3 Orders Pending" />
 
-          <OrderFacilityItem 
+          <HistoryFacilityItem 
+          onPress={() => navigation.navigate("GymHistory")}
           type="gym"
           icon={icons.gym} 
           title="3 Orders Pending" />
@@ -133,8 +136,8 @@ const HistoryScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   infoText: {
-    fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontSize: 13,
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'normal', 
     lineHeight: 20,
@@ -191,15 +194,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   }, 
   subTitle: {
-    fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontSize: 13,
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'normal', 
     lineHeight: 20
   },
   mainTitle: {
-    fontSize: 21,
-    fontFamily: "Benton Sans",
+    fontSize: 17,
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold', 
   },
@@ -213,7 +216,7 @@ const styles = StyleSheet.create({
   },
   business : {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.gentleBlue,
     fontWeight: 'normal',
     marginLeft:5
@@ -226,7 +229,7 @@ const styles = StyleSheet.create({
   },
   titleName: {
     fontSize: 25,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
   },
@@ -238,6 +241,8 @@ const styles = StyleSheet.create({
     width,
     height: 220,
     backgroundColor: COLORS.StandardardBankBlue,
+    marginTop: Platform.OS === 'ios' ? wp(-15) : null,
+    paddingTop: Platform.OS === 'ios' ? wp(4.5) : null
   },
   container: {
     flex: 1,

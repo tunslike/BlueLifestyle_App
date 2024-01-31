@@ -9,6 +9,7 @@ import {
     TouchableOpacity, } from 'react-native';
 
 import { COLORS } from '../../constants';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const CrecheInput = ({button, onFocus, onPress, icon, value, onChange, placeholder,maxlength, multiline}) => {
   return (
@@ -63,7 +64,7 @@ export default CrecheInput
 const styles = StyleSheet.create({
     multilineText: {
         minHeight: 130,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         fontWeight:'600',
         fontSize:14,
         color: COLORS.darkblue,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'top'
     },
     inputStyle: {
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         fontWeight:'600',
         fontSize:14,
         color: COLORS.darkblue,
@@ -86,8 +87,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginHorizontal:5,
         borderBottomColor: COLORS.textGrey,
-        paddingBottom: 3,
-        marginTop:5
+        paddingBottom: Platform.OS === 'ios' ? hp(1.7) : wp(0.4),
+        marginTop: Platform.OS === 'ios' ? hp(2.7) :wp(2)
     },
     container_multiline : {
         flexDirection: 'row',
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginHorizontal:5,
         borderBottomColor: COLORS.textGrey,
-        paddingBottom: 3,
-        marginTop:10
+        paddingBottom: Platform.OS === 'ios' ? hp(1.7) : wp(0.4),
+        marginTop: Platform.OS === 'ios' ? hp(2.7) :wp(2)
     }
 })

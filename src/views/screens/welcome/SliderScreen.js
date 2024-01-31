@@ -9,7 +9,7 @@ import {
   StyleSheet, 
   Text, 
   TouchableOpacity, 
-  View } from 'react-native'
+  View, Platform } from 'react-native'
   import LinearGradient from 'react-native-linear-gradient';
   import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { 
@@ -76,7 +76,6 @@ const Slide = ({item}) => {
         resizeMode="cover"
           source={item.image}
           style={[styles.imagebg]}>
-
           <View
             style={{
              paddingHorizontal: wp(3), position: 'absolute', top:wp(15),
@@ -90,6 +89,7 @@ const Slide = ({item}) => {
                         <Image style={styles.img} source={images.shield} />
                   </View>
                       <TouchableOpacity
+                      onPress={() => navigation.replace("Login")}
                         style={styles.skipBtn}
                       >
                         <Text style={styles.skipText}>Skip</Text>
@@ -106,7 +106,7 @@ const Slide = ({item}) => {
               COLORS.gradientEnd
             ]}
             style={{
-              height: 300,
+              height: Platform.OS === 'ios' ? 350 : 300,
               justifyContent: 'flex-start',
               paddingHorizontal: 20,
             }}
@@ -146,8 +146,8 @@ const Slide = ({item}) => {
                           source={icons.arrow} 
                           resizeMode='contain'
                           style={{
-                            height: 23, width: 23, resizeMode: 'contain',
-                            tintColor: COLORS.darkblue, marginLeft: 10,
+                            height: wp(4), width:wp(4), resizeMode: 'contain',
+                            tintColor: COLORS.darkblue, marginLeft: 5,
                           }}
                           />
                     </TouchableOpacity>)
@@ -163,7 +163,7 @@ const Slide = ({item}) => {
                           resizeMode='contain'
                           style={{
                             height: wp(4), width: wp(4), resizeMode: 'contain',
-                            tintColor: COLORS.darkblue, marginLeft: 10,
+                            tintColor: COLORS.darkblue, marginLeft: 5,
                           }}
                           />
                     </TouchableOpacity>
@@ -176,8 +176,8 @@ const Slide = ({item}) => {
   )
 }
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-    <StatusBar barStyle="light-content" />
+    <View>
+    <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
       <FlatList
       ref={ref}
         onMomentumScrollEnd={updateCurrentSlideIndex}
@@ -188,7 +188,7 @@ const Slide = ({item}) => {
         showsHorizontalScrollIndicator={false}
         renderItem={({item}) => <Slide item={item} />}
       />
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
       paddingVertical: wp(1.3)
   },
   skipText: {
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight:'normal',
     fontSize:wp(3.5),
     color: COLORS.white
@@ -219,9 +219,9 @@ const styles = StyleSheet.create({
     borderRadius: 2
   },
   btnTextNext: {
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight:'600',
-    fontSize:wp(4),
+    fontSize:wp(3.3),
     color: COLORS.darkblue
   },
   btnNext : {
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   },
   textDescription : {
     marginTop:hp(1),
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontSize:wp(4),
     fontWeight: '300',
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontSize: wp(7),
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: '900',
     lineHeight:hp(7)
@@ -265,14 +265,17 @@ const styles = StyleSheet.create({
     width:wp('14%')
   },
   imagebg: {
-    flex: 1,
     width,
     justifyContent: 'flex-end',
-    resizeMode:'cover'
-    
+    resizeMode:'cover',
+    flex: 1
   },
   sliderContainer: {
     alignItems:'center',
+    flex:1,
+  },
+  container: {
+    flex: 1
   }
 })
 

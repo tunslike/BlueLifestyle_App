@@ -21,13 +21,13 @@ const styles = StyleSheet.create({
     title_selected: {
         color: COLORS.white,
         fontSize: 13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         fontWeight: 'normal',
     },
     title: {
         color: COLORS.StandardardBankBlue,
         fontSize: 13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         fontWeight: 'normal',
     },
     box: {

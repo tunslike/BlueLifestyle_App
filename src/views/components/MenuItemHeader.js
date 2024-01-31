@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { COLORS } from '../../constants';
 
 
@@ -13,8 +14,8 @@ const MenuItemHeader = ({title}) => {
 
 const styles = StyleSheet.create({
     headerText: {
-        fontSize: 17,
-        fontFamily: "Benton Sans",
+        fontSize: wp(5),
+        fontFamily: "Roboto",
         color: COLORS.StatureBlue,
         fontWeight: 'bold',
     },

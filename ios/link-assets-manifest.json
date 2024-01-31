@@ -14,16 +14,16 @@
       "sha1": "d5f04e5e7fa78d266dea487f2cb57d2e7f9e5c85"
     },
     {
-      "path": "src/assets/fonts/Benton_Sans-Bold.otf",
-      "sha1": "4862bd0ab8af6026e7baf8c047c1e514d4d698bc"
+      "path": "src/assets/fonts/Roboto-Bold.ttf",
+      "sha1": "6cbb57ba2355cf442e06899898ff5af55867103e"
     },
     {
-      "path": "src/assets/fonts/Benton_Sans-Medium.otf",
-      "sha1": "436ad99d9ce89ecdf993738e325cf1fcb55608c9"
+      "path": "src/assets/fonts/Roboto-Medium.ttf",
+      "sha1": "adbc3bde424bcf7dbc38f148005c8319825891f2"
     },
     {
-      "path": "src/assets/fonts/Benton_Sans-Regular.otf",
-      "sha1": "f358bfd48c2ffefc5e8fec3caebd4db809a7eb7b"
+      "path": "src/assets/fonts/Roboto-Regular.ttf",
+      "sha1": "1d1d41fcadc571decb6444211b7993b99ce926e2"
     },
     {
       "path": "src/assets/icons/access.png",
@@ -86,7 +86,7 @@
       "sha1": "8c049d90b790e64a3aa8cb2fb7d936cb80c1b477"
     },
     {
-      "path": "src/assets/icons/eat-In.png",
+      "path": "src/assets/icons/eat_in.png",
       "sha1": "bb75fbd1af1cadb84a5fd1a02dd9175dbbffbd2d"
     },
     {
@@ -170,8 +170,12 @@
       "sha1": "fab7191e28f50bc18243e0a109729fbb740438b5"
     },
     {
-      "path": "src/assets/icons/package.png",
-      "sha1": "fee6c4f40680d13513da2a15a6f2342c85d75faa"
+      "path": "src/assets/icons/order_success.png",
+      "sha1": "04b9acf04c27a946b9f0d3694f162fc1ec934f08"
+    },
+    {
+      "path": "src/assets/icons/pending.png",
+      "sha1": "6583557361e46422330b9b6f85a98c1c18614aa6"
     },
     {
       "path": "src/assets/icons/people.png",
@@ -196,6 +200,10 @@
     {
       "path": "src/assets/icons/running_icon.png",
       "sha1": "fa483a7e342a47f5a91fba347d0512ad03978af9"
+    },
+    {
+      "path": "src/assets/icons/specials.png",
+      "sha1": "fee6c4f40680d13513da2a15a6f2342c85d75faa"
     },
     {
       "path": "src/assets/icons/takeout.png",
@@ -270,7 +278,7 @@
       "sha1": "d00b474558a0eadc15817915b66c805af76412a2"
     },
     {
-      "path": "src/assets/images/kidsCreche.jpg",
+      "path": "src/assets/images/kids_creche.jpg",
       "sha1": "936eccf4dc4716f81861d7a25486acc92ee2484f"
     },
     {
@@ -298,7 +306,7 @@
       "sha1": "6adda684a8fb360dd2f57b9ce00951e273687bf7"
     },
     {
-      "path": "src/assets/images/profileUpdate.jpg",
+      "path": "src/assets/images/profile_update.jpg",
       "sha1": "3ea92a238ca6bc03184d951756f0badb7fd53b1a"
     },
     {

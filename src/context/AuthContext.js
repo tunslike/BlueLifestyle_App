@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ValidateUserAuthentication } from '../services/LoginService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
-import { updateFirstname, updateUserID, updateUserData, updateUserToken } from '../store/userSlice';
+import { updateFirstname, updateUserID, updateUserData, updateToken, updateIdtkn } from '../store/userSlice';
 import * as RootNavigation from '../views/navigation/RootNavigation';
 
 export const AuthContext = createContext();
@@ -41,6 +41,61 @@ export const AuthProvider = ({children, navigation}) => {
 
         setIsLoading(true);
 
+        //**************************************** DUMMY ADDRESS **********************/
+
+        /*
+        if(usern == 'User01' && pwds == '1234') {
+
+            setFirstName('Test User')
+            setUserID('A00000')
+            setCompany('Pensions');
+            setDepartment('Information Technology')
+    
+            //dispatch value
+            dispatch(updateUserData({
+                "firstName": "Test",
+                "lastName": "User 01",
+                "userID": "A00000",
+                "email": "test.test01@stanbicibtc.com",
+                "phone": "09012309330",
+                "company": "Pensions",
+                "department": "Information Technology",
+            }))
+            dispatch(updateFirstname('Test User'))
+            dispatch(updateUserID('A00000'))
+            AsyncStorage.setItem('tokenID', '3889-8383-0393-03033');
+            AsyncStorage.setItem('userLogged', 'A00000');
+            setUserToken('3889-8383-0393-03033')
+    
+            return;
+
+        }else {
+
+             //show error message
+             setErrorMessage('Username or password is incorrect!');
+
+             //set loading off
+             setIsLoading(false)
+
+             return;
+
+        }
+        */
+        //**************************************** DUMMY ADDRESS **********************/
+
+        /*
+        if(usern != 'User01' && pwds != '1234') {
+        
+            //show error message
+            setErrorMessage('Username or password is incorrect!');
+
+            //set loading off
+            setIsLoading(false)
+
+            return;
+
+        }*/
+
         const options = {
             headers: {
                 'Content-Type' : 'application/json',
@@ -59,28 +114,50 @@ export const AuthProvider = ({children, navigation}) => {
 
             if(response.data.errorCode == '000') {
 
-                console.log(response.data)
+                 console.log(response.data)
 
-                 //set token
                  
+                 //store token in device
+                 AsyncStorage.setItem('tokenID', response.data.jwt);
+                 AsyncStorage.setItem('userLogged', response.data.userData.userID);
+
                  setFirstName(response.data.userData.firstName)
                  setUserID(response.data.userData.userID)
                  setCompany(response.data.userData.company);
                  setDepartment(response.data.userData.department)
 
-                 if(!company || !department) {
+                 //dispatch value
+                 dispatch(updateUserData(response.data.userData))
+                 dispatch(updateFirstname(response.data.userData.firstName))
+                 dispatch(updateUserID(response.data.userData.userID))
 
-                    RootNavigation.navigate('UpdateProfile');
-                    return;
-
-                 }else{
+                 /* ------------- COMMENT THIS SECTION OUT FOR PRODUCTION ----------------- */
+                 /*
+                    setFirstName('Test User')
+                    setUserID(response.data.userData.userID)
+                    setCompany('Pensions');
+                    setDepartment('Information Technology')
+            
                     //dispatch value
-                    dispatch(updateUserData(response.data.userData))
-                    dispatch(updateFirstname(response.data.userData.firstName))
+                    dispatch(updateUserData({
+                        "firstName": "Test",
+                        "lastName": "User 01",
+                        "userID": response.data.userData.userID,
+                        "email": "test.test01@stanbicibtc.com",
+                        "phone": "09012309330",
+                        "company": "Pensions",
+                        "department": "Information Technology",
+                    }))
+                    dispatch(updateFirstname('Test User'))
                     dispatch(updateUserID(response.data.userData.userID))
-                    setUserToken(response.data.jwt)
-                 }
+                    AsyncStorage.setItem('tokenID', '3889-8383-0393-03033');
+                    AsyncStorage.setItem('userLogged', response.data.userData.userID);
+                    */
+                /* ------------- COMMENT THIS SECTION OUT FOR PRODUCTION ----------------- */
 
+                 dispatch(updateIdtkn(response.data.jwt))
+                 setUserToken(response.data.jwt)
+                 
             }else {
 
                 console.log(response.data.statusMessage)
@@ -93,91 +170,17 @@ export const AuthProvider = ({children, navigation}) => {
                 return;
 
             }
-           
-
         })
         .catch(error => {
-          console.log(error);
+
+            setIsLoading(false);
+            setErrorMessage('Service is unavailable, please retry!')
+
+            console.log(error);
         });
-
-
-        /*
-        setUserToken('hdhdhjdhjhsjdhsdjsjhdhsdd')
-        setFirstName('Babatunde')
-        setUserID('A171207')
-        */
-
-        /*
-
-        setErrorMessage(null)
-        
-        if(usern == '' || pwds == '') {
-            setErrorMessage('Please enter your SAPID and Password to login!')
-            return;
-        }
-        
-        //DISMISS KEYBOARD
-        Keyboard.dismiss();
-
-        //SET LOADING TO TRUE
-       // setIsLoading(true);
-
-
-        // CALL FUNCTION
-        ValidateUserAuthentication({
-            username: "A171207",
-            password: "Pension@Dmin123$"
-
-        }).then((result) => {
-
-            console.log('Request is back from the server')
-
-            if(result.status == 200) {
-
-                console.log(result)
-
-                console.log('Request is back from the server')
-
-                //get error code
-                if(result.data.errorCode == '000') {
-
-                    console.log('login was successful')
-
-                    //set token
-                    setFirstName(result.data.userData.firstName)
-                    setUserID(result.data.userData.userID)
-                    setUserToken(result.data.jwt)
-                    
-
-                    //store token
-                    //AsyncStorage.setItem('tokenID', result.data.jwt);
-
-                    //set loading off
-                    setIsLoading(false)
-
-                    return;
-
-                }else {
-
-                    console.log(result.data.statusMessage)
-                    //show error message
-                    setErrorMessage(result.data.statusMessage);
-
-                    //set loading off
-                    setIsLoading(false)
-
-                    return;
-
-                }
-             
-            }
-        }).catch(err => {
-            console.error(err);
-        })
-        */
     
     }
-    // END OF FUNCTION 
+// END OF FUNCTION 
 
     // FUNCTION TO LOGOUT USER
     const ExitAuthenticatedUser = () => {
@@ -229,6 +232,7 @@ export const AuthProvider = ({children, navigation}) => {
                                      department,
                                      userID,
                                      loginToken,
+                                     setErrorMessage
                                     }}>
             {children}
         </AuthContext.Provider>

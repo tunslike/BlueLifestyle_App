@@ -2,7 +2,8 @@
 import React from 'react';
 
 //import react native
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // import screens
@@ -36,9 +37,9 @@ const TabNavigator = () => {
                     left: 0,
                     right: 0,
                     elevation: 0,
-                    height:60,
+                    height: hp(6.8),
                     borderRadius: 50,
-                    marginBottom:10,
+                    marginBottom: Platform.OS === 'ios' ? hp(3.2) : hp(2),
                     marginHorizontal:10,
                     borderTopColor: 'transparent'
                 }
@@ -82,13 +83,16 @@ const TabNavigator = () => {
                 />
             <Tab.Screen 
                 name="Profile" 
-                component={ProfileScreen} 
+                component={ProfileScreen}
                 options={{
                     tabBarIcon: ({focused}) => 
                     <TabIcon 
                         focused={focused} 
                         icon={icons.profile}
-                        title="Profile"    
+                        title="Profile" 
+                        addStyle={{
+                            marginLeft:-18,
+                        }}   
                     />
                 }}
                 />

@@ -12,7 +12,7 @@ import { COLORS, icons } from '../../constants';
 const { width, height } = Dimensions.get("window");
 
 // INIT MENU
-const OrderItem = ({image, name, details, price, discount, onPress}) => {
+const OrderItem = ({image, type, name, details, onPressRemove, price, discount, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
     <View style={styles.menuBox}>
@@ -22,30 +22,42 @@ const OrderItem = ({image, name, details, price, discount, onPress}) => {
       }} />
       <View style={styles.menuDetails}>
         <Text style={styles.nameText}>{name}</Text>
+        {details != '' &&
         <Text style={styles.textDesc}>{details}</Text>
+        }
         <View style={styles.boxFooter}>
 
             <Text style={styles.price}>₦ {price}</Text>
 
-                <View style={styles.orderQuantity}>
-                <TouchableOpacity style={styles.itemicon}>
-                <Image 
-                    source={icons.removeItem}
-                    style={{
-                        height:15, width: 15, resizeMode: 'contain', tintColor: COLORS.SecondaryGreen
-                    }}
-                />
-            </TouchableOpacity>
-            <Text style={styles.QtyText}>1</Text>
-            <TouchableOpacity style={styles.itemicon}>
-                    <Image 
-                    source={icons.additem}
-                    style={{
-                        height:15, width: 15, resizeMode: 'contain', tintColor: COLORS.SecondaryGreen
-                    }}
-                />
-            </TouchableOpacity>
+            {type == 2 &&
+                <TouchableOpacity
+                    onPress={onPressRemove}
+                style={styles.btnRemove}>
+                    <Text style={styles.removeTxt}>Remove</Text>
+                </TouchableOpacity>
+            }
+
+                    {type == 1 &&
+                            <View style={styles.orderQuantity}>
+                            <TouchableOpacity style={styles.itemicon}>
+                            <Image 
+                                source={icons.removeItem}
+                                style={{
+                                    height:15, width: 15, resizeMode: 'contain', tintColor: COLORS.SecondaryGreen
+                                }}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.QtyText}>1</Text>
+                        <TouchableOpacity style={styles.itemicon}>
+                                <Image 
+                                source={icons.additem}
+                                style={{
+                                    height:15, width: 15, resizeMode: 'contain', tintColor: COLORS.SecondaryGreen
+                                }}
+                            />
+                        </TouchableOpacity>
                 </View>
+            }
 
         </View>
         
@@ -56,6 +68,12 @@ const OrderItem = ({image, name, details, price, discount, onPress}) => {
 }
 
 const styles = StyleSheet.create({
+    btnRemove: {
+        backgroundColor: COLORS.SecondaryPlum,
+        borderRadius: 10,
+        paddingVertical: 4,
+        paddingHorizontal: 8
+    },
     QtyText: {
         fontSize: 18,
         fontFamily: "Benton Sans",
@@ -72,6 +90,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    removeTxt: {
+        fontSize: 11,
+        fontFamily: "Benton Sans",
+        color: COLORS.white,
+        fontWeight: 'normal',
     },
     price: {
         fontSize: 15,

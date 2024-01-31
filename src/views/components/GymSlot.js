@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
   slotCaptext: {
     color: COLORS.SecondaryOrange,
     fontSize: 13,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight: 'normal'
   },
   slotText: {
     color: COLORS.StandardardBankBlue,
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight: 'normal', 
   },
     slotMainheader: {

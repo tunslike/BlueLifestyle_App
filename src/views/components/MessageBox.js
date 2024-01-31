@@ -1,12 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions} from 'react-native'
 import { COLORS, icons } from '../../constants';
+import Animated, {SlideInDown, SlideInUp, SlideOutUp} from 'react-native-reanimated';
 
 const { width, height } = Dimensions.get("window");
 
 const MessageBox = ({status, message}) => {
   return (
-    <View style={[styles.container, {backgroundColor:(status == 'error') ? COLORS.SecondaryPlum : COLORS.SecondaryGreen}]}>
+    <Animated.View 
+    entering={SlideInUp}
+    exiting={SlideOutUp}
+    style={[styles.container, {backgroundColor:(status == 'error') ? COLORS.SecondaryPlum : COLORS.SecondaryGreen}]}>
     <Image 
         source={(status == 'error') ? icons.check_no : (status == 'success') ? icons.check_yes : null}
         style={{
@@ -14,7 +18,7 @@ const MessageBox = ({status, message}) => {
         }}
     />
       <Text style={styles.messageText}>{message}</Text>
-    </View>
+    </Animated.View>
   )
 }
 
@@ -31,7 +35,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         width,
-        height:100,
+        height:80,
         paddingLeft:20,
         paddingTop: 10,
         position: 'absolute',
@@ -41,7 +45,8 @@ const styles = StyleSheet.create({
         right: 0,
         zIndex:10,
         borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20
+        borderBottomRightRadius: 20,
+        zIndex:13
     }
 })
 

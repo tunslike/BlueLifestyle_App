@@ -6,11 +6,12 @@ import {
     TextInput,
     Image,
     Keyboard,
-    TouchableOpacity, } from 'react-native';
-
+    TouchableOpacity, Platform } from 'react-native';
+    import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { COLORS } from '../../constants';
 
-const CustomInput = ({label, onFocus, onPress, icon, value, onChange, placeholder,maxlength, }) => {
+const CustomInput = ({label, onFocus, onPress, icon, errorStyle,
+                    value, onChange, placeholder,maxlength, }) => {
   return (
     <View style={styles.container}>
             
@@ -18,7 +19,7 @@ const CustomInput = ({label, onFocus, onPress, icon, value, onChange, placeholde
             <TextInput
                 value={value}
                 onChangeText={onChange}
-                style={styles.inputStyle}
+                style={[styles.inputStyle,{...errorStyle}]}
                 placeholder={placeholder}
                 placeholderTextColor={COLORS.darkGray}
                 keyboardType="default"
@@ -35,14 +36,14 @@ const CustomInput = ({label, onFocus, onPress, icon, value, onChange, placeholde
 
 const styles = StyleSheet.create({
     labelStyle: {
-            fontFamily: "Benton Sans",
+            fontFamily: "Roboto",
             fontWeight:'bold',
             fontSize:14,
             color: COLORS.StandardardBankBlue,
             width:100,
     },
     inputStyle: {
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         fontWeight:'600',
         fontSize:14,
         color: COLORS.darkblue,
@@ -57,6 +58,8 @@ const styles = StyleSheet.create({
         marginHorizontal:5,
         borderBottomColor: COLORS.lineDividerGray,
         paddingBottom: 2,
+        paddingBottom: Platform.OS === 'ios' ? hp(1.7) : null,
+        marginTop: Platform.OS === 'ios' ? hp(2.7) :wp(1)
     },
     container_multiline : {
         flexDirection: 'row',

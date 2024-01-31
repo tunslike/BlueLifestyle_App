@@ -8,6 +8,7 @@ import {  StyleSheet,
   StatusBar,
   Image, 
   TouchableOpacity} from 'react-native';
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
   import { COLORS, icons, images, verticalScale, horizontalScale, moderateScale } from '../../../constants';
   import { HeaderBar, OrderFacilityItem } from '../../components';
   import { useSelector } from 'react-redux';
@@ -16,7 +17,7 @@ import {  StyleSheet,
 
 
   // init app screen
-const OrderScreen = ({navigation}) => {
+  const OrderScreen = ({navigation}) => {
 
   const cartOrders = useSelector((state) => state.order.cart.length)
 
@@ -92,7 +93,7 @@ const OrderScreen = ({navigation}) => {
       }
 
       <OrderFacilityItem 
-          onPress={() => navigation.navigate('RestaurantOrder')}
+          onPress={() => (cartOrders == 0) ? null : navigation.navigate('RestaurantOrder')}
           type="food"
           icon={icons.food} 
           title={cartOrders + " Orders Pending"} />
@@ -100,12 +101,12 @@ const OrderScreen = ({navigation}) => {
           <OrderFacilityItem 
           type="creche"
           icon={icons.kids} 
-          title="3 Orders Pending" />
+          title="0 Orders Pending" />
 
           <OrderFacilityItem 
           type="gym"
           icon={icons.gym} 
-          title="3 Orders Pending" />
+          title="0 Orders Pending" />
       
    
         {/* END OF ORDERS */}
@@ -137,7 +138,7 @@ const OrderScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   infoText: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'normal', 
     lineHeight: 20,
@@ -195,14 +196,14 @@ const styles = StyleSheet.create({
   }, 
   subTitle: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'normal', 
     lineHeight: 20
   },
   mainTitle: {
-    fontSize: 21,
-    fontFamily: "Benton Sans",
+    fontSize: 17,
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold', 
   },
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
   },
   business : {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.gentleBlue,
     fontWeight: 'normal',
     marginLeft:5
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
   },
   titleName: {
     fontSize: 25,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
   },
@@ -241,6 +242,8 @@ const styles = StyleSheet.create({
     width,
     height: 220,
     backgroundColor: COLORS.StandardardBankBlue,
+    marginTop: Platform.OS === 'ios' ? wp(-15) : null,
+    paddingTop: Platform.OS === 'ios' ? wp(4.5) : null
   },
   container: {
     flex: 1,

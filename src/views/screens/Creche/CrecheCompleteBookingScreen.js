@@ -6,11 +6,11 @@ import {
         TouchableOpacity,
         Dimensions,
         Image,
-        ScrollView,
         StatusBar,
-        KeyboardAvoidingView
+        Platform
  } from 'react-native';
  import LottieView from 'lottie-react-native';
+ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
  import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
  import { SafeAreaProvider } from 'react-native-safe-area-context';
  import { COLORS, 
@@ -25,7 +25,10 @@ import {
 
  const { width, height } = Dimensions.get("window");
 
-const CrecheCompleteBookingScreen = ({navigation}) => {
+const CrecheCompleteBookingScreen = ({route, navigation}) => {
+
+    const { message, orderNumber, pageType } = route.params
+
   return (
     <SafeAreaProvider style={styles.container}>
     <StatusBar style="auto" />
@@ -35,19 +38,34 @@ const CrecheCompleteBookingScreen = ({navigation}) => {
             autoPlay
             style={{
                 width,
-                height:400
+                height:400,
+                alignSelf: Platform.OS === 'ios' ? 'center' : null
             }}
         />
 
+        {(pageType == 1) &&
         <View style={styles.succes_header}>
+        <Text style={styles.success_title}>
+            {message}
+        </Text>
+    </View>
+    
+    }
+
+
+            {(pageType == 2) &&
+        
+            <View style={styles.succes_header}>
             <Text style={styles.success_title}>
                 Thank you for booking with the Creche Facility.
             </Text>
             <Text style={styles.success_title}>
             Please note that your booking was successful with details below.
             </Text>
-            <Text style={styles.success_title}>Booking ID: STBCRH03903</Text>
+            <Text style={styles.success_title}>Booking ID: {orderNumber}</Text>
         </View>
+        }
+      
 
     <View>
     

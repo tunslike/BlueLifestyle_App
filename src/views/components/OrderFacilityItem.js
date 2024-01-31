@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { COLORS, icons, verticalScale, horizontalScale, moderateScale } from '../../constants';
 
 
@@ -19,7 +20,7 @@ const OrderFacilityItem = ({icon, title, onPress, type, }) => {
             }}
         />
        <View style={styles.textArea}>
-            <Text style={styles.mainTitle}>RESTAURANT ORDERS</Text>
+            <Text style={styles.mainTitle}>RESTAURANT ORDER</Text>
             <Text style={styles.subTitle}>{title}</Text>
        </View>
        <View style={styles.viewBtn}>
@@ -37,7 +38,7 @@ const OrderFacilityItem = ({icon, title, onPress, type, }) => {
         }}
     />
    <View style={styles.textArea}>
-        <Text style={[styles.mainTitle, {color: (type == 'gym') ? COLORS.AlertGreenbg : null}]}>CRECHE ORDERS</Text>
+        <Text style={[styles.mainTitle, {color: (type == 'creche') ? COLORS.WarningTextColor : null}]}>CRECHE BOOKING</Text>
         <Text style={styles.subTitle}>{title}</Text>
    </View>
    <View style={styles.viewBtn}>
@@ -55,7 +56,7 @@ const OrderFacilityItem = ({icon, title, onPress, type, }) => {
     }}
 />
 <View style={styles.textArea}>
-    <Text style={[styles.mainTitle, {color: (type == 'gym') ? COLORS.AlertGreenbg : null}]}>GYM ORDERS</Text>
+    <Text style={[styles.mainTitle, {color: (type == 'gym') ? COLORS.AlertGreenbg : null}]}>GYM BOOKING</Text>
     <Text style={styles.subTitle}>{title}</Text>
 </View>
 <View style={styles.viewBtn}>
@@ -70,7 +71,7 @@ const OrderFacilityItem = ({icon, title, onPress, type, }) => {
 const styles = StyleSheet.create({
     btnText: {
         fontSize: moderateScale(12),
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StatureBlue,
         fontWeight: 'normal', 
     },
@@ -82,13 +83,13 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         fontSize: moderateScale(12),
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StatureBlue,
         fontWeight: 'normal', 
     },
     mainTitle: {
         fontSize: moderateScale(13),
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'bold', 
     },
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        padding: moderateScale(15),
+        padding: Platform.OS === 'ios' ? wp(5) : wp(4),
         borderRadius: moderateScale(15),
         columnGap: 15
       },
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        padding: moderateScale(15),
+        padding: Platform.OS === 'ios' ? wp(5) : wp(4),
         borderRadius: moderateScale(15),
         columnGap: 15
       },
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        padding: moderateScale(15),
+        padding: Platform.OS === 'ios' ? wp(5) : wp(4),
         borderRadius: moderateScale(15),
         columnGap: 15
       },

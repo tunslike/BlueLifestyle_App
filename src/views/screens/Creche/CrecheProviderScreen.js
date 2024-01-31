@@ -32,26 +32,30 @@ import {
 const CrecheProviderScreen = ({route, navigation}) => {
 
   const userData = useSelector((state) => state.user.userData)
+  const token = useSelector((state) => state.user.idtkn)
 
   // GET ROUTE PARAMS
   const { 
+          facilityID,
           providerId, 
-          startTime, 
+          crecheSessionID,
+          crecheSessionName,
+          sessionStart, 
           capacity, 
           teacher, 
           contactPhone, 
           rating, 
-          sessionName} = route.params
+          sessionName, childName, parentPhone} = route.params
 
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
 
   // SET USER INPUT STATES
-  const [childName, setChildName] = useState('');
-  const [parentPhone, setParentPhone] = useState('');
-  const [emergencyNo, setEmergencyNo] = useState('');
-  const [pickUpTime, setPickUpTime] = useState('');
-  const [dropOffDate, setDropOffDate] = useState('');
+  //const [childName, setChildName] = useState(null);
+  //const [parentPhone, setParentPhone] = useState(null);
+  const [emergencyNo, setEmergencyNo] = useState(null);
+  const [pickUpTime, setPickUpTime] = useState(null);
+  const [dropOffDate, setDropOffDate] = useState(null);
 
   const [showMessage, setShowMessage] = useState(0);
 
@@ -106,17 +110,25 @@ const CrecheProviderScreen = ({route, navigation}) => {
 
   //FUNCTION TO SUBMIT GYM SESSION REQUEST
   const BookCrecheSession = () => {
-    
+
     setErrorMessage(null)
     Keyboard.dismiss();
 
-    Alert.alert('Creche Facility - Stanbic Towers', 'Do you want to book now?', [
+      //validate input
+      if(!childName || !parentPhone || !dropOffDate || !pickUpTime) {
+        setErrorMessage('Please complete all fields!')
+        //setTimeout(hideErrorMessage, 3000);
+        return;
+    }
+
+
+    Alert.alert('Blue Lifestyle Creche', 'Do you want to book now?', [
       {
         text: 'No',
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'Ok', onPress: () => RequestCrecheSession()},
+      {text: 'Yes', onPress: () => RequestCrecheSession()},
     ]);
 
   }//END OF FUNCTION
@@ -124,31 +136,27 @@ const CrecheProviderScreen = ({route, navigation}) => {
   //function to book creche session
   const RequestCrecheSession = () => {
 
-    setErrorMessage(null)
-    Keyboard.dismiss();
-
-    //validate input
-    if(!childName || !parentPhone || !emergencyNo || !dropOffDate || !pickUpTime) {
-        setErrorMessage('Please complete all fields!')
-        //setTimeout(hideErrorMessage, 3000);
-        return;
-    }
-
     const data = {
-      "userID": "A171207",
-      "entity": 1,
-      "contactNumber": "09053100574",
-      "emergencyNumber": "09088792992",
-      "orderDetails": [
+      userID: userData.userID,
+      crecheSessionID: crecheSessionID,
+      crecheSessionName: crecheSessionName,
+      entity: 1,
+      contactNumber: parentPhone,
+      emergencyNumber: parentPhone,
+      providerID: providerId,
+      facilityID: facilityID,
+      orderDetails: [
         {
-          "providerID": "KJKJDJKDJDJDJKD",
-          "childFirstName": "Kehinde",
-          "childLastName": "Adams",
-          "dateFrom": "2023-12-02T23:20:07.871Z",
-          "dateTo": "2023-12-02T23:20:07.871Z"
+          childFirstName: childName,
+          childLastName: childName,
+          dateDropOff: dropOffDate,
+          timeDropOff: pickUpTime
         }
       ]
     };
+
+    console.log(new Date(dropOffDate))
+    console.log(dropOffDate)
 
     setIsLoading(true)
 
@@ -156,7 +164,11 @@ const CrecheProviderScreen = ({route, navigation}) => {
 
         console.log('********************* Booking Creche Session ***********************')
     
-        axios.post(APIBaseUrl.developmentUrl + 'Order/CreateCreche', data, ApIHeaderOptions.headers)
+        axios.post(APIBaseUrl.developmentUrl + 'orders/order/CreateCreche', data, {
+          headers: {
+            'JWTToken': token
+          }
+        })
         .then(response => {
     
           setIsLoading(false)
@@ -165,7 +177,7 @@ const CrecheProviderScreen = ({route, navigation}) => {
     
                 //set data
                 console.log(response.data)
-                navigation.navigate('CrecheComplete', {message:response.data.statusMessage})
+                navigation.navigate('CrecheComplete', {message:response.data.statusMessage, orderNumber: response.data.orderNo, pageType:2})
     
             }else {
     
@@ -238,7 +250,7 @@ const hideErrorMessage = () => {
                 
                 <View style={styles.vendorFeatures}>
                     <ProviderFeature
-                      title={`Opens: ${startTime}`}
+                      title={`Opens: ${sessionStart}`}
                       icon={icons.time}
                     />
                     <ProviderFeature
@@ -274,7 +286,6 @@ const hideErrorMessage = () => {
                       button={false}
                       icon={icons.child}
                       placeholder="Enter Child Full Name"
-                      onChange={(text) => setChildName(text)}
                       value={childName}
                       onFocus={() => setErrorMessage(null)}
                     />
@@ -282,7 +293,6 @@ const hideErrorMessage = () => {
                     button={false}
                     icon={icons.phone_fill}
                     placeholder="Enter Parent Number"
-                    onChange={(text) => setParentPhone(text)}
                     value={parentPhone}
                     onFocus={() => setErrorMessage(null)}
                     maxlength={11}
@@ -292,8 +302,7 @@ const hideErrorMessage = () => {
                   button={false}
                     icon={icons.emergencyPhone}
                     placeholder="Enter Emergency Number"
-                    onChange={(text) => setEmergencyNo(text)}
-                    value={emergencyNo}
+                    value={parentPhone}
                     onFocus={() => setErrorMessage(null)}
                     maxlength={11}
                   />
@@ -384,14 +393,14 @@ const hideErrorMessage = () => {
 const styles = StyleSheet.create({
   descText: {
     fontSize:13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
         marginTop:5,
         marginBottom: 10,
   },
     crecheTxt: {
         fontSize:14,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
     },
     crecheSetup: {
@@ -430,7 +439,7 @@ const styles = StyleSheet.create({
   },
   vendorDesc: {
     fontSize:14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.darkGray,
     fontWeight: 'normal',
     marginVertical: 2,
@@ -438,7 +447,7 @@ const styles = StyleSheet.create({
   },
   vendorTileName : {
     fontSize: 20,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold',
   },
@@ -448,7 +457,7 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StandardardBankBlue,
     fontWeight: 'normal',
 },

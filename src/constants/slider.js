@@ -1,7 +1,7 @@
 const slides = [
     {
         id: '1',
-        image: require("../assets/images/resturant2_slider.jpg"),
+        image: require("../assets/images/resturant_slider.jpg"),
         title: 'Resturant',
         description: 'Experience the ease and comfort of making your food orders'
     },

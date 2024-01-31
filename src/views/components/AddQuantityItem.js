@@ -21,7 +21,6 @@ const AddQuantityItem = ({amount, getItemCount}) => {
             setItemCount(itemCount + 1)
     }
 
-
   // increase counter
   const DecreaseItem = () => {
         if(itemCount > 1) {

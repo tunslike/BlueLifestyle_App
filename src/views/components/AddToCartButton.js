@@ -9,14 +9,17 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { COLORS, icons } from '../../constants'
 const { width, height } = Dimensions.get("window");
 
-const AddToCartButton = ({title, icon, onPress}) => {
+const AddToCartButton = ({title, icon, count, onPress}) => {
   return (
     <TouchableOpacity 
       onPress={onPress}
       style={styles.loginBtn}>
           <Text style={styles.loginText}>{title}</Text>
+          <View style={styles.couter}>
+              <Text style={styles.txtCount}>{count} Items</Text>
+          </View>
           <Image source={icon} 
-            style={{height:22, width: 22,
+            style={{height:22, width: 22, marginLeft: 5,
             tintColor: COLORS.white, resizeMode: 'contain'}}
           />
     </TouchableOpacity>
@@ -24,6 +27,20 @@ const AddToCartButton = ({title, icon, onPress}) => {
 }
 
 const styles = StyleSheet.create({
+  txtCount: {
+    fontSize: 12,
+    fontFamily: "Benton Sans",
+    color: COLORS.StandardardBankBlue,
+    fontWeight: 'bold',
+  },
+    couter: {
+      backgroundColor: COLORS.white,
+      paddingVertical: 2.5,
+      paddingHorizontal:7,
+      borderRadius:15,
+      flexDirection: 'row',
+      justifyContent: 'flex-start'
+    },
     loginText: {
         fontSize: 16,
         fontFamily: "Benton Sans",
@@ -32,11 +49,8 @@ const styles = StyleSheet.create({
         marginRight:10
       },
     loginBtn: {
-      position: 'absolute',
-    height: wp(14),
-    bottom: hp(3),
-    width: wp(88),
-      zIndex:10,
+        height: wp(13),
+        width: wp(88),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

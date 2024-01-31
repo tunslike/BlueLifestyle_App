@@ -3,8 +3,9 @@ import {
     StyleSheet, 
     Image, 
     TouchableOpacity, 
-    View } from 'react-native';
+    View, Platform } from 'react-native';
 import { icons, COLORS, images } from '../../constants';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { verticalScale, horizontalScale, moderateScale } from '../../constants';
 
 
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: verticalScale(20),
+        marginTop: wp(12.5),
         marginVertical:verticalScale(15),
         marginHorizontal:horizontalScale(15)
       },

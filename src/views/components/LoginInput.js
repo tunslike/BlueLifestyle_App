@@ -6,7 +6,7 @@ import {
     TextInput,
     Image,
     Keyboard,
-    TouchableOpacity, } from 'react-native';
+    TouchableOpacity, Platform } from 'react-native';
     import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 import {COLORS, icons} from '../../constants'
@@ -57,9 +57,9 @@ const LoginInput = ({pwd, value, onFocus, setSecureText, visibleOnPress, onChang
 
 const styles = StyleSheet.create({
     inputStyle: {
-        fontFamily: "Benton Sans",
-        fontWeight:'600',
-        fontSize:wp(4),
+        fontFamily: "Roboto",
+        fontWeight:'500',
+        fontSize: Platform.OS === 'ios' ? hp(1.85) : wp(3.7),
         color: COLORS.darkblue,
         marginLeft:wp(3),
         flex: 1
@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 25,
         borderBottomWidth: 1,
         borderBottomColor: COLORS.textGrey,
-        paddingBottom: wp(0.4),
-        marginTop:wp(2)
+        paddingBottom: Platform.OS === 'ios' ? hp(1.7) : wp(0.4),
+        marginTop: Platform.OS === 'ios' ? hp(2.7) :wp(2)
     }
 })
 

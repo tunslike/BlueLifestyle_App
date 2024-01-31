@@ -19,14 +19,14 @@ import {
         } from '../../components';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addToCart, removeFromCart } from '../../../store/OrderSlice';
+import { addToCart } from '../../../store/OrderSlice';
 
  const { width, height } = Dimensions.get("window");
 
 // INIT APP
 const OrderMenuItem = ({route, navigation}) => {
 
-const {menuID, menuItem, description, amount, image } = route.params
+const {menuID, foodName, description, amount, image } = route.params
 
 const orderCart = useSelector((state) => state.order.cart);
 const dispatch = useDispatch();
@@ -34,9 +34,12 @@ const dispatch = useDispatch();
 const [showMessage, setShowMessage] = useState(0);
 const [itemCount, setItemCount] = useState(0);
 
-const getItemCount = (data) => {
+const getItemCount = (data = 1) => {
+    
     if(!data) {
         setItemCount(Number(data))
+    }else {
+        setItemCount(data)
     }
 }
 
@@ -46,17 +49,18 @@ const AddProductToCart = (product_id) => {
     // create cart object
     const cart = {
         menuID : product_id,
+        menuName : foodName,
         quantity: itemCount,
         amount: amount
     }
-    
+
     // push cart to store
     dispatch(addToCart(cart))
 
     //show notification
     setShowMessage(1);
 
-    setTimeout(hideNotificationMessage, 3000);
+    setTimeout(hideNotificationMessage, 1300);
 }
 // end of function
 
@@ -67,6 +71,8 @@ const hideNotificationMessage = () => {
 
 //USE EFFECT
 useEffect(() => {
+
+    console.log(foodName + '/')
 
     //fetch providers
     console.log("Number of items in cart: " + orderCart.length)
@@ -101,7 +107,7 @@ useEffect(() => {
                             marginRight: 15
                         }}
                     />
-                    <Text style={styles.productHeader}>{menuItem}</Text>
+                    <Text style={styles.productHeader}>{foodName}</Text>
                 </View>
 
                 <View style={styles.productDesc}>
@@ -156,13 +162,13 @@ const styles = StyleSheet.create({
     },
     textPrice: {
         fontSize: 24,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'bold',
     },
     descText: {
         fontSize: 15,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
         fontWeight: 'normal',
         lineHeight:23
@@ -182,7 +188,7 @@ const styles = StyleSheet.create({
     },
     productHeader: {
         fontSize: 20,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.StandardardBankBlue,
         fontWeight: 'bold',
     },

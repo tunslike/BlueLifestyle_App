@@ -7,11 +7,11 @@ import { StyleSheet,
 
 import { COLORS, icons } from '../../constants'
 
-const Button = ({title, icon, onPress}) => {
+const Button = ({title, icon, onPress, addStyles}) => {
   return (
     <TouchableOpacity 
       onPress={onPress}
-      style={styles.loginBtn}>
+      style={[styles.loginBtn, {...addStyles}]}>
           <Text style={styles.loginText}>{title}</Text>
           <Image source={icon} 
             style={{height:22, width: 22,
@@ -24,7 +24,7 @@ const Button = ({title, icon, onPress}) => {
 const styles = StyleSheet.create({
     loginText: {
         fontSize: 15,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.white,
         fontWeight: 'bold',
         marginRight:20

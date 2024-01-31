@@ -11,7 +11,8 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TextInput,
-  Alert
+  Alert,
+  Platform
 } from 'react-native'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -28,7 +29,8 @@ const LoginScreen = ({navigation}) => {
          isLoading, 
          errorMessage,
          company,
-         department
+         department,
+         setErrorMessage
         } = useContext(AuthContext)
 
   // SET STATES
@@ -38,8 +40,8 @@ const LoginScreen = ({navigation}) => {
   const [isVisible, setIsVisible] = React.useState(true);
 
   // SET USER INPUT STATES
-  const [username, setUsername] = useState('A171207');
-  const [pwd, setPwd] = useState('Pension@Dmin123$');
+  const [username, setUsername] = useState('');
+  const [pwd, setPwd] = useState('');
   
 
   //Function to login
@@ -66,7 +68,8 @@ const LoginScreen = ({navigation}) => {
           flexGrow: 1,
           backgroundColor: COLORS.white
         }}
-     >
+     >    
+    <SafeAreaView>    
     <StatusBar barStyle="dark-content"  />
   
     {errorMessage &&
@@ -76,8 +79,7 @@ const LoginScreen = ({navigation}) => {
     {isLoading && 
       <NewLoader title="Authenticating user, please wait..." />
     }
-    
-    <SafeAreaView>    
+
       <View style={styles.subContainer}>
           <Image style={styles.img} source={images.shield} />
       </View>
@@ -100,6 +102,7 @@ const LoginScreen = ({navigation}) => {
             placeholder="Enter your SAP ID"
             icon={icons.user}
             maxlength={7}
+            onFocus={() => setErrorMessage(null)}
           />
           <LoginInput 
             value={pwd}
@@ -110,6 +113,7 @@ const LoginScreen = ({navigation}) => {
             icon={icons.pwd}
             eye_type={isVisible == true ? icons.eye_off : icons.eye_on}
             visibleOnPress={() => setIsVisible(!isVisible)}
+            onFocus={() => setErrorMessage(null)}
           />
       </View>
 
@@ -132,7 +136,7 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   loginText: {
     fontSize: 16,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
     marginRight:20
@@ -144,13 +148,13 @@ const styles = StyleSheet.create({
       backgroundColor: COLORS.StandardardBankBlue ,
       borderRadius:10,
       paddingHorizontal: 20,
-      paddingVertical: 18,
+      paddingVertical: wp(5.2),
       marginHorizontal:wp(8),
       marginTop:(height > 600) ? hp(7) : hp(4)
   },
   loginDesc :{
     fontSize: wp(3.4),
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.darkGray,
     fontWeight: 'normal',
     marginHorizontal: wp(7),
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
   },
   loginTitle : {
     fontSize: wp(6),
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StandardardBankBlue,
     fontWeight: 'bold',
     marginHorizontal:wp(7),

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { 
         StyleSheet, 
         Text, 
@@ -10,20 +10,24 @@ import {
         ScrollView,
         StatusBar,
         FlatList,
+        Platform,
         Alert
  } from 'react-native';
  import axios from 'axios';
+ import { useDispatch } from 'react-redux';
+ import { AuthContext } from '../../../context/AuthContext';
  import { SafeAreaProvider } from 'react-native-safe-area-context';
  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
  import { useSelector } from 'react-redux';
- import { COLORS, icons, images, dummyData, utilities, APIBaseUrl, ApIHeaderOptions } from '../../../constants';
+ import { COLORS, icons, images, ApplicationName, utilities, APIBaseUrl } from '../../../constants';
  import { HeaderBarBlank, 
           ProviderFeature, 
           MenuItemHeader,
           MenuItem,
           NewLoader,
-          AddToCartButton 
+          AddToCartButton
         } from '../../components';
+import { updateProviderID } from '../../../store/OrderSlice';
 
  const { width, height } = Dimensions.get("window");
 
@@ -31,13 +35,17 @@ import {
 // INIT APP
 const ProviderScreen = ({route, navigation}) => {
 
-  const {providerID} = route.params
+  const {providerID, providerName} = route.params
+  const dispatch = useDispatch();
 
-  const cartOrders = useSelector((state) => state.order.cart.length)
+  const { ExitAuthenticatedUser} = useContext(AuthContext);
+
+  const cartItem = useSelector((state) => state.order.cart.length)
+  const token = useSelector((state) => state.user.idtkn)
 
   const [loader, setLoader] = useState(false)
   const [menuItem, setMenuItem] = useState('');
-
+  const [userToken, setUserToken] = useState(null);
 
   // FUNCTION TO LOAD RESTURANT MENUS
   const FetchRestaurantMenus = () => {
@@ -53,7 +61,13 @@ const ProviderScreen = ({route, navigation}) => {
       "providerId":providerID
      }
 
-     axios.post(APIBaseUrl.developmentUrl + 'services/Service/FetchRestaurantMenu', data, ApIHeaderOptions.headers)
+     console.log('Posting with this token' + token)
+
+     axios.post(APIBaseUrl.developmentUrl + 'services/Service/FetchRestaurantMenu', data, {
+      headers: {
+        'JWTToken': token
+      }
+    })
      .then(response => {
  
       setLoader(false)
@@ -66,8 +80,12 @@ const ProviderScreen = ({route, navigation}) => {
          }else {
  
              console.log(response.data.statusMessage)
-             //show error message
-             setErrorMessage(response.data.statusMessage);
+         
+             if(response.data.statusMessage.includes("failed")) {
+
+                Alert.alert(ApplicationName.AppName, 'Session Expired! Please login again')
+                ExitAuthenticatedUser();
+             }
  
              //set loading off
              setLoader(false)
@@ -82,11 +100,25 @@ const ProviderScreen = ({route, navigation}) => {
   }
   // END OF FUNCTION
 
+  //function to return base 64 image
+  const convertToBase64 = (ext, data) => {
+
+    var base64Image = `data:image/jpeg;base64,${data}`;
+
+    console.log(base64Image);
+
+  }
+  // end of function
+
 //USE EFFECT
 useEffect(() => {
 
-  //fetch providers
+
+  console.log(providerID)
+  //update prodivder Data
+   dispatch(updateProviderID(providerID))
   //FetchProviders();
+  console.log('No of items is ' + cartItem)
 
   FetchRestaurantMenus();
 
@@ -117,6 +149,16 @@ useEffect(() => {
     }
   // END OF FUNCTION
 
+  const bottomComponent = () => {
+    return (
+      <View style={{marginTop: 30, alignSelf: 'center'}}>
+      {cartItem > 0 &&
+        <AddToCartButton onPress={() => navigation.navigate("RestaurantOrder")} title="Complete your order" icon={icons.basket} />
+        }
+      </View>  
+    )
+  }
+
   // FUNCTION TO RENDER BODY CONTENT
     function renderBodyContent() {
       return (
@@ -124,7 +166,7 @@ useEffect(() => {
               <View
                 style={styles.vendorBox}
               >
-                <Text style={styles.vendorTileName}>Travis Caterering Services</Text>
+                <Text style={styles.vendorTileName}>{providerName}</Text>
                 
                 <View style={styles.vendorFeatures}>
                     <ProviderFeature
@@ -140,7 +182,21 @@ useEffect(() => {
                       icon={icons.feedback}
                     />
                 </View>
-              </View>
+
+                {cartItem > 0 &&
+                <View style={{
+
+                  alignSelf: 'center',
+                  marginTop: 25,
+                  marginBottom:15
+                  
+                }}>
+               
+                  <AddToCartButton onPress={() => navigation.navigate("RestaurantOrder")} count={cartItem} title="Complete your order" icon={icons.basket} />
+                
+                </View>
+              }
+      </View>
           
                 {/* Load body for menu items */}
 
@@ -152,16 +208,19 @@ useEffect(() => {
                     data={menuItem}
                     keyboardDismissMode="on-drag"
                     keyExtractor={item => `${item.menuID}`} 
-                    showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={true}
+                    ListFooterComponent={bottomComponent}
                     renderItem={
                         ({ item }) => {
                             return (
                               <MenuItem 
-                              onPress={() => navigation.navigate('OrderMenuItem', { menuID: item.menuID, menuItem:item.food_Name, description: item.food_Description, amount: item.food_Price, image: images.indoomie_pic})}
+                              onPress={() => navigation.navigate('OrderMenuItem', {provider_id:providerID, menuID: item.menuID, 
+                                foodName:item.food_Name, description: item.food_Description, amount: item.food_Price, 
+                                image: { uri: `data:image/jpeg;base64,${item.menu_data}`} })}
                               name={item.food_Name}
                               details={item.food_Description}
                               price={utilities.formatToCurency(Number(item.food_Price))}
-                              image={images.indoomie_pic}
+                              image={{ uri: `data:image/jpeg;base64,${item.menu_data}`}}
                             />
                             )
                         }
@@ -214,16 +273,13 @@ useEffect(() => {
       <NewLoader title="Processing your request, please wait..." />
     }
 
-    {cartOrders > 0 &&
-       <AddToCartButton onPress={() => navigation.navigate("RestaurantOrder")} title="Complete your order" icon={icons.basket} />
-    }
-  
+
          {/* Render Header */}
          {renderHeaderContent()}
 
+               {/* Render Body */}  
+              {renderBodyContent()}
 
-         {/* Render Body */}  
-         {renderBodyContent()}
 
     </SafeAreaProvider>
   )
@@ -239,6 +295,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical:20,
     borderTopStyle: 'solid',
+    marginBottom: 100
   },  
   featureBox: {
     flexDirection: 'row',
@@ -260,7 +317,7 @@ const styles = StyleSheet.create({
   },
   vendorDesc: {
     fontSize:14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.darkGray,
     fontWeight: 'normal',
     marginVertical: 2,
@@ -268,7 +325,7 @@ const styles = StyleSheet.create({
   },
   vendorTileName : {
     fontSize: 20,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold',
   },
@@ -278,7 +335,7 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StandardardBankBlue,
     fontWeight: 'normal',
 },
@@ -302,7 +359,7 @@ vendorRating: {
     paddingVertical:10
   },
   headerBg: {
-    height:180,
+    height:200,
     width
   },
   container: {

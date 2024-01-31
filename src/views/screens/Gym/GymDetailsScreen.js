@@ -29,35 +29,41 @@ import {
 // INIT APP
 const GymDetailsScreen = ({route, navigation}) => {
 
+  const token = useSelector((state) => state.user.idtkn)
   const userData = useSelector((state) => state.user.userData)
 
   const { 
+    facilityID,
     providerID, 
     gymSessionID, 
     gymSessionName, 
     gymCapacity, 
     gymInstructor, 
     gymStartDate, 
-    gymEndDate,gymPhoneNumber, gymRating} = route.params
+    gymEndDate,gymPhoneNumber, gymRating, gymScheduledDate} = route.params
 
   // SET USER INPUT STATES
-  const [gymDetails, setParentPhone] = useState('');
+  const [username, setUsername] = useState('');
+  const [sessionDate, setSessionDate] = useState('')
+  const [gymDetails, setGymDetails] = useState('');
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null);
+  const [orderNumber, setOrderNumber] = useState('')
 
   const RequestGymBooking = () => {
-    try {
-
-      
+    try {      
       const data = {
         userID: userData.userID,
-        entity: 1,
+        gymSessionID: gymSessionID,
+        gymSessionName: gymSessionName,
+        "entity": 1,
         contactNumber: userData.phone,
+        facilityID : facilityID,
+        providerID : providerID,
         "orderDetails": [
           {
-            "providerID": "bjds-mndn-9393-skskj",
-            "scheduledDate": "2023-12-02T20:57:39.465Z",
-            "additional_details": gymDetails
+            scheduledDate: gymScheduledDate,
+            additional_details : gymDetails
           }
         ]
       }
@@ -66,7 +72,11 @@ const GymDetailsScreen = ({route, navigation}) => {
   
         console.log('********************* Booking Gym Session ***********************')
   
-        axios.post(APIBaseUrl.developmentUrl + 'Order/CreateGym', data, ApIHeaderOptions.headers)
+        axios.post(APIBaseUrl.developmentUrl + 'orders/order/CreateGym', data,{
+          headers: {
+            'JWTToken': token
+          }
+        })
         .then(response => {
     
           setIsLoading(false)
@@ -75,7 +85,7 @@ const GymDetailsScreen = ({route, navigation}) => {
     
                  //set data
                  console.log(response.data)
-                 navigation.navigate('GymComplete', {message:response.data.statusMessage})
+                 navigation.navigate('GymComplete', {message:response.data.statusMessage, orderNumber: response.data.orderNo})
     
             }else {
     
@@ -105,13 +115,13 @@ const GymDetailsScreen = ({route, navigation}) => {
     setErrorMessage(null)
     Keyboard.dismiss();
 
-    Alert.alert('Stanbic IBTC Towers', 'Do you want to book now?', [
+    Alert.alert('Blue Lifestyle Gym', 'Do you want to book now?', [
       {
         text: 'No',
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'Ok', onPress: () => RequestGymBooking()},
+      {text: 'Yes', onPress: () => RequestGymBooking()},
     ]);
 
   }//END OF FUNCTION
@@ -189,15 +199,22 @@ const GymDetailsScreen = ({route, navigation}) => {
                     <CrecheInput 
                       button={false}
                       icon={icons.user}
-                      placeholder="Babatunde Francis"
-                      onChange={(text) => setChildName(text)}
+                      placeholder="Enter your Full Name"
+                      onChange={(text) => setUsername(text)}
                       value={userData.firstName + " " + userData.lastName}
                     />
                     <CrecheInput 
                     button={false}
+                    icon={icons.calendar}
+                    placeholder="Booking Date"
+                    onChange={(text) => setSessionDate(text)}
+                    value={gymScheduledDate}
+                  />
+                    <CrecheInput 
+                    button={false}
                     icon={icons.gym_details}
                     placeholder="Provide Additional Details (optional)"
-                    onChange={(text) => setParentPhone(text)}
+                    onChange={(text) => setGymDetails(text)}
                     value={gymDetails}
                     multiline={true}
                   />
@@ -234,7 +251,7 @@ const GymDetailsScreen = ({route, navigation}) => {
           <StatusBar style="auto" />
 
           {isLoading && 
-            <NewLoader title="Authenticating user, please wait..." />
+            <NewLoader title="Processing your booking request, please wait..." />
           }
         
           {errorMessage &&
@@ -256,7 +273,7 @@ const GymDetailsScreen = ({route, navigation}) => {
 const styles = StyleSheet.create({
     sessionType: {
         fontSize:13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
         fontWeight: 'bold',
         marginTop:3,
@@ -264,14 +281,14 @@ const styles = StyleSheet.create({
     },
   descText: {
     fontSize:13,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
         marginTop:5,
         marginBottom: 10,
   },
     crecheTxt: {
         fontSize:14,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.darkGray,
     },
     crecheSetup: {
@@ -310,7 +327,7 @@ const styles = StyleSheet.create({
   },
   vendorDesc: {
     fontSize:14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.darkGray,
     fontWeight: 'normal',
     marginVertical: 2,
@@ -318,7 +335,7 @@ const styles = StyleSheet.create({
   },
   vendorTileName : {
     fontSize: 17,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold',
   },
@@ -328,7 +345,7 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 14,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StandardardBankBlue,
     fontWeight: 'normal',
 },

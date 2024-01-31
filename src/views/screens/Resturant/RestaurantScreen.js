@@ -9,13 +9,20 @@ import {  StyleSheet,
   Image, Alert,
   FlatList} from 'react-native';
   import axios from 'axios';
-  import { COLORS, icons, images, APIBaseUrl, ApIHeaderOptions } from '../../../constants';
+  import { useSelector } from 'react-redux';
+  import { AuthContext } from '../../../context/AuthContext';
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+  import { COLORS, icons, images, APIBaseUrl, ApplicationName, ApIHeaderOptions } from '../../../constants';
   import { HeaderBar, ProviderCard, NewLoader } from '../../components';
   const { width, height } = Dimensions.get("window");
 
 
   // init app screen
 const RestaurantScreen = ({navigation}) => {
+
+  const token = useSelector((state) => state.user.idtkn)
+
+  const { ExitAuthenticatedUser} = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false)
   const [providers, setProviders] = useState('');
@@ -26,7 +33,13 @@ const RestaurantScreen = ({navigation}) => {
     //show loader
     setIsLoading(true);
 
-    axios.post(APIBaseUrl.developmentUrl + 'services/Providers/FetchRestaurantProviders', ApIHeaderOptions.headers)
+    console.log('Posting with this token:' + token)
+
+    axios.post(APIBaseUrl.developmentUrl + 'services/Providers/FetchRestaurantProviders',{},{
+      headers: {
+        'JWTToken': token
+      }
+    })
     .then(response => {
 
       setIsLoading(false)
@@ -40,8 +53,11 @@ const RestaurantScreen = ({navigation}) => {
         }else {
 
             console.log(response.data.statusMessage)
-            //show error message
-            setErrorMessage(response.data.statusMessage);
+        
+            if(response.data.statusMessage.includes("failed")) {
+              Alert.alert(ApplicationName.AppName, 'Session Expired! Please login again')
+              ExitAuthenticatedUser();
+           }
 
             //set loading off
             setIsLoading(false)
@@ -55,7 +71,6 @@ const RestaurantScreen = ({navigation}) => {
 
   }
 // end of function
-
 
 //USE EFFECT
       useEffect(() => {
@@ -133,7 +148,7 @@ const RestaurantScreen = ({navigation}) => {
                   <ProviderCard
                   image={images.kitchen_bg2}
                   name={item.provider_name}
-                  onPress={() => navigation.navigate('Provider', {providerID: item.provider_id})}
+                  onPress={() => navigation.navigate('Provider', {providerID: item.provider_id, providerName: item.provider_name})}
                 />   
                 )
             }
@@ -189,7 +204,7 @@ const styles = StyleSheet.create({
   orderText: {
     color: COLORS.darkGray,
     fontSize: 13,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight: 'normal', 
   },
   orderHistory: {
@@ -207,7 +222,7 @@ const styles = StyleSheet.create({
       marginBottom:20
   },
   providerList: {
-
+ paddingHorizontal:10
   },
   detailsBox : {
     flexDirection: 'row',
@@ -216,7 +231,7 @@ const styles = StyleSheet.create({
   }, 
   mainTitle: {
     fontSize: 19,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold', 
   },
@@ -231,7 +246,7 @@ const styles = StyleSheet.create({
   },
   business : {
     fontSize: 15,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.gentleBlue,
     fontWeight: 'normal',
     marginLeft:5
@@ -244,7 +259,7 @@ const styles = StyleSheet.create({
   },
   titleName: {
     fontSize: 25,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
   },
@@ -256,6 +271,8 @@ const styles = StyleSheet.create({
     width,
     height: 220,
     backgroundColor: COLORS.StandardardBankBlue,
+    marginTop: Platform.OS === 'ios' ? wp(-15) : null,
+    paddingTop: Platform.OS === 'ios' ? wp(4.5) : null
   },
   container: {
     flex: 1,

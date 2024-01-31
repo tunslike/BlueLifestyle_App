@@ -7,8 +7,11 @@ import {  StyleSheet,
   Alert,
   Dimensions,
   StatusBar,
-  Image, FlatList} from 'react-native';
+  Image, FlatList, Platform} from 'react-native';
   import axios from 'axios';
+  import moment from 'moment';
+  import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+  import { useSelector } from 'react-redux';
   import { COLORS, 
            icons, 
            images, 
@@ -23,6 +26,8 @@ import {  StyleSheet,
   // init app screen
 const GymScreen = ({navigation}) => {
 
+  const token = useSelector((state) => state.user.idtkn)
+
  const [activeDay, setActiveDay] = useState(true)
  const [errorMessage, setErrorMessage] = useState(null)
 
@@ -30,7 +35,8 @@ const GymScreen = ({navigation}) => {
  const [gymData, setGYMData] = useState('');
  const [regularGym, setRegularGym] = useState([]);
  const [weeklyGym, setWeeklyGym] = useState([]);
- const [currentDay, getCurrentDay] = useState(null);
+ const [todayDay, setTodayDay] = useState(null);
+ const [dayOfWeek, setDayOfWeek] = useState(new Date())
 
  const [monday, setMonday] = useState(false);
  const [tuesday, setTuesday] = useState(false);
@@ -41,17 +47,24 @@ const GymScreen = ({navigation}) => {
  const [sunday, setSunday] = useState(false);
 
    // FUNCTION TO LOAD RESTURANT MENUS
-   const FetchGymProvidersWeekly = () => {
+   const FetchGymProvidersWeekly = (formattedDate) => {
+
+    console.log(formattedDate)
 
      //show loader
      setLoader(true);
 
      const dataRegular = {
+      scheduled_Date: formattedDate,
         gymSessionType: 'Regular'
      }
 
      //
-     axios.post(APIBaseUrl.developmentUrl + 'services/service/FetchGymSessions', dataRegular, ApIHeaderOptions.headers)
+     axios.post(APIBaseUrl.developmentUrl + 'services/service/FetchGymSessions', dataRegular, {
+      headers: {
+        'JWTToken': token
+      }
+    })
      .then(response => {
  
          if(response.data.errorCode == '000') {
@@ -91,11 +104,17 @@ const GymScreen = ({navigation}) => {
      }
 
      //
-     axios.post(APIBaseUrl.developmentUrl + 'services/service/FetchGymSessions', dataWeekly, ApIHeaderOptions.headers)
+     axios.post(APIBaseUrl.developmentUrl + 'services/service/FetchGymSessions', dataWeekly, 
+     {
+      headers: {
+        'JWTToken': token
+      }
+    }
+     )
      .then(response => {
  
          if(response.data.errorCode == '000') {
- 
+
               //set data
               setWeeklyGym(response.data.gymServiceData)
  
@@ -114,8 +133,17 @@ const GymScreen = ({navigation}) => {
   }
   // END OF FUNCTION
 
+  // format weekly date
+  const formatWeeklyDate = (date) => {
+   
+    return date;
+  }
+  // end of function 
+
   //function to get the current day
   const setCurrentDay = () => {
+
+    let formatDate = null
 
     setMonday(false)
     setTuesday(false)
@@ -128,31 +156,52 @@ const GymScreen = ({navigation}) => {
     var d = new Date();
     var dayName = d.toString().split(' ')[0];
 
-    if(dayName == ' Mon') {
+  
+    if(dayName == 'Mon') {
       setMonday(true);
+      formatDate = transformDate(dayOfWeek, 1)
     }else if(dayName == 'Tue') {
       setTuesday(true) 
+      formatDate = transformDate(dayOfWeek, 2)
     }else if(dayName == 'Wed') {
       setWednesday(true)
+      formatDate = transformDate(dayOfWeek, 3)
     }else if(dayName == 'Thu') {
       setThursday(true)
+      formatDate = transformDate(dayOfWeek, 4)
     }else if(dayName == 'Fri') {
       setFriday(true)
+      formatDate = transformDate(dayOfWeek, 5)
     }else if(dayName == 'Sat') {
       setSaturday(true)
+      formatDate = transformDate(dayOfWeek, 6)
     }else if(dayName == 'Sun'){
       setSunday(true)
+      formatDate = transformDate(dayOfWeek, 0)
     }
+
+    return formatDate;
   }
   // end of function to get current day
 
+  const transformDate = (date, day) => {
+    const offset = date.getDay() - day
+    
+    const d = new Date(date)
+    d.setDate(d.getDate() - offset)
+    return d.toISOString().split('T')[0]
+  }
 
   // FUNCTION TO SPOOL DATA FOR EACH DAY
   const FetchGymSessionDaily = (day) => {
 
+    setLoader(false)
+
     if(!day) {
       return;
     }
+
+    let dailyDate = null;
 
     setMonday(false)
     setTuesday(false)
@@ -166,24 +215,31 @@ const GymScreen = ({navigation}) => {
 
       case 1: 
         setMonday(true);
+        dailyDate = transformDate(dayOfWeek, 1)
       break;
       case 2: 
         setTuesday(true);
+        dailyDate = transformDate(dayOfWeek, 2)
       break;
       case 3: 
         setWednesday(true);
+        dailyDate = transformDate(dayOfWeek, 3)
       break;
       case 4: 
         setThursday(true);
+        dailyDate = transformDate(dayOfWeek, 4)
       break;
       case 5: 
         setFriday(true);
+        dailyDate = transformDate(dayOfWeek, 5)
       break;
       case 6: 
         setSaturday(true);
+        dailyDate = transformDate(dayOfWeek, 6)
       break;
       case 7: 
         setSunday(true);
+        dailyDate = transformDate(dayOfWeek, 0)
       break;
       default: 
           setMonday(false)
@@ -197,21 +253,29 @@ const GymScreen = ({navigation}) => {
 
     }
 
-    let dailyDate = "'" + utilities.getCurrentDateMMDDYYYY() + "'";
-
-    console.log(dailyDate)
-    return;
-
      //show loader
      setLoader(true);
 
      const dataRegular = {
-        scheduled_Date: dailyDate
+        scheduled_Date: dailyDate,
+        gymSessionType: 'Regular',
       }
 
-   //
-   axios.post(APIBaseUrl.developmentUrl + 'Service/FetchGymSessions', dataRegular, ApIHeaderOptions.headers)
+      //show loader
+     setLoader(true);
+
+   //make call
+   axios.post(APIBaseUrl.developmentUrl + 'services/Service/FetchGymSessions', dataRegular, {
+    headers: {
+      'JWTToken': token
+    }
+  })
    .then(response => {
+
+      //show loader
+      setLoader(false);
+
+      console.log(response.data.gymServiceData)
 
        if(response.data.errorCode == '000') {
 
@@ -220,6 +284,7 @@ const GymScreen = ({navigation}) => {
 
        }else {
 
+          setRegularGym(response.data.gymServiceData)
            //show error message
            setErrorMessage(response.data.statusMessage);
 
@@ -227,6 +292,8 @@ const GymScreen = ({navigation}) => {
    })
    .catch(error => {
      console.log(error);
+     //show loader
+     setLoader(false);
    });
 
 
@@ -237,11 +304,10 @@ const GymScreen = ({navigation}) => {
 //USE EFFECT
 useEffect(() => {
 
-  setCurrentDay();
+  let formattedDate = setCurrentDay();
 
   FetchGymProvidersRegular();
-
-  FetchGymProvidersWeekly();
+  FetchGymProvidersWeekly(formattedDate);
 
 }, []);
 
@@ -289,18 +355,30 @@ useEffect(() => {
     return (
       <View>
     {/* RENDER WEEKLY SPECIALS */}
-
-
       <View style={styles.vendorTitle}>
       <Text style={styles.mainTitle}>Weekly Specials</Text>
       <Image source={icons.specials} 
         style={{
-          height: 20, width: 20, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
+          height: 20, width: 20, marginLeft:7, marginTop:20, tintColor: COLORS.darkGray, resizeMode: 'contain'
         }}
       />
   </View>
 
   <View style={styles.week_specials}>
+
+  {(weeklyGym == '') &&
+    <View style={styles.orderStatusDiv}>
+      <Image 
+      source={icons.info}
+      style={{
+        height:32, width: 32, tintColor: COLORS.WarningTextColor,
+        resizeMode: 'contain'
+      }}
+      />
+      <Text style={styles.infoText}>Sorry, there are no weekly specials! Please check back</Text>
+    </View>
+  }
+
 
   <FlatList 
   data={weeklyGym}
@@ -315,12 +393,13 @@ useEffect(() => {
             image={images.gym1}
             title={item.gymSession_Name}
             trainer={item.gymInstructorName}
-            subTitle={`${item.session_Start_Time} Every Wednesday`}
+            subTitle={formatWeeklyDate(item.scheduled_Date)}
             onPress={() => navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId,
               gymSessionName: item.gymSession_Name, gymCapacity: (item.gymSession_Capacity == '') ? '30' : item.gymSession_Capacity,
-              gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time,
+              gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time, gymScheduledDate: item.scheduled_Date,
               gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact,
-              gymRating: item.provider_performance_ratings, providerID: item.providerId})}
+              gymRating: item.provider_performance_ratings, providerID: item.providerId,
+              facilityID: item.facilityId})}
         />
           )
       }
@@ -341,7 +420,7 @@ useEffect(() => {
 <Text style={styles.mainTitle}>Regular Slots</Text>
 <Image source={icons.gym} 
   style={{
-    height: 20, width: 20, marginLeft:7, tintColor: COLORS.darkGray, resizeMode: 'contain'
+    height: 20, width: 20, marginLeft:7, marginTop:20, tintColor: COLORS.darkGray, resizeMode: 'contain'
   }}
 />
 </View>
@@ -409,12 +488,13 @@ useEffect(() => {
                         return (
                           <GymSlot 
                               timeSlot={`${item.session_Start_Time} - ${item.session_End_Time}`}
-                              capacity={`30 Slots Available`}
+                              capacity={`${item.gymSession_Capacity} Slots Available`}
                               onPress={() => navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId,
                               gymSessionName: item.gymSession_Name, gymCapacity: (item.gymSession_Capacity == '') ? '30' : item.gymSession_Capacity,
                               gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time,
-                              gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact,
-                              gymRating: item.provider_performance_ratings, providerID: item.providerId})}
+                              gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact, gymScheduledDate: item.scheduled_Date,
+                              gymRating: item.provider_performance_ratings, providerID: item.providerId,
+                              facilityID: item.facilityId})}
                           />  
                         )
                     }
@@ -497,12 +577,12 @@ const styles = StyleSheet.create({
   noDataText: {
     color: COLORS.StandardardBankBlue,
     fontSize: 13,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight: 'normal', 
   },
   slotDays: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     marginBottom: 25,
     paddingHorizontal:5
@@ -515,6 +595,18 @@ week_specials: {
  marginHorizontal:10,
  columnGap:10
 },
+orderStatusDiv: {
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: COLORS.WarningBorder,
+  backgroundColor: COLORS.Warningbg,
+  flexDirection: 'row',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  padding: wp(5),
+  borderRadius: wp(5),
+  columnGap: 15
+},
    orderBox: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -523,7 +615,7 @@ week_specials: {
   orderText: {
     color: COLORS.darkGray,
     fontSize: 13,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     fontWeight: 'normal', 
   },
   orderHistory: {
@@ -537,30 +629,36 @@ week_specials: {
       flexDirection: 'row',
       justifyContent: 'flex-start',
       alignItems: 'center',
-      marginHorizontal: 25,
+      marginHorizontal: 10,
       marginBottom:20
   },
   dailyTitle : {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginHorizontal: 25,
+    marginHorizontal: 10,
     marginBottom:20,
     marginTop: 30,
 },
-  providerList: {
-
-  },
+infoText: {
+  fontSize: wp(3.7),
+  fontFamily: "Roboto",
+  color: COLORS.StatureBlue,
+  fontWeight: 'normal', 
+  lineHeight: 25,
+  width:wp(70)
+},
   detailsBox : {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   }, 
   mainTitle: {
-    fontSize: 17,
-    fontFamily: "Benton Sans",
+    fontSize: 20,
+    fontFamily: "Roboto",
     color: COLORS.StatureBlue,
     fontWeight: 'bold', 
+    marginTop:20
   },
   bodyContainer: {
     flex: 1,
@@ -573,7 +671,7 @@ week_specials: {
   },
   business : {
     fontSize: 15,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.gentleBlue,
     fontWeight: 'normal',
     marginLeft:5
@@ -586,7 +684,7 @@ week_specials: {
   },
   titleName: {
     fontSize: 25,
-    fontFamily: "Benton Sans",
+    fontFamily: "Roboto",
     color: COLORS.white,
     fontWeight: 'bold',
   },
@@ -598,6 +696,8 @@ week_specials: {
     width,
     height: 220,
     backgroundColor: COLORS.StandardardBankBlue,
+    marginTop: Platform.OS === 'ios' ? wp(-15) : null,
+    paddingTop: Platform.OS === 'ios' ? wp(4.5) : null
   },
   container: {
     flex: 1,

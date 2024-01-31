@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { utilities } from "../constants";
 
 //set initiate State
 const initialState = {
     cart: [],
+    providerID: ''
 }
 
 export const orderSlice = createSlice({
@@ -14,11 +16,24 @@ export const orderSlice = createSlice({
             console.log(state.cart.length)
         },
         removeFromCart: (state, action) => {
-            state.cart[0] = action.payload
+
+            const findIndex = state.cart.findIndex(a => a.menuID === action.payload)
+            findIndex !== -1 && state.cart.splice(findIndex , 1)
+
+            //state.cart = [...state.cart, arr]
+            console.log(state.cart.length)
         },
+        clearCart: (state, action) => {
+            state.cart.splice(0, state.cart.length);
+            console.log(state.cart.length)
+        },
+        updateProviderID: (state, action) => {
+            state.providerID = action.payload
+        }
+
     },
 })
 
-export const {addToCart, removeFromCart} = orderSlice.actions;
+export const {addToCart, removeFromCart, clearCart, updateProviderID} = orderSlice.actions;
 
 export default orderSlice.reducer;

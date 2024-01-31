@@ -25,8 +25,14 @@ import LogoutButton from "./LogoutButton";
 import DropDown from "./DropDown";
 import AddToCartButton from "./AddToCartButton";
 import CustomInput from "./CustomInput";
+import HistoryFacilityItem from "./HistoryFacilityItem";
+import OrderHistoryItem from "./OrderHistoryItem";
+import CrecheRegInput from "./CrecheRegInput";
 
 export {
+    CrecheRegInput,
+    HistoryFacilityItem,
+    OrderHistoryItem,
     CustomInput,
     AddToCartButton,
     DropDown,

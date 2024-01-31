@@ -6,16 +6,13 @@ import {
         TouchableOpacity,
         Dimensions,
         Image,
-        ScrollView,
+        Platform,
         StatusBar,
-        KeyboardAvoidingView
  } from 'react-native';
  import LottieView from 'lottie-react-native';
- import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
  import { SafeAreaProvider } from 'react-native-safe-area-context';
  import { COLORS, 
           icons, 
-          images, 
           animation, 
           verticalScale, 
           horizontalScale, 
@@ -25,7 +22,11 @@ import {
 
  const { width, height } = Dimensions.get("window");
 
-const GymCompleteBookingScreen = ({navigation}) => {
+const GymCompleteBookingScreen = ({route, navigation}) => {
+
+
+    const { orderNumber } = route.params
+
   return (
     <SafeAreaProvider style={styles.container}>
     <StatusBar style="auto" />
@@ -35,18 +36,20 @@ const GymCompleteBookingScreen = ({navigation}) => {
             autoPlay
             style={{
                 width,
-                height:400
+                height:400,
+                marginTop:20,
+                alignSelf: Platform.OS === 'ios' ? 'center' : null
             }}
         />
 
         <View style={styles.succes_header}>
             <Text style={styles.success_title}>
-                Thank you for your booking with the Gym Facility.
+                Thank you for booking a session with the Gym Facility.
             </Text>
             <Text style={styles.success_title}>
             Please note that your booking was successful with details below.
             </Text>
-            <Text style={styles.success_title}>Booking ID: STBCRH03903</Text>
+            <Text style={styles.success_title}>Booking ID: {orderNumber}</Text>
         </View>
 
     <View>
@@ -72,7 +75,7 @@ const GymCompleteBookingScreen = ({navigation}) => {
 const styles = StyleSheet.create({ 
     loginText: {
         fontSize: moderateScale(16),
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.DeepBlue,
         fontWeight: 'bold',
         marginRight:moderateScale(20)
@@ -97,12 +100,12 @@ const styles = StyleSheet.create({
     },
     succes_header: {
         marginHorizontal: horizontalScale(25),
-        marginTop: verticalScale(-70)
+        marginTop: verticalScale(-20)
     },
     success_title: {
         marginBottom: 15,
         fontSize: 20,
-        fontFamily: "Benton Sans",
+        fontFamily: "Roboto",
         color: COLORS.white,
         fontWeight: 'bold',
         alignSelf: 'center',
