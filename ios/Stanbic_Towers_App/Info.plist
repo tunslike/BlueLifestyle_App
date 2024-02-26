@@ -57,5 +57,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict/>
+	</array>
 </dict>
 </plist>

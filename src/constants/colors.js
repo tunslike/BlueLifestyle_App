@@ -15,6 +15,10 @@ const COLORS = {
     lineDividerGray: '#e3e3e3',
     addItem:'rgba(157, 242, 190,0.2)',
 
+
+    Dangerbg: '#f8d7da',
+    DangerBorder: '#f5c6cb',
+    DangerTextColor: '#721c24',
     Warningbg: '#fff3cd',
     WarningBorder: '#ffeeba',
     WarningTextColor: '#755d12',

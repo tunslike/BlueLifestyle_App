@@ -91,7 +91,6 @@ const CrecheProviderScreen = ({route, navigation}) => {
       data.getHours() +
       ':' +
       data.getMinutes();
-  
     return dateTimeString; // It will look something like this 3-5-2021 16:23
   };
 

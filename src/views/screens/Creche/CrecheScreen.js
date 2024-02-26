@@ -123,7 +123,12 @@ const CrecheScreen = ({navigation}) => {
 
             return
       
-        }else {
+        }else if(response.data.errorCode == '005') {
+          setRegistrationStatus(3);
+          return
+      
+        }
+        else {
 
             if(response.data.crecheRegisterData == null) {
               console.log('Registration is needed')
@@ -251,9 +256,50 @@ useEffect(() => {
       height: 25, width: 25, marginRight: 15, resizeMode: 'contain', tintColor: COLORS.WarningTextColor
     }
   } />
-    <Text style={styles.pendingtxt}>Sorry, your registration is being reviewed. Kindly contact the facility manager for further instructions!</Text>
+    <Text style={styles.pendingtxt}>Sorry, your registration is being reviewed. Kindly contact P&C for further instructions!</Text>
   </View>
 } 
+
+{(registrationStatus == 3) && 
+
+
+<View>
+  <View style={styles.rejectedReg}>
+  <Image source={icons.cancel} style={
+    {
+      height: 25, width: 25, marginRight: 15, resizeMode: 'contain', tintColor: COLORS.DangerTextColor
+    }
+  } />
+    <Text style={styles.dangertxt}>Sorry, your registration has been declined, kindly contact P&C for further details!</Text>
+  </View>
+
+    <View>
+    <TouchableOpacity
+        onPress={() => navigation.navigate("CrecheRegistration")}
+    >
+
+          <View style={styles.container_restuarant}>
+          <Image
+              source={icons.kids}
+              style={{
+                  height: 30, width: 30, resizeMode: 'contain', tintColor: COLORS.AlertGreenbg
+              }}
+          />
+        <View style={styles.textArea}>
+              <Text style={styles.txtRegister}>New Registration</Text>
+
+        </View>
+        <View style={styles.viewBtn}>
+              <Text style={styles.btnText}>Register Now</Text>
+        </View>
+          </View>
+
+    </TouchableOpacity>
+    </View>
+
+  </View>
+  
+}   
 
 {(registrationStatus == 2) && 
 
@@ -396,6 +442,16 @@ const styles = StyleSheet.create({
     width:'90%'
   },
 
+
+  dangertxt: {
+    color: COLORS.DangerTextColor,
+    fontFamily: "Roboto",
+    fontWeight: 'bold', 
+    lineHeight: 20,
+    fontSize:14,
+    width:'90%'
+  },
+
   activeTxt: {
     color: COLORS.AlertGreenbg,
     fontFamily: "Roboto",
@@ -427,6 +483,20 @@ const styles = StyleSheet.create({
     borderColor: COLORS.WarningBorder,
     backgroundColor: COLORS.Warningbg,
     borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10
+  },
+
+  rejectedReg: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    marginHorizontal: 20,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: COLORS.DangerBorder,
+    backgroundColor: COLORS.Dangerbg,
+    borderRadius: moderateScale(15),
     paddingHorizontal: 10,
     paddingVertical: 10
   },

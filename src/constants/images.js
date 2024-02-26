@@ -21,8 +21,10 @@ const gym3 = require("../assets/images/gym3.jpeg")
 const gym4 = require("../assets/images/gym4.jpeg")
 const profileUpdate = require("../assets/images/profile_update.jpg")
 const blank_food = require("../assets/images/blank_food.png")
+const regular_workout = require("../assets/images/regular_workout.jpeg")
 
 export default {
+    regular_workout,
     towersBuilding,
     blank_food,
     profileUpdate,

@@ -51,8 +51,10 @@ const company = require("../assets/icons/company.png")
 const gym_details = require("../assets/icons/gym_details.png")
 const pending = require("../assets/icons/pending.png")
 const order_success = require("../assets/icons/order_success.png")
+const duration = require("../assets/icons/duration.png")
 
 export default {
+    duration,
     order_success,
     pending,
     gym_details,

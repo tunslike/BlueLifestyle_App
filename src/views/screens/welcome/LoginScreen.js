@@ -62,8 +62,9 @@ const LoginScreen = ({navigation}) => {
   return (
     <KeyboardAwareScrollView 
         enableOnAndroid={true}
+        enableAutomaticScroll={true}
         keyboardShouldPersistTaps={"handled"}
-        extraScrollHeight={-300}
+        extraScrollHeight={100}
         contentContainerStyle={{
           flexGrow: 1,
           backgroundColor: COLORS.white

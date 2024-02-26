@@ -265,7 +265,7 @@ const ValidateProfile = () => {
                 <FacilityCard 
                   image={images.creche_dash_img}
                   title="Creche"
-                  capacity="45"
+                  capacity="25"
                   openingTime="6.00am" 
                   onPress={() => navigation.navigate('Creche', {facility_ID: FacilityIDs.CrecheFacilityID })}         
                 />
@@ -292,7 +292,7 @@ const ValidateProfile = () => {
     }
 
     {isLoading && 
-      <NewLoader title="Loading facilities, please wait..." />
+      <NewLoader title="Processing your request, please wait..." />
     }
        
        <LogoutButton onPress={() => LogoutAuthenticatedUser()} />

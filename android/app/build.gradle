@@ -75,11 +75,11 @@ android {
 
     namespace "com.stanbic_towers_app"
     defaultConfig {
-        applicationId "com.stanbicibtc.bluelifestyle"
+        applicationId "com.stanbic_towers_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
-        versionName "1.0.1"
+        versionName "1.0.2"
     }
     signingConfigs {
         release {

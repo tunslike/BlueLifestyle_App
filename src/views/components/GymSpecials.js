@@ -7,7 +7,7 @@ import { StyleSheet,
 
 import { COLORS, icons, images } from '../../constants'
 
-const GymSpecials = ({onPress, image, title, subTitle, trainer}) => {
+const GymSpecials = ({onPress, image, slot, title, subTitle, time, trainer}) => {
   return (
     <TouchableOpacity
         onPress={onPress}
@@ -37,6 +37,26 @@ const GymSpecials = ({onPress, image, title, subTitle, trainer}) => {
       />
       <Text style={styles.subTitle}>{subTitle}</Text>
     </View>
+    <View style={styles.details}>
+    <Image
+        source={icons.time}
+        style={{
+            height:13, width:13,
+            resizeMode: 'contain', tintColor:COLORS.SecondaryGreen
+        }}
+    />
+    <Text style={styles.subTitle}>{"Opens: " + time}</Text>
+  </View>
+  <View style={styles.details}>
+  <Image
+      source={icons.people}
+      style={{
+          height:13, width:13,
+          resizeMode: 'contain', tintColor:COLORS.SecondaryGreen
+      }}
+  />
+  <Text style={styles.subTitle}>{slot + " Slots"}</Text>
+</View>
     </TouchableOpacity>
   )
 }
@@ -46,7 +66,7 @@ const styles = StyleSheet.create({
     fontFamily: "Benton Sans",
     color: COLORS.darkGray,
     fontWeight: 'normal', 
-    fontSize: 13,
+    fontSize: 12,
   },
     details: {
         marginHorizontal: 5,

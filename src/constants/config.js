@@ -1,5 +1,5 @@
 export const APIBaseUrl = {
-    developmentUrl: "https://webdev.stanbicibtcpension.com:7443/",
+    developmentUrl: "https://bluelifestyle.stanbicibtc.com:8443/",
     productionUrl: "https://mpp.stanbicibtcpension.com:5443/",
 }
 

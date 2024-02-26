@@ -38,8 +38,8 @@ const GymDetailsScreen = ({route, navigation}) => {
     gymSessionID, 
     gymSessionName, 
     gymCapacity, 
-    gymInstructor, 
-    gymStartDate, 
+    gymInstructor, gymSessionDuration,
+    gymStartDate, gymSessionImg, providerName,
     gymEndDate,gymPhoneNumber, gymRating, gymScheduledDate} = route.params
 
   // SET USER INPUT STATES
@@ -131,7 +131,7 @@ const GymDetailsScreen = ({route, navigation}) => {
     function renderHeaderContent() {
       return (
         <ImageBackground
-        source={images.gym4}
+        source={gymSessionImg}
         style={styles.headerBg}
       >
           <HeaderBarBlank 
@@ -161,6 +161,7 @@ const GymDetailsScreen = ({route, navigation}) => {
               >
                 <Text style={styles.vendorTileName}>{gymSessionName}</Text>
                 <Text style={styles.sessionType}>{`${gymStartDate} - ${gymEndDate}`}</Text>
+                <Text style={styles.fitnessCenter}>{providerName}</Text>
                 
                 <View style={styles.vendorFeatures}>
                     <ProviderFeature
@@ -183,7 +184,10 @@ const GymDetailsScreen = ({route, navigation}) => {
                   title={gymPhoneNumber}
                   icon={icons.phone_fill}
                     />
-    
+                    <ProviderFeature
+                    title={`Duration: ${gymSessionDuration}`}
+                    icon={icons.duration}
+                      />
                 </View>
             
               </View>
@@ -271,6 +275,14 @@ const GymDetailsScreen = ({route, navigation}) => {
 }
 
 const styles = StyleSheet.create({
+  fitnessCenter: {
+    fontSize:13,
+    fontFamily: "Roboto",
+    color: COLORS.darkGray,
+    fontWeight: 'normal',
+    marginTop:3,
+    marginLeft:1
+},
     sessionType: {
         fontSize:13,
         fontFamily: "Roboto",

@@ -107,7 +107,7 @@ export const AuthProvider = ({children, navigation}) => {
             password: pwds
           };
 
-        axios.post('https://webdev.stanbicibtcpension.com:7443/accounts/staff/login', data, options)
+        axios.post('https://bluelifestyle.stanbicibtc.com:8443/accounts/staff/login', data, options)
         .then(response => {
 
             setIsLoading(false);

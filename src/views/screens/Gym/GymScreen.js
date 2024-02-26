@@ -46,16 +46,43 @@ const GymScreen = ({navigation}) => {
  const [saturday, setSaturday] = useState(false);
  const [sunday, setSunday] = useState(false);
 
+ const [currentDate, setCurrentDate] = useState(moment())
+
    // FUNCTION TO LOAD RESTURANT MENUS
    const FetchGymProvidersWeekly = (formattedDate) => {
 
-    console.log(formattedDate)
+    var day_week = moment().isoWeekday();
+    var day_name = ''
+
+    switch(day_week) {
+        case 1: 
+            day_name = "Monday";
+        break;
+        case 2: 
+            day_name = "Tuesday";
+        break;
+        case 3: 
+            day_name = "Wednesday";
+        break;
+        case 4: 
+            day_name = "Thursday";
+        break;
+        case 5: 
+            day_name = "Friday";
+        break;
+        case 6: 
+            day_name = "Saturday";
+        break;
+        case 7: 
+            day_name = "Sunday";
+        break;
+    }
 
      //show loader
      setLoader(true);
 
      const dataRegular = {
-      scheduled_Date: formattedDate,
+      scheduled_Date: day_name,
         gymSessionType: 'Regular'
      }
 
@@ -202,6 +229,7 @@ const GymScreen = ({navigation}) => {
     }
 
     let dailyDate = null;
+    let dayName = '';
 
     setMonday(false)
     setTuesday(false)
@@ -216,30 +244,37 @@ const GymScreen = ({navigation}) => {
       case 1: 
         setMonday(true);
         dailyDate = transformDate(dayOfWeek, 1)
+        dayName = 'Monday'
       break;
       case 2: 
         setTuesday(true);
         dailyDate = transformDate(dayOfWeek, 2)
+        dayName = 'Tuesday'
       break;
       case 3: 
         setWednesday(true);
         dailyDate = transformDate(dayOfWeek, 3)
+        dayName = 'Wednesday'
       break;
       case 4: 
         setThursday(true);
         dailyDate = transformDate(dayOfWeek, 4)
+        dayName = 'Thursday'
       break;
       case 5: 
         setFriday(true);
         dailyDate = transformDate(dayOfWeek, 5)
+        dayName = 'Friday'
       break;
       case 6: 
         setSaturday(true);
         dailyDate = transformDate(dayOfWeek, 6)
+        dayName = 'Saturday'
       break;
       case 7: 
         setSunday(true);
         dailyDate = transformDate(dayOfWeek, 0)
+        dayName = 'Sunday'
       break;
       default: 
           setMonday(false)
@@ -257,15 +292,17 @@ const GymScreen = ({navigation}) => {
      setLoader(true);
 
      const dataRegular = {
-        scheduled_Date: dailyDate,
+        scheduled_Date: dayName,
         gymSessionType: 'Regular',
       }
+
+      console.log(dataRegular)
 
       //show loader
      setLoader(true);
 
    //make call
-   axios.post(APIBaseUrl.developmentUrl + 'services/Service/FetchGymSessions', dataRegular, {
+   axios.post(APIBaseUrl.developmentUrl + 'services/service/FetchGymSessions', dataRegular, {
     headers: {
       'JWTToken': token
     }
@@ -275,7 +312,7 @@ const GymScreen = ({navigation}) => {
       //show loader
       setLoader(false);
 
-      console.log(response.data.gymServiceData)
+      //console.log(response.data.gymServiceData)
 
        if(response.data.errorCode == '000') {
 
@@ -296,18 +333,119 @@ const GymScreen = ({navigation}) => {
      setLoader(false);
    });
 
-
   } 
 
-  //END OF FUNCTION
+  function FindDayofWeek(dateValue) {
+
+    var day_name = '';
+
+    switch(dateValue) {
+      case 1: 
+          day_name = "Monday";
+      break;
+      case 2: 
+          day_name = "Tuesday";
+      break;
+      case 3: 
+          day_name = "Wednesday";
+      break;
+      case 4: 
+          day_name = "Thursday";
+      break;
+      case 5: 
+          day_name = "Friday";
+      break;
+      case 6: 
+          day_name = "Saturday";
+      break;
+      case 7: 
+          day_name = "Sunday";
+      break;
+    }
+
+    return day_name;
+
+  }
+
+  // FUNCTION TO SHOW WEEKLY SESSIONS
+  const showWeeklySessionDetails = (item) => {
+
+     var day_week = moment().isoWeekday();
+
+     var dayName = FindDayofWeek(day_week);
+     var scheduledDay = item.scheduled_Date;
+
+     if(compareValue = dayName.localeCompare(scheduledDay)) {
+    
+      Alert.alert("Blue Lifestyle Gym", "Sorry, you can only book today's session!")
+      return;
+     }
+
+      navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId, gymSessionImg:utilities.WeeklySpecialImageMatch(item.gymSession_Name),
+      gymSessionName: item.gymSession_Name, gymCapacity: item.gym_available_slot, gymSessionDuration: item.session_Duration,
+      gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time, gymScheduledDate: item.scheduled_Date,
+      gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact,
+      gymRating: item.provider_performance_ratings, providerID: item.providerId,
+      facilityID: item.facilityId})
+  }
+
+  
+ // FUNCTION TO SHOW REGULAR SESSIONS
+  const showRegularSessionDetails = (item) => {
+
+    var day_week = moment().isoWeekday();
+
+    var dayName = FindDayofWeek(day_week);
+    var scheduledDay = item.scheduled_Date;
+
+    if(compareValue = dayName.localeCompare(scheduledDay)) {
+   
+     Alert.alert("Blue Lifestyle Gym", "Sorry, you can only book today's session!")
+     return;
+
+    }
+
+    //cleanr time
+    var newEndTime = item.session_End_Time.toLowerCase().trim();
+    var currentTime = formatAMPM(new Date);
+
+    var beginningTime = moment(newEndTime, 'h:mma');
+    var endTime = moment(currentTime, 'h:mma');
+  
+    if(beginningTime.isBefore(endTime) == true) {
+      Alert.alert("Blue Lifestyle Gym","Sorry, selected session is over!")
+      return;
+    }else{
+
+        navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId, gymSessionImg:images.regular_workout,
+        gymSessionName: item.gymSession_Name, gymCapacity: item.gym_available_slot, gymSessionDuration: item.session_Duration,
+        gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time, providerName: item.provider_name,
+        gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact, gymScheduledDate: item.scheduled_Date,
+        gymRating: item.provider_performance_ratings, providerID: item.providerId,
+        facilityID: item.facilityId})
+    }
+  }
+
+  function formatAMPM(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 
 //USE EFFECT
 useEffect(() => {
 
+  
+
   let formattedDate = setCurrentDay();
 
   FetchGymProvidersRegular();
-  FetchGymProvidersWeekly(formattedDate);
+  FetchGymProvidersWeekly();
 
 }, []);
 
@@ -390,16 +528,13 @@ useEffect(() => {
       ({ item }) => {
           return (
             <GymSpecials 
-            image={images.gym1}
+            image={utilities.WeeklySpecialImageMatch(item.gymSession_Name)}
             title={item.gymSession_Name}
+            slot={item.gym_available_slot}
             trainer={item.gymInstructorName}
-            subTitle={formatWeeklyDate(item.scheduled_Date)}
-            onPress={() => navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId,
-              gymSessionName: item.gymSession_Name, gymCapacity: (item.gymSession_Capacity == '') ? '30' : item.gymSession_Capacity,
-              gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time, gymScheduledDate: item.scheduled_Date,
-              gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact,
-              gymRating: item.provider_performance_ratings, providerID: item.providerId,
-              facilityID: item.facilityId})}
+            subTitle={`Every: ${item.scheduled_Date}`}
+            time={item.session_Start_Time.toLowerCase()}
+            onPress={() => showWeeklySessionDetails(item)}
         />
           )
       }
@@ -488,13 +623,8 @@ useEffect(() => {
                         return (
                           <GymSlot 
                               timeSlot={`${item.session_Start_Time} - ${item.session_End_Time}`}
-                              capacity={`${item.gymSession_Capacity} Slots Available`}
-                              onPress={() => navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId,
-                              gymSessionName: item.gymSession_Name, gymCapacity: (item.gymSession_Capacity == '') ? '30' : item.gymSession_Capacity,
-                              gymInstructor: item.gymInstructorName, gymStartDate: item.session_Start_Time,
-                              gymEndDate: item.session_End_Time, gymPhoneNumber: item.gymInstructorContact, gymScheduledDate: item.scheduled_Date,
-                              gymRating: item.provider_performance_ratings, providerID: item.providerId,
-                              facilityID: item.facilityId})}
+                              capacity={`${item.gym_available_slot} Slots Available`}
+                              onPress={() => showRegularSessionDetails(item)}
                           />  
                         )
                     }

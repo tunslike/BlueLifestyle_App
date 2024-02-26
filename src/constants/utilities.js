@@ -63,6 +63,39 @@ const getCurrentDateMMDDYYYY = () => {
     return today;
 }
 
+const WeeklySpecialImageMatch = (sessionName) => {
+    if(sessionName == '')
+        return;
+
+    //match session name
+    if(sessionName.toLowerCase().indexOf("circuit") > -1) {
+
+        return require("../assets/images/super_c.jpeg");
+
+    }else if(sessionName.toLowerCase().indexOf("tabata") > -1) {
+        return require("../assets/images/tabata_workout.jpeg");
+
+    }else if(sessionName.toLowerCase().indexOf("blast") > -1) {
+        return require("../assets/images/core_blast.jpeg");
+
+    }else if(sessionName.toLowerCase().indexOf("yoga") > -1) {
+        return require("../assets/images/yoga.jpeg");
+    }
+    else if(sessionName.toLowerCase().indexOf("spin") > -1) {
+        return require("../assets/images/spin_workouts.jpeg");
+    }
+    else if(sessionName.toLowerCase().indexOf("afro") > -1) {
+        return require("../assets/images/dance_workout.jpeg");
+    } 
+    else if(sessionName.toLowerCase().indexOf("box") > -1) {
+        return require("../assets/images/boxercise_workout.jpeg");
+    }
+    else {
+        return require("../assets/images/gym1.jpeg");
+    }
+
+}
+
 const FoodImageMatchAlgorithm = (foodName) => {
 
     if(foodName == '') 
@@ -117,4 +150,5 @@ export default {
     getCurrentDateMMDDYYYY,
     formatDateInMinutes,
     FoodImageMatchAlgorithm,
+    WeeklySpecialImageMatch,
 }

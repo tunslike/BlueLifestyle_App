@@ -5,6 +5,7 @@ import {
          StatusBar,
          StyleSheet, 
          Text, 
+         Alert,
          TouchableOpacity, 
          View, Platform } from 'react-native';
 import Animated, {BounceInLeft,
@@ -13,6 +14,8 @@ import Animated, {BounceInLeft,
   withTiming,
   withRepeat
 } from 'react-native-reanimated';
+import axios from 'axios';
+import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
          COLORS, 
@@ -20,13 +23,32 @@ import {
          icons, 
          verticalScale,
          horizontalScale,
-         moderateScale} from '../../../constants';
+         moderateScale, APIBaseUrl} from '../../../constants';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const WelcomeScreen = ({navigation}) => {
 
 
   const [isUserValid, setIsUserValid] = useState(null);
+  const [appVersion, setAppVersion] = useState(null);
+
+
+   // FUNCTION TO LOAD RESTURANT MENUS
+   const validAppVersionUpdate = () => {
+
+     //
+     axios.post(APIBaseUrl.developmentUrl + 'staff/GetAppVersion', {}, {})
+     .then(response => {
+
+      console.log('this is coming from server: ' + response.data.version)
+         
+     })
+     .catch(error => {
+       console.log(error);
+     });
+   
+  }
+  // END OF FUNCTION
 
   // FUNCTION TO CHECK LOGGED USER
     const ValidatedAuthenticatedUser = async () => {
@@ -51,7 +73,14 @@ const WelcomeScreen = ({navigation}) => {
 //USE EFFECT
   useEffect(() => {
 
-  
+    validAppVersionUpdate();
+
+    let version = DeviceInfo.getVersion();
+
+    if(version != appVersion) {
+      Alert.alert("Blue Lifestyle Update!", "A new update is available! Please uninstall and install the latest version from Microsoft Intunes")
+    }
+
     ValidatedAuthenticatedUser();
 
 }, []);
