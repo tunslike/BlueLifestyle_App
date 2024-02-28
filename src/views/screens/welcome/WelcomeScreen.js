@@ -30,18 +30,29 @@ const WelcomeScreen = ({navigation}) => {
 
 
   const [isUserValid, setIsUserValid] = useState(null);
-  const [appVersion, setAppVersion] = useState(null);
-
 
    // FUNCTION TO LOAD RESTURANT MENUS
    const validAppVersionUpdate = () => {
 
-     //
      axios.post(APIBaseUrl.developmentUrl + 'staff/GetAppVersion', {}, {})
      .then(response => {
 
-      console.log('this is coming from server: ' + response.data.version)
-         
+          let version = DeviceInfo.getVersion();
+
+          if(version.localeCompare(response.data.version) == 0) {
+            console.log('Updated version found!')
+          }else {
+
+            if(Platform.OS === 'ios') {
+
+              Alert.alert("Blue Lifestyle Update!", "A new update is available! Please update your app via the Apple Test Flight App")
+
+              }else {
+                Alert.alert("Blue Lifestyle Update!", "A new update is available! Please uninstall and install the latest version from Microsoft Intunes")
+            }
+      
+          }
+ 
      })
      .catch(error => {
        console.log(error);
@@ -74,12 +85,6 @@ const WelcomeScreen = ({navigation}) => {
   useEffect(() => {
 
     validAppVersionUpdate();
-
-    let version = DeviceInfo.getVersion();
-
-    if(version != appVersion) {
-      Alert.alert("Blue Lifestyle Update!", "A new update is available! Please uninstall and install the latest version from Microsoft Intunes")
-    }
 
     ValidatedAuthenticatedUser();
 
