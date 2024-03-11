@@ -55,7 +55,7 @@ const GymSpecials = ({onPress, image, slot, title, subTitle, time, trainer}) => 
           resizeMode: 'contain', tintColor:COLORS.SecondaryGreen
       }}
   />
-  <Text style={styles.subTitle}>{slot + " Slots"}</Text>
+  <Text style={styles.subTitle}>{slot}</Text>
 </View>
     </TouchableOpacity>
   )

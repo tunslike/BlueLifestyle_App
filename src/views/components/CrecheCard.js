@@ -13,7 +13,6 @@ const { width, height } = Dimensions.get("window");
 const CrecheCard = ({onPress, image, time, slot, rating, name}) => {
   return (
     <TouchableOpacity 
-    onPress={onPress}
 style={styles.container}>
   <ImageBackground 
     imageStyle={{ borderRadius: 20}}
@@ -28,15 +27,7 @@ style={styles.container}>
             />
             <Text style={styles.ratingText}>{rating} (10)</Text>
         </View>
-        <View style={styles.business}>
-            <Image source={icons.kids} 
-                style={{
-                    height: 20, width: 20, tintColor: COLORS.darkGray,
-                    resizeMode: 'contain', marginRight: 5
-                }}
-            />
-            <Text style={styles.businessName}>{name}</Text>
-        </View>
+   
   </ImageBackground>
    
   <View style={styles.features}>

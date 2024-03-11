@@ -94,6 +94,8 @@ const CrecheScreen = ({navigation}) => {
       username : userData.userID
      }
 
+     console.log(data)
+
      axios.post(APIBaseUrl.developmentUrl + 'accounts/Staff/ValidateCrecheUser', data, {
       headers: {
         'JWTToken': token
@@ -117,18 +119,27 @@ const CrecheScreen = ({navigation}) => {
 
           return;
              
-        }else if(response.data.errorCode == '002') {
+        }else if(response.data.errorCode == '001') {
 
           setRegistrationStatus(1);
 
             return
       
-        }else if(response.data.errorCode == '005') {
+        }else if(response.data.errorCode == '002') {
           setRegistrationStatus(3);
           return
       
         }
-        else {
+        else if(response.data.errorCode == '003') {
+
+          if(response.data.crecheRegisterData == null) {
+            console.log('Registration is needed')
+            setRegistrationStatus(0);
+          }
+
+           return;
+        
+        }else{
 
             if(response.data.crecheRegisterData == null) {
               console.log('Registration is needed')
@@ -136,7 +147,7 @@ const CrecheScreen = ({navigation}) => {
             }
  
              return;
-         }
+       }
      })
      .catch(error => {
        console.log(error);
@@ -311,7 +322,7 @@ useEffect(() => {
           height: 20, width: 20, marginRight:15, resizeMode: 'contain', tintColor: COLORS.AlertGreenbg
         }}
       />
-      <Text style={styles.activeTxt}>You have an active creche registration! Please tap below to book a slot</Text>
+      <Text style={styles.activeTxt}>You have an active creche registration! Please contact P&C for more information and instructions</Text>
   </View>
 
   <View
@@ -321,14 +332,6 @@ useEffect(() => {
   >
   <CrecheCard
   rating={crecheDetails.provider_performance_ratings} 
-  onPress={() => navigation.navigate('CrecheProvider', {facilityID: crecheDetails.facilityId, providerId: crecheDetails.providerId, 
-    crecheSessionID: crecheDetails.crecheServiceId, 
-crecheSessionName: crecheDetails.crecheSessionName, sessionStart: crecheDetails.crecheSessionStartTime,
-capacity: crecheDetails.crecheSessionCapacity, teacher: crecheDetails.crecheTeacherName,
-crecheSessionStartTime:crecheDetails.crecheSessionStartTime,
-contactPhone: crecheDetails.crecheTeacherContact, rating: crecheDetails.provider_performance_ratings,
-sessionName: crecheDetails.provider_name, childName: regData.dependentName1, 
-  parentPhone: regData.phone})}
   name="Book a Slot Now"
   image={images.creche_dash_img}
   time={crecheDetails.crecheSessionStartTime}

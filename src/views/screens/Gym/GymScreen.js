@@ -375,11 +375,18 @@ const GymScreen = ({navigation}) => {
      var dayName = FindDayofWeek(day_week);
      var scheduledDay = item.scheduled_Date;
 
+     let slotCount = item.gym_available_slot;
+
      if(compareValue = dayName.localeCompare(scheduledDay)) {
     
       Alert.alert("Blue Lifestyle Gym", "Sorry, you can only book today's session!")
       return;
      }
+
+     if(slotCount < 1) {
+      Alert.alert("Blue Lifestyle Gym", "Sorry, no more available slot!")
+      return;
+   }
 
       navigation.navigate('GymDetails', {gymSessionID: item.gymSessionId, gymSessionImg:utilities.WeeklySpecialImageMatch(item.gymSession_Name),
       gymSessionName: item.gymSession_Name, gymCapacity: item.gym_available_slot, gymSessionDuration: item.session_Duration,
@@ -404,6 +411,13 @@ const GymScreen = ({navigation}) => {
      return;
 
     }
+
+    let slotCount = item.gym_available_slot;
+
+    if(slotCount < 1) {
+      Alert.alert("Blue Lifestyle Gym", "Sorry, no more available slot!")
+      return;
+   }
 
     //cleanr time
     var newEndTime = item.session_End_Time.toLowerCase().trim();
@@ -530,7 +544,7 @@ useEffect(() => {
             <GymSpecials 
             image={utilities.WeeklySpecialImageMatch(item.gymSession_Name)}
             title={item.gymSession_Name}
-            slot={item.gym_available_slot}
+            slot={(item.gym_available_slot < 1) ? 'Out of Slot' : item.gym_available_slot + " Slots"}
             trainer={item.gymInstructorName}
             subTitle={`Every: ${item.scheduled_Date}`}
             time={item.session_Start_Time.toLowerCase()}
